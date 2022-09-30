@@ -1,0 +1,35 @@
+body {
+    background-color: #35363a;
+}
+
+#inp_search {
+    background-color: #343b42;
+    margin-top: 5px;
+    margin-right: 10px;
+    border-radius: 50px;
+    color: white;
+}
+
+#basic-addon1 {
+    background-color: #343b42;
+    margin-top: 5px;
+    border-radius: 50px;
+}
+
+#search_parameters {
+    background-color: #343b42;
+    border-radius: 50px;
+    color: white;
+    width: 200px;
+    border: none;
+    text-align: center;
+}
+
+.card {
+    background-color: #060606;
+    color: white;
+}
+
+#homeBtn {
+    margin-right: 10px;
+}

@@ -1,0 +1,22 @@
+body {
+    background-color: #35363a;
+    color: white
+}
+
+.form-control {
+    background-color: #343b42;
+    border-radius: 50px;
+    color: white;
+}
+
+#recommended_options {
+    background-color: #343b42;
+    border-radius: 50px;
+    width: 100px;
+    text-align: center;
+    color: white;
+}
+
+#headline {
+    margin-bottom: 0px !important;
+}

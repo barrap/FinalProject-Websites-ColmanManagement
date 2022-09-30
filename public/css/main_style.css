@@ -1,0 +1,12 @@
+body {
+    background-color: #35363a;
+}
+
+.card {
+    background-color: #060606;
+    color: white;
+}
+
+.update_input {
+    width: 450px;
+}
