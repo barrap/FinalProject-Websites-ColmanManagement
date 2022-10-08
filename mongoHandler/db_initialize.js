@@ -1,7 +1,7 @@
 var MongoClient = require('mongodb').MongoClient;
-var DBurl = require('config.js').DBurl;
-var MongoURL = require('config.js').MongoURL;
-var dbName = require('config.js').dbName;
+const DBurl = require('./config').DBurl;
+const MongoURL = require('./config').MongoURL;
+const dbName = require('./config').dbName;
 
 function createDB()
 /*
@@ -31,7 +31,7 @@ function createCollectionDB(collection_name)
       });
 }
 
-function initializeDB()
+module.exports.initializeDB = function()
 /*
     The function initialize a new database instance and the relevant collections. 
 */
