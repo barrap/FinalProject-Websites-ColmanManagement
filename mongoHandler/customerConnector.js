@@ -1,8 +1,8 @@
 import { update } from '../services/movies';
 
 const MongoClient = require('mongodb').MongoClient;
-const MongoURL = require('config.js').MongoURL;
-const dbName = require('config.js').dbName;
+const MongoURL = require('./config.js').MongoURL;
+const dbName = require('./config.js').dbName;
 const crypto = require('crypto'); 
 
 /*                      CustomerDB                          */
@@ -123,3 +123,6 @@ module.exports.verifyUser =  function(_username, _password) // TODO: fix !
        return test;
 });
 }
+
+
+//TODO: fix the verifyUser function! 
