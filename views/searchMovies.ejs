@@ -23,11 +23,9 @@
                             <input type="text" class="form-control" placeholder="Search" id="inp_search">
                             <span class="input-group-text" id="basic-addon1"><select id="search_parameters">
                                     <option value="title">By Title</option>
-                                    <option value="preview">By Synopsis</option>
-                                    <option value="views">By Views</option>
-                                    <option value="profit">By Profit</option>
+                                    <option value="director">By Director</option>
+                                    <option value="Actors">By Actor</option>
                                     <option value="date">By Date</option>
-                                    <option value="recommended">By Recommendation</option>
                                 </select>
                         </div>
                     </form>
@@ -66,23 +64,31 @@
         <div class="col-md-3 col-4">
             <div class="card">
                 <div class="card-body">
+                    <iframe src="{trailer}" height="230">
+                    </iframe>
                     <h5 class="card-title">
                         {_id}
                     </h5>
                     <p class="card-text"><b>Synopsis: </b>
                         {preview}
                     </p>
-                    <p><b>Views: </b>
-                        {views}
+                    <p><b>Director: </b>
+                        {director}
                     </p>
-                    <p><b>Box Profit: </b>
-                        {profit}
+                    <p><b>Publish Year: </b>
+                        {year}
                     </p>
-                    <p><b>Preimre Date: </b>
-                        {preimre_date}
+                    <p><b>Movie Length: </b>
+                        {length}
                     </p>
-                    <p><b>Recommended: </b>
-                        {recommended}
+                    <p><b>Main Actors: </b>
+                        {main_actors}
+                    </p>
+                    <p><b>Genere: </b>
+                        {type}
+                    </p>
+                    <p><b>Cost: </b>
+                        {price}
                     </p>
                     <a href="{link}"><button class="btn btn-outline-info"
                             type="button">Read More</button></a>

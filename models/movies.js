@@ -3,12 +3,14 @@ const Schema = mongoose.Schema
 
 const Movie = new Schema({
     _id: String,
+    year: String,
+    director: String,
+    length: Number, 
+    main_actors: Array,
+    type: Array,
     preview: String,
-    views: Number, 
-    profit: Number,
-    preimre_date: String,
-    link: String,
-    recommended: Boolean
+    trailer: String,
+    price: Number
 })
 
 module.exports = mongoose.model('Movie', Movie)

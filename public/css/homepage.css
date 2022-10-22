@@ -1,0 +1,28 @@
+body {
+    background-color: #35363a;
+    background-image: url("img/Blockbuster_logo.svg.png");
+    color: white
+}
+
+.form-control {
+    background-color: #343b42;
+    border-radius: 50px;
+    color: white;
+}
+
+#headline {
+    margin-bottom: 0px !important;
+}
+.btn {
+    border-radius: 20px;
+    height: 50px;
+    width: 150px;
+    transition-duration: 0.2s;
+}
+
+.home_logo {
+    width: 30%;
+    height: 30%;
+}
+
+

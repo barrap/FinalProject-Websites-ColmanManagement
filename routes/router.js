@@ -3,17 +3,19 @@ const express = require('express');
 
 // Imports the required modules
 const moviesController = require('../controllers/movies');
-const loginController = require("../controllers/login")
+const CustomerController = require("../controllers/customers")
 const router = express.Router();
 
-// Sets the routes accordingly
-router.get('/', (req, res) => {
-        res.sendFile("C:\\Users\\barra\\Desktop\\לימודים\\שנה ב\\סמסטר קיץ\\פיתוח אפליקציות אינטרנטיות\\מטלות\\final - project\\public\\homepage.html")
+const public_dir_path = "C:\\Users\\barra\\Desktop\\לימודים\\שנה ב\\סמסטר קיץ\\פיתוח אפליקציות אינטרנטיות\\מטלות\\final - project\\public"
+
+router.get("/", (req, res) => {
+        res.sendFile(public_dir_path + "\\homepage.html")
 })
 
-// Login routing
-router.post("/login", loginController.login)
-
+router.get("/login", CustomerController.loginPage)
+router.post("/login", CustomerController.login)
+router.post("/register", CustomerController.register)
+router.get("/register", CustomerController.registerPage)
 
 // Movies routing
 router.get('/movies', moviesController.findAll);

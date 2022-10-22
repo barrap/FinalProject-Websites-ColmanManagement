@@ -4,7 +4,8 @@ const url = require("url")
 const MovieService = require('../services/movies');
 
 const findAll = (req, res) => {
-    if (req.session.username) {
+
+    if(req.session.username != null) {
         const result = MovieService.getMovies()
         result.then(r => {
             res.render("../views/movies", { movies: r });
@@ -13,6 +14,7 @@ const findAll = (req, res) => {
     else {
         res.redirect("/")
     }
+
 }
 const deleteMovie = (req, res) => {
     const result = MovieService.deleteMovie(req.body.movie_id)
@@ -24,7 +26,8 @@ const deleteMovie = (req, res) => {
 
 const addMovie = (req, res) => {
 
-    const result = MovieService.addMovie(req.body.title, req.body.preview, parseInt(req.body.views, 10), parseInt(req.body.profit, 10), req.body.preimre_date, req.body.recommended, req.body.link)
+    const result = MovieService.addMovie(req.body.title, parseInt(req.body.year, 10), req.body.director, parseInt(req.body.length, 10),
+     req.body.actors.split(","), req.body.genre.split(","), req.body.preview, req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
     result.then(r => {
         res.redirect("/movies")
     })

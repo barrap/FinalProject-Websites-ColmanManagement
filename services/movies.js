@@ -12,38 +12,23 @@ async function getMovies() {
 
 // Function to delete a movie
 async function deleteMovie(id) {
-    await Movie.deleteOne({_id: id})
+    await Movie.deleteOne({ _id: id })
 }
 
 // Function to add a movie
-function addMovie(title, preview, views, profit, preimre_date, recommended, link) {
+function addMovie(title, year, director, length, main_actors, type, preview, trailer, price) {
+    var movie = new Movie({
+        _id: title,
+        year: year,
+        director: director,
+        length: length, 
+        main_actors: main_actors,
+        type: type,
+        preview: preview,
+        trailer: trailer,
+        price: price
 
-    var movie = {}
-    // Check if the movie is recommended and add it accordingly
-    if (recommended == "true") {
-        movie = new Movie({
-            _id: title,
-            preview: preview,
-            views: views,
-            profit: profit,
-            preimre_date: preimre_date,
-            link: link,
-            recommended: true
-
-        })
-    }
-    else {
-        movie = new Movie({
-            _id: title,
-            synopsis: preview,
-            views: views,
-            profit: profit,
-            date: preimre_date,
-            link: link,
-            recommended: false
-
-        })
-    }
+    })
     return movie.save();
 }
 
@@ -53,18 +38,14 @@ async function search(param, value) {
     // Uses a switch according to the search parameter the user selected
     switch (param) {
         case "title":
-            return await Movie.find({"_id": {"$regex": value, "$options": "i"}})
+            return await Movie.find({ "_id": { "$regex": value, "$options": "i" } })
             break;
-        case "preview":
-            return await Movie.find({"preview": {"$regex": value, "$options": "i"}})
-        case "views":
-            return await Movie.find({"views": {"$gte": parseInt(value, 10)}})
-        case "profit":
-            return await Movie.find({"profit": {"$gte": parseInt(value, 10)}})
+        case "director":
+            return await Movie.find({ "director": { "$regex": value, "$options": "i" } })
         case "date":
-            return await Movie.find({"preimre_date": {"$regex": value, "$options": "i"}})
-        case "recommended":
-            return await Movie.find({"recommended": (value == "yes") ? true : false})
+            return await Movie.find({ "year": { "$gte": parseInt(value, 10) } })
+        case "Actors":
+            return await Movie.find({ "Actors": { "$regex": value, "$options": "i" } })
         default:
             break;
     }

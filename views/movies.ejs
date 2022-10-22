@@ -7,7 +7,7 @@
     <title>Movie Catalog</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.rtl.min.css"
         integrity="sha384-+4j30LffJ4tgIMrq9CwHvn0NjEvmuDCOfk6Rpg2xg7zgOxWWtLtozDEEVvBPgHqE" crossorigin="anonymous">
-    <link rel="icon" type="image/x-icon" href="img/netflix.png">
+    <link rel="icon" type="image/x-icon" href="img/Blockbuster_logo.svg.png">
     <link rel="stylesheet" href="css/main_style.css">
 </head>
 
@@ -17,7 +17,7 @@
         <div class="row">
             <nav class="navbar bg-dark">
                 <div class="container-fluid">
-                    <a href="/movies"><img src="img/netflix.png" style="width: 50px; height: 50px" class="g-3"></a>
+                    <a href="/movies"><img src="img/Blockbuster_logo.svg.png" style="width: 50px; height: 50px" class="g-3"></a>
                     <a href="/searchMovies" style="margin-right: 10px"><button class="btn btn-outline-warning"
                             type="button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -31,6 +31,7 @@
                                 <path
                                     d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
                             </svg> Add Movie</button></a>
+                    <button type="submit" class="btn btn-primary">Hello, <span id="username"></span></button>
                 </div>
             </nav>
             <div class="container text-center g-3">
@@ -38,6 +39,8 @@
                     <% for (var i=0; i < movies.length; i++) { %>
                         <div class="col-md-3 col-4">
                             <div class="card">
+                                <iframe src="<%=movies[i].trailer%>" height="230">
+                                </iframe>
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         <%=movies[i]._id%>
@@ -45,20 +48,36 @@
                                     <p class="card-text"><b>Synopsis: </b>
                                         <%=movies[i].preview%>
                                     </p>
-                                    <p><b>Views: </b>
-                                        <%=movies[i].views%>
+                                    <p><b>Director: </b>
+                                        <%=movies[i].director%>
                                     </p>
-                                    <p><b>Box Profit: </b>
-                                        <%=movies[i].profit%>
+                                    <p><b>Publish Year: </b>
+                                        <%=movies[i].year%>
                                     </p>
-                                    <p><b>Preimre Date: </b>
-                                        <%=movies[i].preimre_date%>
+                                    <p><b>Movie Length: </b>
+                                        <%=movies[i].length%>
                                     </p>
-                                    <p><b>Recommended: </b>
-                                        <%=(movies[i].recommended==true) ? "Yes" : "No" %>
+                                    <p><b>Main Actors: </b>
+                                        <% for (var j=0; j < movies[i].main_actors.length; j++) { %>
+                                            <% if(j==movies[i].main_actors.length - 1) {%>
+                                                <%=movies[i].main_actors[j]%>
+                                                    <%} else { %>
+                                                        <%=movies[i].main_actors[j]%>,
+                                                            <%}%>
+                                                                <%}%>
                                     </p>
-                                    <a href="<%=movies[i].link%>"><button class="btn btn-outline-info" type="button">
-                                            Read More</button></a>
+                                    <p><b>Genere: </b>
+                                        <% for (var k=0; k < movies[i].type.length; k++) { %>
+                                            <% if(k==movies[i].type.length - 1) {%>
+                                                <%=movies[i].type[k]%>
+                                                    <%} else { %>
+                                                        <%=movies[i].type[k]%>,
+                                                            <%}%>
+                                                                <%}%>
+                                    </p>
+                                    <p><b>Cost: </b>
+                                        <%=movies[i].price%>$
+                                    </p>
                                     <form action="/deleteMovie" method="POST" class="float-end">
                                         <input readonly class="d-none" name="movie_id" value="<%=movies[i]._id%>">
                                         <button type="submit" class="btn btn-outline-danger"><svg
@@ -88,7 +107,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="updateModalLabel<%=i%>">Update info for:
-                                            <%=movies[i].title%>
+                                            <%=movies[i]._id%>
                                         </h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
@@ -127,6 +146,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
+
+
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
