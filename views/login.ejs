@@ -17,27 +17,34 @@
         <div class="row">
             <nav class="navbar bg-dark">
                 <div class="container-fluid">
-                    <a href="/movies"><img src="img/Blockbuster_logo.svg.png" style="width: 50px; height: 50px"
+                    <a href="/"><img src="img/Blockbuster_logo.svg.png" style="width: 50px; height: 50px"
                             class="g-3"></a>
-                    <form class="d-flex mx-auto" role="search">
-                        <div class="input-group mb-3 title text-center">
-                        </div>
-                    </form>
+                    <a href="/"><button class="btn btn-outline-success" type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-house-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                                <path fill-rule="evenodd"
+                                    d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+                            </svg></button></a>
                 </div>
             </nav>
             <div class="col g-3">
                 <div class="container text-center g-3 ">
+                    <h3>Login to enter the store!</h3>
+                    <br>
                     <form action="/login" method="post">
-                        <div class="mb-3 row text-center">
+                        <div class="mb-3 row text-center div_input">
                             <label class="col-sm-2 col-form-label">Username</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="username" required>
+                                <input type="text" class="form-control input_text" name="username" required>
                             </div>
                         </div>
-                        <div class="mb-3 row">
+                        <div class="mb-3 row text-center div_input">
                             <label class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" name="password" id="password" required>
+                                <input type="password" class="form-control input_text" name="password" id="password"
+                                    required>
                             </div>
                         </div>
                         <label>Show Password</label>
@@ -50,6 +57,7 @@
                     <div id="error_message">
                         <%=message.status%>
                     </div>
+                    <span>Click <a href="/register">Here</a> to register to the site</span>
                 </div>
             </div>
         </div>

@@ -11,4 +11,5 @@ $(() => {
             password.type = "password"
         }
     }
+    
 });

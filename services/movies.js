@@ -52,20 +52,39 @@ async function search(param, value) {
 }
 
 
-// Function to update data about the movie (only synopsis, views and profit)
-function update(movie_index, new_preview, new_views, new_profit) {
+// Function to update data about the movie
+async function update(title, new_preview, new_director, new_year, new_length, new_actors, new_genre, new_trailer, new_cost) {
+
     if (new_preview) {
-        movies[movie_index].preview = new_preview
+        await Movie.updateOne({_id: title}, {preview: new_preview})
+    }
+    
+    if (new_director) {
+        await Movie.updateOne({_id: title}, {director: new_director})
     }
 
-    // Checks if the new amount of views can be updated (provided it's larger than the current amount)
-    if (new_views > movies[movie_index].views) {
-        movies[movie_index].views = new_views
+    if (new_year) {
+        await Movie.updateOne({_id: title}, {year: new_year})
     }
 
-    // Checks if the new profit can be updated (provided it's larger than the current amount)
-    if (new_profit > movies[movie_index].profit) {
-        movies[movie_index].profit = new_profit
+    if (new_length) {
+        await Movie.updateOne({_id: title}, {length: new_length})
+    }
+
+    if (new_actors[0] != '') {
+        await Movie.updateOne({_id: title}, {main_actors: new_actors})
+    }
+
+    if (new_genre[0] != '') {
+        await Movie.updateOne({_id: title}, {type: new_genre})
+    }
+
+    if (new_trailer) {
+        await Movie.updateOne({_id: title}, {trailer: new_trailer})
+    }
+
+    if (new_cost) {
+        await Movie.updateOne({_id: title}, {price: new_cost})
     }
 }
 

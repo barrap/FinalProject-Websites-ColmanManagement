@@ -14,12 +14,18 @@ async function login(req, res) {
         if (cust) {
             if (cust.password == hashed_password) {
                 req.session.username = username
-                res.redirect("/movies")
+                if (cust.isAdmin == true) {
+                    res.redirect("/moviesAdmin")
+                }
+                else {
+                    res.redirect("/movies")
+                }
+
             }
             else {
                 res.render("../views/login", { message: { status: "Wrong Password" } })
             }
-    
+
         }
         else {
             res.render("../views/login", { message: { status: "Username doesn't exsit" } })
@@ -54,11 +60,18 @@ function update(req, res) {
     //TODO: update content (update permissions only while admin)
 }
 
+function logout(req, res) {
+    req.session.destroy(() => {
+        res.redirect("/")
+    })
+}
+
 module.exports = {
     loginPage,
     login,
     registerPage,
     register,
     deleteCustomer,
-    update
+    update,
+    logout
 }

@@ -16,9 +16,11 @@ router.get("/login", CustomerController.loginPage)
 router.post("/login", CustomerController.login)
 router.post("/register", CustomerController.register)
 router.get("/register", CustomerController.registerPage)
+router.get("/logout", CustomerController.logout)
 
 // Movies routing
 router.get('/movies', moviesController.findAll);
+router.get("/moviesAdmin", moviesController.findAllAdmin)
 router.post("/deleteMovie", moviesController.deleteMovie)
 router.post("/addMovie", moviesController.addMovie)
 router.get("/search", moviesController.search)

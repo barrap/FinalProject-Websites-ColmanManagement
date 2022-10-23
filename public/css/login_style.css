@@ -18,3 +18,15 @@ body {
     font-size: 30px;
     
 }
+
+.input_text {
+    width: 55%;
+}
+
+.div_input {
+    padding-left: 200px;
+}
+
+a {
+    text-decoration: none;
+}

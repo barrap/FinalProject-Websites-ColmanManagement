@@ -4,10 +4,10 @@ const url = require("url")
 const MovieService = require('../services/movies');
 
 const findAll = (req, res) => {
-
-    if(req.session.username != null) {
+    if (req.session.username != null) {
         const result = MovieService.getMovies()
         result.then(r => {
+            r['username'] = req.session.username
             res.render("../views/movies", { movies: r });
         })
     }
@@ -15,6 +15,19 @@ const findAll = (req, res) => {
         res.redirect("/")
     }
 
+}
+
+const findAllAdmin = (req, res) => {
+    if (req.session.username != null) {
+        const result = MovieService.getMovies()
+        result.then(r => {
+            r['username'] = req.session.username
+            res.render("../views/movies-admin", { movies: r });
+        })
+    }
+    else {
+        res.redirect("/")
+    }
 }
 const deleteMovie = (req, res) => {
     const result = MovieService.deleteMovie(req.body.movie_id)
@@ -27,7 +40,7 @@ const deleteMovie = (req, res) => {
 const addMovie = (req, res) => {
 
     const result = MovieService.addMovie(req.body.title, parseInt(req.body.year, 10), req.body.director, parseInt(req.body.length, 10),
-     req.body.actors.split(","), req.body.genre.split(","), req.body.preview, req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
+        req.body.actors.split(","), req.body.genre.split(","), req.body.preview, req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
     result.then(r => {
         res.redirect("/movies")
     })
@@ -45,20 +58,21 @@ const search = (req, res) => {
     const value = query.split("=")[1]
     const result = MovieService.search(param, value)
     result.then(r => {
-        console.log(r)
         res.json(r);
     })
 
 }
 
 const update = (req, res) => {
-    MovieService.update(req.body.movie_index, req.body.preview, parseInt(req.body.views, 10), parseInt(req.body.profit, 10))
+    MovieService.update(req.body.title, req.body.preview, req.body.director, parseInt(req.body.year, 10), parseInt(req.body.length, 10),
+        req.body.actors.split(","), req.body.genre.split(","), req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
     res.redirect("/movies")
 }
 
 // Exports the neccesary functions
 module.exports = {
     findAll,
+    findAllAdmin,
     deleteMovie,
     addMovie,
     searchMovies,
