@@ -26,8 +26,39 @@
                                 <path
                                     d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                             </svg> Search Movies</button></a>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cartModal">
+                        Cart <span id="cart_counter"></span>
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="show-cart table">
+
+                                    </table>
+                                    <div>Total price: $<span class="total-cart"></span></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-danger" id="clear_cart">Clear Cart</button>
+                                    <button type="button" class="btn btn-primary">Order Now</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="dropdown">
-                        <button type="submit" onclick="showDropDown()" class="btn btn-primary dropbtn">Hello,
+                        <button type="submit" class="btn btn-primary dropbtn">Hello,
                             <%=movies.username%>
                         </button>
                         <div id="myDropdown" class="dropdown-content">
@@ -80,7 +111,8 @@
                                     <p><b>Cost: </b>
                                         <%=movies[i].price%>$
                                     </p>
-                                    <button type="submit" class="btn btn-outline-success"><svg
+                                    <button type="submit" class="btn btn-outline-success add-to-cart"
+                                        data-name="<%=movies[i]._id%>" data-price="<%=movies[i].price%>"><svg
                                             xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                                             <path
@@ -99,14 +131,10 @@
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
 
-
-
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
-    <script src="js/movies.js">
-
-    </script>
+    <script src="js/movies.js"></script>
 </body>
 
 </html>

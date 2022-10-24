@@ -14,13 +14,8 @@ async function login(req, res) {
         if (cust) {
             if (cust.password == hashed_password) {
                 req.session.username = username
-                if (cust.isAdmin == true) {
-                    res.redirect("/moviesAdmin")
-                }
-                else {
-                    res.redirect("/movies")
-                }
-
+                req.session.isAdmin = cust.isAdmin
+                res.redirect("/movies")
             }
             else {
                 res.render("../views/login", { message: { status: "Wrong Password" } })

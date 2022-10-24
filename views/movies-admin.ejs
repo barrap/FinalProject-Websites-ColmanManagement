@@ -17,7 +17,7 @@
         <div class="row">
             <nav class="navbar bg-dark">
                 <div class="container-fluid">
-                    <a href="/moviesAdmin"><img src="img/Blockbuster_logo.svg.png" style="width: 50px; height: 50px"
+                    <a href="/movies"><img src="img/Blockbuster_logo.svg.png" style="width: 50px; height: 50px"
                             class="g-3"></a>
                     <a href="/searchMovies" style="margin-right: 10px"><button class="btn btn-outline-warning"
                             type="button">
@@ -32,12 +32,49 @@
                                 <path
                                     d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
                             </svg> Add Movie</button></a>
-                    <button type="submit" class="btn btn-primary" ata-bs-toggle="modal"
-                        data-bs-target="#cartModal">
+
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cartModal">
                         Cart <span id="cart_counter"></span>
                     </button>
+
+                    <!-- cart Modal -->
+                    <form action="/addOrder" method="post">
+                        <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-floating">
+                                            <input readonly class="d-none" name="username" value="<%=movies.username%>">
+                                        </div>
+                                        <table class="show-cart table">
+
+                                        </table>
+                                        <div>Total price: $<span class="total-cart"></span></div>
+                                        <input readonly class="d-none" name="total_price" id="total_price">
+                                        <input readonly class="d-none" name="all_titles" id="all_titles">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger" id="clear_cart">Clear Cart</button>
+                                        <button type="submit" class="btn btn-primary" id="order">Order Now</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- cart Modal End -->
                     <div class="dropdown">
-                        <button type="submit" onclick="showDropDown()" class="btn btn-primary dropbtn">Hello,
+                        <button type="submit" class="btn btn-primary dropbtn">Hello,
                             <%=movies.username%>
                         </button>
                         <div id="myDropdown" class="dropdown-content">
@@ -107,6 +144,8 @@
                                                 d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                                         </svg> Add to cart</button>
                                     <form class="float-start">
+
+                                        <!-- Update modal trigger button -->
                                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                                             data-bs-target="#updateModal<%=i%>">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -120,6 +159,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Update modal -->
                         <div class="modal fade" id="updateModal<%=i%>" tabindex="-1"
                             aria-labelledby="updateModalLabel<%=i%>" aria-hidden="true">
                             <div class="modal-dialog">
@@ -171,6 +211,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Update modal end -->
                         <%}%>
                 </div>
             </div>

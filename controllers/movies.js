@@ -8,7 +8,13 @@ const findAll = (req, res) => {
         const result = MovieService.getMovies()
         result.then(r => {
             r['username'] = req.session.username
-            res.render("../views/movies", { movies: r });
+            if(req.session.isAdmin == true) {
+                res.render("../views/movies-admin", { movies: r });
+            }
+            else {
+                res.render("../views/movies", { movies: r });
+            }
+            
         })
     }
     else {

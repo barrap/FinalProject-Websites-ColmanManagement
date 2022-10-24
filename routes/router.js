@@ -20,7 +20,6 @@ router.get("/logout", CustomerController.logout)
 
 // Movies routing
 router.get('/movies', moviesController.findAll);
-router.get("/moviesAdmin", moviesController.findAllAdmin)
 router.post("/deleteMovie", moviesController.deleteMovie)
 router.post("/addMovie", moviesController.addMovie)
 router.get("/search", moviesController.search)
