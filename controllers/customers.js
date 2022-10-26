@@ -5,7 +5,6 @@ function loginPage(req, res) {
     res.render("login.ejs", { message: { status: "" } })
 }
 
-
 async function login(req, res) {
     const { username, password } = req.body
     var hashed_password = crypto.pbkdf2Sync(password, "", 1000, 64, `sha512`).toString(`hex`);
@@ -48,8 +47,20 @@ async function register(req, res) {
 }
 
 function deleteCustomer(req, res) {
-    //TODO: update content (only use while admin)
+    if (req.session.isAdmin == true) {
+        console.log(req.session.isAdmin)
+        const result = customersService.deleteCustomer(req.body.username)
+        result.then(r => {
+            res.redirect("/customers")
+        })
+
+    }
+    else {
+        res.redirect("/movies")
+    }
+
 }
+
 
 function update(req, res) {
     //TODO: update content (update permissions only while admin)
@@ -61,6 +72,62 @@ function logout(req, res) {
     })
 }
 
+function getAllCustomers(req, res) {
+
+    if (req.session.username != null) {
+        if (req.session.isAdmin == true) {
+            const result = customersService.getAllCustomers()
+            result.then(r => {
+                r['username'] = req.session.username
+                res.render("../views/customers", { customers: r })
+            })
+
+        }
+        else {
+            res.redirect("/movies")
+        }
+    }
+    else {
+        res.redirect("/movies")
+    }
+}
+
+function addAdmin(req, res) {
+    if (req.session.username != null) {
+        if (req.session.isAdmin == true) {
+            const result = customersService.updateAdmin(req.body.username, true)
+            result.then(r => {
+                res.redirect("/customers")
+            })
+
+        }
+        else {
+            res.redirect("/movies")
+        }
+    }
+    else {
+        res.redirect("/movies")
+    }
+}
+
+function removeAdmin(req, res) {
+    if (req.session.username != null) {
+        if (req.session.isAdmin == true) {
+            const result = customersService.updateAdmin(req.body.username, false)
+            result.then(r => {
+                res.redirect("/customers")
+            })
+
+        }
+        else {
+            res.redirect("/movies")
+        }
+    }
+    else {
+        res.redirect("/movies")
+    }
+}
+
 module.exports = {
     loginPage,
     login,
@@ -68,5 +135,8 @@ module.exports = {
     register,
     deleteCustomer,
     update,
-    logout
+    logout,
+    getAllCustomers,
+    addAdmin,
+    removeAdmin
 }

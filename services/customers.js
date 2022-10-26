@@ -2,7 +2,7 @@ const Customer = require("../models/customers");
 const crypto = require('crypto');
 
 async function login(username, password) {
-    const customer = await Customer.findOne({ _id: username});
+    const customer = await Customer.findOne({ _id: username });
     return customer
 }
 
@@ -21,4 +21,23 @@ async function register(fullname, username, password, location, isAdmin, phone) 
     return await customer.save()
 }
 
-module.exports = { login, register }
+async function deleteCustomer(username) {
+    await Customer.deleteOne({ _id: username })
+}
+
+async function getAllCustomers() {
+    return await Customer.find()
+}
+
+async function updateAdmin(username, val) {
+
+    await Customer.updateOne({ _id: username }, { isAdmin: val })
+}
+
+module.exports = {
+    login,
+    register,
+    deleteCustomer,
+    getAllCustomers,
+    updateAdmin
+}

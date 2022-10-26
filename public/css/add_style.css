@@ -20,3 +20,7 @@ body {
 #headline {
     margin-bottom: 0px !important;
 }
+
+span {
+    color: red
+}

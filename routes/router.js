@@ -12,11 +12,17 @@ router.get("/", (req, res) => {
         res.sendFile(public_dir_path + "\\homepage.html")
 })
 
+
+// Customers routing
 router.get("/login", CustomerController.loginPage)
 router.post("/login", CustomerController.login)
 router.post("/register", CustomerController.register)
 router.get("/register", CustomerController.registerPage)
 router.get("/logout", CustomerController.logout)
+router.get("/customers", CustomerController.getAllCustomers)
+router.post("/deleteCustomer", CustomerController.deleteCustomer)
+router.post("/addAdmin", CustomerController.addAdmin)
+router.post("/removeAdmin", CustomerController.removeAdmin)
 
 // Movies routing
 router.get('/movies', moviesController.findAll);

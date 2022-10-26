@@ -167,7 +167,7 @@ toggle between hiding and showing the dropdown content */
     }
 
 
-    
+
     $('.show-cart').on("click", ".delete-item", function (event) {
         var name = $(this).data('name')
         deleteAllItems(name);
@@ -198,11 +198,14 @@ toggle between hiding and showing the dropdown content */
     });
 
     // Checks if the cart has value in it
-    if(sessionStorage.getItem("shoppingCart") != null) {
+    if (sessionStorage.getItem("shoppingCart") != null) {
         loadCart()
     }
     displayCart();
 
-    $("#order").click(clearCart())
+    $("#order").click(() => {
+        displayCart()
+        clearCart()
+    })
 
 })

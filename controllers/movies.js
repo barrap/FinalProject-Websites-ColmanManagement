@@ -23,18 +23,6 @@ const findAll = (req, res) => {
 
 }
 
-const findAllAdmin = (req, res) => {
-    if (req.session.username != null) {
-        const result = MovieService.getMovies()
-        result.then(r => {
-            r['username'] = req.session.username
-            res.render("../views/movies-admin", { movies: r });
-        })
-    }
-    else {
-        res.redirect("/")
-    }
-}
 const deleteMovie = (req, res) => {
     const result = MovieService.deleteMovie(req.body.movie_id)
     result.then(r => {
@@ -78,7 +66,6 @@ const update = (req, res) => {
 // Exports the neccesary functions
 module.exports = {
     findAll,
-    findAllAdmin,
     deleteMovie,
     addMovie,
     searchMovies,

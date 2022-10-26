@@ -17,7 +17,8 @@
         <div class="row">
             <nav class="navbar bg-dark">
                 <div class="container-fluid">
-                    <a href="/movies"><img src="img/Blockbuster_logo.svg.png" style="width: 50px; height: 50px" class="g-3"></a>
+                    <a href="/movies"><img src="img/Blockbuster_logo.svg.png" style="width: 50px; height: 50px"
+                            class="g-3"></a>
                     <form class="d-flex mx-auto" role="search">
                         <div class="input-group mb-3 title text-center">
                             <h5 class="text-white" id="headline">Fill the form to add a movie</h5>
@@ -35,60 +36,69 @@
             </nav>
             <div class="col g-3">
                 <div class="container text-center g-3">
-                    <form action="/addMovie" method="post">
+                    <form action="/addMovie" method="post" onsubmit="return validateBeforeSubmit()">
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label">Movie Title</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="title" required>
+                                <input type="text" class="form-control" name="title" id="title" required>
                             </div>
+                            <span id="title_message"></span>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label">Year of publish</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" name="year" required>
+                                <input type="number" class="form-control" name="year" id="year" required>
                             </div>
+                            <span id="year_message"></span>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label">Director</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="director" required>
+                                <input type="text" class="form-control" name="director" id="director" required>
                             </div>
+                            <span id="director_message"></span>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label">Movie Length</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" name="length" required>
+                                <input type="number" class="form-control" name="length" id="length" required>
                             </div>
+                            <span id="length_message"></span>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label">Main Actors (Split By ,)</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="actors" required>
+                                <input type="text" class="form-control" name="actors" id="actors" required>
                             </div>
+                            <span id="actors_message"></span>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label">Genre (Split By ,)</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="genre" required>
+                                <input type="text" class="form-control" name="genre" id="genre" required>
                             </div>
+                            <span id="genre_message"></span>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label">Synopsis</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="preview" required>
+                                <input type="text" class="form-control" name="preview" id="preview" required>
                             </div>
+                            <span id="preview_message"></span>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label">Trailer Link</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="link" required>
+                                <input type="text" class="form-control" name="link" id="link" required>
                             </div>
+                            <span id="link_message"></span>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label">Cost</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" name="cost" required>
+                                <input type="number" class="form-control" name="cost" id="cost" required>
                             </div>
+                            <span id="cost_message"></span>
                         </div>
                         <button class="btn btn-primary" type="submit" id="submitBtn">Add Movie</button>
                     </form>
@@ -103,6 +113,8 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
         integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+
+    <script src="js/addMovie.js"></script>
 
 </body>
 

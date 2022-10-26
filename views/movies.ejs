@@ -12,116 +12,142 @@
 </head>
 
 <body>
+    <div id="sidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/movies">Home page</a>
+        <a href="/movies">Movies</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+    </div>
+    <div id="main">
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="navbar bg-dark">
+                    <div class="container-fluid">
+                        <span style="font-size:30px;cursor:pointer;color:white" id="sidenavBtn" onclick="openNav()">&#9776;</span>
+                        <a href="/searchMovies" style="margin-right: 10px"><button class="btn btn-outline-warning"
+                                type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-search" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                </svg> Search Movies</button></a>
+                        <a href="addMovie.html"><button class="btn btn-outline-primary" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                                </svg> Add Movie</button></a>
 
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="navbar bg-dark">
-                <div class="container-fluid">
-                    <a href="/movies"><img src="img/Blockbuster_logo.svg.png" style="width: 50px; height: 50px"
-                            class="g-3"></a>
-                    <a href="/searchMovies" style="margin-right: 10px"><button class="btn btn-outline-warning"
-                            type="button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-search" viewBox="0 0 16 16">
-                                <path
-                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                            </svg> Search Movies</button></a>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cartModal">
-                        Cart <span id="cart_counter"></span>
-                    </button>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="show-cart table">
-
-                                    </table>
-                                    <div>Total price: $<span class="total-cart"></span></div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-danger" id="clear_cart">Clear Cart</button>
-                                    <button type="button" class="btn btn-primary">Order Now</button>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <button type="submit" class="btn btn-primary dropbtn">Hello,
-                            <%=movies.username%>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#cartModal">
+                            Cart <span id="cart_counter"></span>
                         </button>
-                        <div id="myDropdown" class="dropdown-content">
-                            <a href="/logout">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            <div class="container text-center g-3">
-                <div class="row g-3 results">
-                    <% for (var i=0; i < movies.length; i++) { %>
-                        <div class="col-md-3 col-4">
-                            <div class="card">
-                                <iframe src="<%=movies[i].trailer%>" height="230">
-                                </iframe>
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        <%=movies[i]._id%>
-                                    </h5>
-                                    <p class="card-text"><b>Synopsis: </b>
-                                        <%=movies[i].preview%>
-                                    </p>
-                                    <p><b>Director: </b>
-                                        <%=movies[i].director%>
-                                    </p>
-                                    <p><b>Publish Year: </b>
-                                        <%=movies[i].year%>
-                                    </p>
-                                    <p><b>Movie Length: </b>
-                                        <%=movies[i].length%>
-                                    </p>
-                                    <p><b>Main Actors: </b>
-                                        <% for (var j=0; j < movies[i].main_actors.length; j++) { %>
-                                            <% if(j==movies[i].main_actors.length - 1) {%>
-                                                <%=movies[i].main_actors[j]%>
-                                                    <%} else { %>
-                                                        <%=movies[i].main_actors[j]%>,
-                                                            <%}%>
-                                                                <%}%>
-                                    </p>
-                                    <p><b>Genere: </b>
-                                        <% for (var k=0; k < movies[i].type.length; k++) { %>
-                                            <% if(k==movies[i].type.length - 1) {%>
-                                                <%=movies[i].type[k]%>
-                                                    <%} else { %>
-                                                        <%=movies[i].type[k]%>,
-                                                            <%}%>
-                                                                <%}%>
-                                    </p>
-                                    <p><b>Cost: </b>
-                                        <%=movies[i].price%>$
-                                    </p>
-                                    <button type="submit" class="btn btn-outline-success add-to-cart"
-                                        data-name="<%=movies[i]._id%>" data-price="<%=movies[i].price%>"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                            <path
-                                                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                        </svg> Add to cart</button>
+
+                        <!-- cart Modal -->
+                        <form action="/addOrder" method="post">
+                            <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-floating">
+                                                <input readonly class="d-none" name="username"
+                                                    value="<%=movies.username%>">
+                                            </div>
+                                            <table class="show-cart table">
+
+                                            </table>
+                                            <div>Total price: $<span class="total-cart"></span></div>
+                                            <input readonly class="d-none" name="total_price" id="total_price">
+                                            <input readonly class="d-none" name="all_titles" id="all_titles">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-danger" id="clear_cart">Clear
+                                                Cart</button>
+                                            <button type="submit" class="btn btn-primary" id="order">Order Now</button>
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                        </form>
+                        <!-- cart Modal End -->
+                        <div class="dropdown">
+                            <button type="submit" class="btn btn-primary dropbtn">Hello,
+                                <%=movies.username%>
+                            </button>
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="/logout">Logout</a>
+                            </div>
                         </div>
-                        <%}%>
+                    </div>
+                </nav>
+                <div class="container text-center g-3">
+                    <div class="row g-3 results">
+                        <% for (var i=0; i < movies.length; i++) { %>
+                            <div class="col-md-3 col-4">
+                                <div class="card">
+                                    <iframe src="<%=movies[i].trailer%>" height="230">
+                                    </iframe>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <%=movies[i]._id%>
+                                        </h5>
+                                        <p class="card-text"><b>Synopsis: </b>
+                                            <%=movies[i].preview%>
+                                        </p>
+                                        <p><b>Director: </b>
+                                            <%=movies[i].director%>
+                                        </p>
+                                        <p><b>Publish Year: </b>
+                                            <%=movies[i].year%>
+                                        </p>
+                                        <p><b>Movie Length: </b>
+                                            <%=movies[i].length%>
+                                        </p>
+                                        <p><b>Main Actors: </b>
+                                            <% for (var j=0; j < movies[i].main_actors.length; j++) { %>
+                                                <% if(j==movies[i].main_actors.length - 1) {%>
+                                                    <%=movies[i].main_actors[j]%>
+                                                        <%} else { %>
+                                                            <%=movies[i].main_actors[j]%>,
+                                                                <%}%>
+                                                                    <%}%>
+                                        </p>
+                                        <p><b>Genere: </b>
+                                            <% for (var k=0; k < movies[i].type.length; k++) { %>
+                                                <% if(k==movies[i].type.length - 1) {%>
+                                                    <%=movies[i].type[k]%>
+                                                        <%} else { %>
+                                                            <%=movies[i].type[k]%>,
+                                                                <%}%>
+                                                                    <%}%>
+                                        </p>
+                                        <p><b>Cost: </b>
+                                            <%=movies[i].price%>$
+                                        </p>
+                                        <button type="submit" class="btn btn-outline-success add-to-cart"
+                                            data-name="<%=movies[i]._id%>" data-price="<%=movies[i].price%>"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                            </svg> Add to cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <%}%>
+                    </div>
                 </div>
             </div>
         </div>
@@ -131,10 +157,13 @@
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
 
+
+
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
-    <script src="js/movies.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/sidenav.js"></script>
 </body>
 
 </html>

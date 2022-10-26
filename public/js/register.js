@@ -61,7 +61,7 @@ $(() => {
         var fullname = $("#fullname").val()
         var fullname_message = document.getElementById("fullname_message")
         fullname_counter = 0
-        if (/^[a-zA-z]+$/.test(fullname)) {
+        if (!(/^[a-zA-z ]+$/.test(fullname))) {
             fullname_message.innerHTML = "Only Letters are allowed<br>";
             document.getElementById("fullname").style.borderColor = "red";
             fullname_valid = false
