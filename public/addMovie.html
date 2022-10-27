@@ -12,96 +12,95 @@
 </head>
 
 <body>
-
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="navbar bg-dark">
-                <div class="container-fluid">
-                    <a href="/movies"><img src="img/Blockbuster_logo.svg.png" style="width: 50px; height: 50px"
-                            class="g-3"></a>
-                    <form class="d-flex mx-auto" role="search">
-                        <div class="input-group mb-3 title text-center">
-                            <h5 class="text-white" id="headline">Fill the form to add a movie</h5>
-                        </div>
-                    </form>
-                    <a href="/movies"><button class="btn btn-outline-success" type="button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-house-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
-                                <path fill-rule="evenodd"
-                                    d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
-                            </svg></button></a>
-                </div>
-            </nav>
-            <div class="col g-3">
-                <div class="container text-center g-3">
-                    <form action="/addMovie" method="post" onsubmit="return validateBeforeSubmit()">
-                        <div class="mb-3 row">
-                            <label class="col-sm-2 col-form-label">Movie Title</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="title" id="title" required>
+    <div id="sidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/movies">Home page</a>
+        <a href="/movies">Movies</a>
+        <a href="/customers">Clients</a>
+        <a href="#">Contact</a>
+    </div>
+    <div id="main">
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="navbar bg-dark">
+                    <div class="container-fluid">
+                        <span id="sidenavBtn" onclick="openNav()">&#9776;</span>
+                        <form class="d-flex mx-auto" role="search">
+                            <div class="input-group mb-3 title text-center">
+                                <h5 class="text-white" id="headline">Fill the form to add a movie</h5>
                             </div>
-                            <span id="title_message"></span>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-sm-2 col-form-label">Year of publish</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" name="year" id="year" required>
+                        </form>
+                    </div>
+                </nav>
+                <div class="col g-3">
+                    <div class="container text-center g-3">
+                        <form action="/addMovie" method="post" onsubmit="return validateBeforeSubmit()">
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">Movie Title</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="title" id="title" required>
+                                </div>
+                                <span id="title_message"></span>
                             </div>
-                            <span id="year_message"></span>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-sm-2 col-form-label">Director</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="director" id="director" required>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">Year of publish</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="year" id="year" required>
+                                </div>
+                                <span id="year_message"></span>
                             </div>
-                            <span id="director_message"></span>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-sm-2 col-form-label">Movie Length</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" name="length" id="length" required>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">Director</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="director" id="director" required>
+                                </div>
+                                <span id="director_message"></span>
                             </div>
-                            <span id="length_message"></span>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-sm-2 col-form-label">Main Actors (Split By ,)</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="actors" id="actors" required>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">Movie Length</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="length" id="length" required>
+                                </div>
+                                <span id="length_message"></span>
                             </div>
-                            <span id="actors_message"></span>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-sm-2 col-form-label">Genre (Split By ,)</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="genre" id="genre" required>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">Main Actors (Split By ,)</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="actors" id="actors" required>
+                                </div>
+                                <span id="actors_message"></span>
                             </div>
-                            <span id="genre_message"></span>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-sm-2 col-form-label">Synopsis</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="preview" id="preview" required>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">Genre (Split By ,)</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="genre" id="genre" required>
+                                </div>
+                                <span id="genre_message"></span>
                             </div>
-                            <span id="preview_message"></span>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-sm-2 col-form-label">Trailer Link</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="link" id="link" required>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">Synopsis</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="preview" id="preview" required>
+                                </div>
+                                <span id="preview_message"></span>
                             </div>
-                            <span id="link_message"></span>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-sm-2 col-form-label">Cost</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" name="cost" id="cost" required>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">Trailer Link</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="link" id="link" required>
+                                </div>
+                                <span id="link_message"></span>
                             </div>
-                            <span id="cost_message"></span>
-                        </div>
-                        <button class="btn btn-primary" type="submit" id="submitBtn">Add Movie</button>
-                    </form>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">Cost</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="cost" id="cost" required>
+                                </div>
+                                <span id="cost_message"></span>
+                            </div>
+                            <button class="btn btn-primary" type="submit" id="submitBtn">Add Movie</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -115,6 +114,7 @@
         integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 
     <script src="js/addMovie.js"></script>
+    <script src="js/sidenav.js"></script>
 
 </body>
 

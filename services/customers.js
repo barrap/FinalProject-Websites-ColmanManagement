@@ -26,7 +26,7 @@ async function deleteCustomer(username) {
 }
 
 async function getAllCustomers() {
-    return await Customer.find()
+    return await Customer.find().sort({ _id: 1 })
 }
 
 async function updateAdmin(username, val) {
@@ -34,10 +34,29 @@ async function updateAdmin(username, val) {
     await Customer.updateOne({ _id: username }, { isAdmin: val })
 }
 
+async function getCustomer(username) {
+    return await Customer.findOne({ _id: username })
+}
+
+async function update(username, new_phone, new_location, new_password) {
+    if (new_phone) {
+        await Customer.updateOne({ _id: username }, { phone: new_phone })
+    }
+    if (new_location) {
+        await Customer.updateOne({ _id: username }, { location: new_location })
+    }
+    if (new_password) {
+        var new_hashed_password = crypto.pbkdf2Sync(new_password, "", 1000, 64, `sha512`).toString(`hex`);
+        await Customer.updateOne({ _id: username }, { password: new_hashed_password })
+    }
+}
+
 module.exports = {
     login,
     register,
     deleteCustomer,
     getAllCustomers,
-    updateAdmin
+    updateAdmin,
+    getCustomer,
+    update
 }

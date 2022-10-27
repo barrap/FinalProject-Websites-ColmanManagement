@@ -1,8 +1,42 @@
 $(() => {
+    $(".dropbtn").click(showDropDown)
+    $("#showpass").click(showPass)
     $("#submitBtn").click(validateBeforeSubmit);
 
-    function validateBeforeSubmit(event) {
+    /* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+    function showDropDown() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
 
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+
+    function showPass(event) {
+        var password = document.getElementById("password")
+        var password_conf = document.getElementById("password_conf")
+        if (password.type === "password") {
+            password.type = "text"
+            password_conf.type = "text"
+        }
+        else {
+            password.type = "password"
+            password_conf.type = "password"
+        }
+    }
+
+    function validateBeforeSubmit() {
         // Check the validity of the password
         var password = $("#password").val()
         var password_conf = $("#password_conf").val()
@@ -21,7 +55,7 @@ $(() => {
             password_valid = false
             password_counter++
         }
-        if (password_counter == 0) {
+        if (password_counter == 0 || password.length == 0) {
             password_message.innerHTML = ""
             document.getElementById("password").style.borderColor = "green";
             document.getElementById("password_conf").style.borderColor = "green";
@@ -50,69 +84,18 @@ $(() => {
             phone_valid = false
             phone_counter++
         }
-        if (phone_counter == 0) {
+        if (phone_counter == 0 || phone_num.length == 0) {
             phone_message.innerHTML = ""
             document.getElementById("phone").style.borderColor = "green";
             phone_valid = true
         }
 
-        // Checks the full name validity
-        var fullname = $("#fullname").val()
-        var fullname_message = document.getElementById("fullname_message")
-        fullname_counter = 0
-        if (!(/^[a-zA-z ]+$/.test(fullname))) {
-            fullname_message.innerHTML = "Only Letters are allowed<br>";
-            document.getElementById("fullname").style.borderColor = "red";
-            fullname_valid = false
-            fullname_counter++
-        }
-        if (fullname.length == 0) {
-            fullname_message.innerHTML = "Full name can not be empty<br>";
-            document.getElementById("fullname").style.borderColor = "red";
-            fullname_valid = false
-            fullname_counter++
-        }
-        if (fullname_counter == 0) {
-            fullname_message.innerHTM = ""
-            document.getElementById("fullname").style.borderColor = "green";
-            fullname_valid = true
-        }
-
-        // Checks the username validity
-        var username = $("#username").val()
-        var username_message = document.getElementById("username_message")
-        var username_counter = 0
-        if (username.length == 0) {
-            username_message.innerHTML = "Username can not be empty<br>";
-            document.getElementById("username").style.borderColor = "red";
-            username_valid = false
-            username_counter++
-        }
-        if(username_counter == 0) {
-            username_message.innerHTML = ""
-            document.getElementById("username").style.borderColor = "green";
-            username_valid = true
-        }
-
-        // Checks that all input is valid
-        if (phone_valid && password_valid && fullname_valid && username_valid) {
+        if(phone_valid && password_valid) {
             return true
         }
         else {
             return false
         }
     }
-})
 
-function showPass(event) {
-    var password = document.getElementById("password")
-    var password_conf = document.getElementById("password_conf")
-    if (password.type === "password") {
-        password.type = "text"
-        password_conf.type = "text"
-    }
-    else {
-        password.type = "password"
-        password_conf.type = "password"
-    }
-}
+})

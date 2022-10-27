@@ -23,6 +23,8 @@ router.get("/customers", CustomerController.getAllCustomers)
 router.post("/deleteCustomer", CustomerController.deleteCustomer)
 router.post("/addAdmin", CustomerController.addAdmin)
 router.post("/removeAdmin", CustomerController.removeAdmin)
+router.get("/updaeUserPage", CustomerController.updateUser)
+router.post("/updateUser", CustomerController.update)
 
 // Movies routing
 router.get('/movies', moviesController.findAll);
@@ -30,6 +32,6 @@ router.post("/deleteMovie", moviesController.deleteMovie)
 router.post("/addMovie", moviesController.addMovie)
 router.get("/search", moviesController.search)
 router.get("/searchMovies", moviesController.searchMovies)
-router.post("/update", moviesController.update)
+router.post("/updateMovies", moviesController.update)
 
 module.exports = router;

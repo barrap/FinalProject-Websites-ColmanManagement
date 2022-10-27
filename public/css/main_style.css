@@ -69,3 +69,25 @@ body {
 #main {
     transition: margin-left .5s;
 }
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #060606;
+}
+
+.navbar-brand {
+    color: #818181
+}
+
+.navbar-brand:hover {
+    color: #504e4e
+}
+
+#sidenavBtn {
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+}

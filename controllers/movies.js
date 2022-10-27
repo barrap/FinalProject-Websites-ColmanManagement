@@ -2,19 +2,22 @@
 // Import the neccesary modules 
 const url = require("url")
 const MovieService = require('../services/movies');
+const customersService = require("../services/customers")
 
 const findAll = (req, res) => {
     if (req.session.username != null) {
         const result = MovieService.getMovies()
         result.then(r => {
-            r['username'] = req.session.username
-            if(req.session.isAdmin == true) {
-                res.render("../views/movies-admin", { movies: r });
-            }
-            else {
-                res.render("../views/movies", { movies: r });
-            }
-            
+            const customer = customersService.getCustomer(req.session.username)
+            customer.then(cust => {
+                r['username'] = req.session.username
+                if (cust.isAdmin == true) {
+                    res.render("../views/movies-admin", { movies: r });
+                }
+                else {
+                    res.render("../views/movies", { movies: r });
+                }
+            })
         })
     }
     else {
@@ -42,7 +45,13 @@ const addMovie = (req, res) => {
 }
 
 const searchMovies = (req, res) => {
-    res.render("searchMovies.ejs", {})
+    if (req.session.username != null) {
+        res.render("searchMovies.ejs", {})
+    }
+    else {
+        req.redirect("/")
+    }
+
 }
 const search = (req, res) => {
 
