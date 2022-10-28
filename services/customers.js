@@ -1,13 +1,25 @@
 const Customer = require("../models/customers");
 const crypto = require('crypto');
 
-async function login(username, password) {
+
+// Function to login to the store
+async function login(username) {
+
+    // Tries to find the customer by the username
     const customer = await Customer.findOne({ _id: username });
+
+    // Returns the customer
     return customer
 }
 
+
+// Function to register a new customer
 async function register(fullname, username, password, location, isAdmin, phone) {
+
+    // Creates the hashed password
     var hashed_password = crypto.pbkdf2Sync(password, "", 1000, 64, `sha512`).toString(`hex`);
+
+    // Define the new user
     const customer = new Customer({
         _id: username,
         fullname: fullname,
@@ -18,39 +30,59 @@ async function register(fullname, username, password, location, isAdmin, phone) 
         orders: 0
     });
 
+    // Tries and save the new user
     return await customer.save()
 }
 
+
+// Function to delete a customer
 async function deleteCustomer(username) {
     await Customer.deleteOne({ _id: username })
 }
 
+
+// Function to get the data on all the customer
 async function getAllCustomers() {
+    
+    // Sorts the Customer by thier username
     return await Customer.find().sort({ _id: 1 })
 }
 
+// Function to change the isAdmin property of a customer
 async function updateAdmin(username, val) {
 
     await Customer.updateOne({ _id: username }, { isAdmin: val })
 }
 
+// Function to get the data about one customer
 async function getCustomer(username) {
     return await Customer.findOne({ _id: username })
 }
 
+
+// Function to update a customer details
 async function update(username, new_phone, new_location, new_password) {
+
+    // checks if a new phone number was provided
     if (new_phone) {
         await Customer.updateOne({ _id: username }, { phone: new_phone })
     }
+
+    // Checks if a new location was provided
     if (new_location) {
         await Customer.updateOne({ _id: username }, { location: new_location })
     }
+
+    // Checks if a new password was provided
     if (new_password) {
+
+        // Created the new hashed password
         var new_hashed_password = crypto.pbkdf2Sync(new_password, "", 1000, 64, `sha512`).toString(`hex`);
         await Customer.updateOne({ _id: username }, { password: new_hashed_password })
     }
 }
 
+// Exports all the function
 module.exports = {
     login,
     register,

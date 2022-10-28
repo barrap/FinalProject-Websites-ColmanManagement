@@ -7,47 +7,97 @@
     <title>Movie Catalog - Search</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.rtl.min.css"
         integrity="sha384-+4j30LffJ4tgIMrq9CwHvn0NjEvmuDCOfk6Rpg2xg7zgOxWWtLtozDEEVvBPgHqE" crossorigin="anonymous">
-    <link rel="icon" type="image/x-icon" href="img/netflix.png">
+    <link rel="icon" type="image/x-icon" href="img/Blockbuster_logo.svg.png">
     <link rel="stylesheet" href="css/search_style.css">
+    <link rel="stylesheet" href="css/sidenav.css">
 </head>
 
 <body>
+    <div id="sidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/movies">Home page</a>
+        <a href="/movies">Movies</a>
+        <a href="/customers">Clients</a>
+        <a href="locationMap.html">Locations</a>
+        <a href="/logout">Logout</a>
+    </div>
+    <div id="main">
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="navbar bg-dark">
+                    <div class="container-fluid">
+                        <span id="sidenavBtn" onclick="openNav()">&#9776;</span>
+                        <form class="d-flex mx-auto" role="search">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Search" id="inp_search">
+                                <span class="input-group-text" id="basic-addon1"><select id="search_parameters">
+                                        <option value="title">By Title</option>
+                                        <option value="director">By Director</option>
+                                        <option value="year">By year</option>
+                                        <option value="length">By Movie Length</option>
+                                        <option value="cost">By Movie Cost</option>
+                                    </select>
+                            </div>
+                        </form>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#cartModal">
+                            Cart <span id="cart_counter"></span>
+                        </button>
+                        <div class="dropdown">
+                            <button type="submit" class="btn btn-primary dropbtn">Hello,
+                                <%=username.username%>
+                            </button>
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="/logout">Logout</a>
+                                <a href="/updaeUserPage">Update Details</a>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="navbar bg-dark">
-                <div class="container-fluid">
-                    <a href="/movies"><img src="img/netflix.png" style="width: 50px; height: 50px" class="g-3"></a>
-                    <form class="d-flex mx-auto" role="search">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Search" id="inp_search">
-                            <span class="input-group-text" id="basic-addon1"><select id="search_parameters">
-                                    <option value="title">By Title</option>
-                                    <option value="director">By Director</option>
-                                    <option value="Actors">By Actor</option>
-                                    <option value="date">By Date</option>
-                                </select>
+
+                    <!-- cart Modal -->
+                    <form action="/addOrder" method="post">
+                        <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-floating">
+                                            <input readonly class="d-none" name="username"
+                                                value="<%{username.username}%>">
+                                        </div>
+                                        <table class="show-cart table">
+
+                                        </table>
+                                        <div>Total price: $<span class="total-cart"></span></div>
+                                        <input readonly class="d-none" name="total_price" id="total_price">
+                                        <input readonly class="d-none" name="all_titles" id="all_titles">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger" id="clear_cart">Clear
+                                            Cart</button>
+                                        <button type="submit" class="btn btn-primary" id="order">Order Now</button>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </form>
-                    <a href="/movies" id="homeBtn"><button class="btn btn-outline-success" type="button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-house-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
-                                <path fill-rule="evenodd"
-                                    d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
-                            </svg></button></a>
-                    <a href="addMovie.html"><button class="btn btn-outline-primary" type="button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
-                            </svg> Add Movie</button></a>
-                </div>
-            </nav>
+                    <!-- cart Modal End -->
 
-            <div class="container text-center g-3">
-                <div class="row g-3 results">
+                </nav>
+
+                <div class="container text-center g-3">
+                    <div class="row g-3 results">
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,7 +129,7 @@
                         {year}
                     </p>
                     <p><b>Movie Length: </b>
-                        {length}
+                        {length} Minutes
                     </p>
                     <p><b>Main Actors: </b>
                         {main_actors}
@@ -88,14 +138,23 @@
                         {type}
                     </p>
                     <p><b>Cost: </b>
-                        {price}
+                        {price}$
                     </p>
-                    <a href="{link}"><button class="btn btn-outline-info"
-                            type="button">Read More</button></a>
+                    <button type="submit" class="btn btn-outline-success add-to-cart"
+                                            data-name="{_id}" data-price="{price}"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                            </svg> Add to cart</a>
                 </div>
             </div>
         </div>
     </script>
+
+    <script src="js/sidenav.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
 </body>
 
 </html>

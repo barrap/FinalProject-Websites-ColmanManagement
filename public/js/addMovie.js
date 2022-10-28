@@ -3,6 +3,7 @@ $(() => {
     $("#submitBtn").click(validateBeforeSubmit);
 
     function validateBeforeSubmit(event) {
+        
         // Gets all the values
         var movie_title = $("#title").val()
         var movie_year = $("#year").val()
@@ -48,7 +49,7 @@ $(() => {
         var cost_bool = false
 
 
-        // Checks title
+        // Checks if a title was provided
         if (movie_title == "") {
             movie_title_html.style.borderColor = "red"
             title_message.innerHTML = "Movie title can't be empty"
@@ -60,7 +61,7 @@ $(() => {
             movie_title_bool = true
         }
 
-        // Checks year
+        // // Checks if a year was provided
         if (movie_year == "") {
             movie_year_html.style.borderColor = "red"
             year_message.innerHTML = "Movie year can't be empty"
@@ -72,7 +73,7 @@ $(() => {
             year_bool = true
         }
 
-        // Checks director
+        // Checks if a director was provided
         if (director == "") {
             director_html.style.borderColor = "red"
             director_message.innerHTML = "Director can't be empty"
@@ -84,7 +85,7 @@ $(() => {
             director_bool = true
         }
 
-        // Checks movie length
+        // Checks if a movie length was provided
         if (length == "") {
             length_html.style.borderColor = "red"
             length_message.innerHTML = "Movie length can't be empty"
@@ -96,7 +97,7 @@ $(() => {
             length_bool = true
         }
 
-        // Checks actors
+        // // Checks if actors were provided
         if (actors == "") {
             actors_html.style.borderColor = "red"
             actors_message.innerHTML = "You must enter at least one main actor"
@@ -108,7 +109,7 @@ $(() => {
             actors_bool = true
         }
 
-        // Checks genre
+        // Checks if genres were provided
         if (genre == "") {
             genre_html.style.borderColor = "red"
             genre_message.innerHTML = "You must enter at least one genre"
@@ -120,7 +121,7 @@ $(() => {
             genre_bool = true
         }
 
-        // Checks preview
+        // Checks if a preview was provided
         if (preview == "") {
             preview_html.style.borderColor = "red"
             preview_message.innerHTML = "You must enter the movie synopsis"
@@ -132,12 +133,14 @@ $(() => {
             preview_bool = true
         }
 
-        // Checks link
+        // Checks if a trailer link was provided
         if (trailer == "") {
             trailer_html.style.borderColor = "red"
             trailer_message.innerHTML = "You must enter a trailer for the movie"
             trailer_bool = false
         }
+
+        // Check if the trailer link is valid
         else if (!(/https?:\/\/www.youtube.com\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(trailer))) {
             trailer_html.style.borderColor = "red"
             trailer_message.innerHTML = "The trailer must be from youtube"
@@ -149,7 +152,7 @@ $(() => {
             trailer_bool = true
         }
 
-        // Checks cost
+        // Checks if a cost was provided
         if (cost == "") {
             cost_html.style.borderColor = "red"
             cost_message.innerHTML = "You must enter a cost for the movie"
@@ -161,7 +164,9 @@ $(() => {
             cost_bool = true
         }
 
-        if (movie_title_bool & director_bool & length_bool & actors_bool & genre_bool & preview_bool & trailer_bool & cost_bool) {
+
+        // Checks if all the condition are met
+        if (movie_title_bool & year_bool & director_bool & length_bool & actors_bool & genre_bool & preview_bool & trailer_bool & cost_bool) {
             return true
         }
         else {

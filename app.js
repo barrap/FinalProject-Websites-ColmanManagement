@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const app = express();
-
+var http = require('http').createServer(app)
 var io = require('socket.io')(http)
 
 app.use(express.static("public"));
@@ -17,7 +17,5 @@ app.use(express.urlencoded());
 app.set('view engine', 'ejs');
 
 app.use('/', require('./routes/router'));
-
-var http = require('http').createServer(app)
 
 http.listen(process.env.PORT)

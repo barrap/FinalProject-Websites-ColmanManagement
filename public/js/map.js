@@ -2,6 +2,7 @@
 
 // Initialize and add the map
 function initMap() {
+  
   // The location of stores
   const tel_aviv = { lat: 32.08552355994881, lng: 34.78216797643222 };
   const jerusalem = { lat: 31.768512994536373, lng: 35.2127603643461 };

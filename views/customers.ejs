@@ -10,6 +10,7 @@
     <link rel="icon" type="image/x-icon" href="img/Blockbuster_logo.svg.png">
     <link rel="stylesheet" href="css/main_style.css">
     <link rel="stylesheet" href="css/customers.css">
+    <link rel="stylesheet" href="css/sidenav.css">
 </head>
 
 <body>
@@ -18,6 +19,7 @@
         <a href="/movies">Home page</a>
         <a href="/movies">Movies</a>
         <a href="#">Clients</a>
+        <a href="locationMap.html">Locations</a>
         <a href="/logout">Logout</a>
     </div>
     <div id="main">
@@ -48,8 +50,7 @@
                                 <th>Phone Number</th>
                                 <th>Location</th>
                                 <th>Delete user?</th>
-                                <th>Change to Admin?</th>
-                                <th>Remove Admin?</th>
+                                <th>Change admin status</th>
                             </tr>
                             <% for (var i=0; i < customers.length; i++) { %>
                                 <tr>
@@ -59,10 +60,10 @@
                                     <td>
                                         <%=customers[i].fullname%>
                                     </td>
-                                    <td>
+                                    <td id="username_<%=i+1%>">
                                         <%=customers[i]._id%>
                                     </td>
-                                    <td>
+                                    <td class="isAdmin" data-admin="<%=customers[i].isAdmin%>">
                                         <%=(customers[i].isAdmin==true) ? 'True' : 'False' %>
                                     </td>
                                     <td>
@@ -83,33 +84,8 @@
                                                 </svg></button>
                                         </form>
                                     </td>
-                                    <td>
-                                        <form action="/addAdmin" method="post">
-                                            <input readonly class="d-none" name="username"
-                                                value="<%=customers[i]._id%>">
-                                            <button type="submit" class="btn btn-outline-primary">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                                                    <path fill-rule="evenodd"
-                                                        d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-                                                </svg></button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form action="/removeAdmin" method="post">
-                                            <input readonly class="d-none" name="username"
-                                                value="<%=customers[i]._id%>">
-                                            <button type="submit" class="btn btn-outline-warning">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                                                    <path fill-rule="evenodd"
-                                                        d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z" />
-                                                </svg></button>
-                                        </form>
+                                    <td id="admin-status_<%=i+1%>">
+
                                     </td>
                                 </tr>
                                 <%}%>
@@ -131,6 +107,7 @@
 
     <script src="js/main.js"></script>
     <script src="js/sidenav.js"></script>
+    <script src="js/customers.js"></script>
 </body>
 
 </html>

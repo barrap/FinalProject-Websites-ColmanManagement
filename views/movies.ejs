@@ -50,7 +50,7 @@
                         <form action="/addOrder" method="post">
                             <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
@@ -116,7 +116,7 @@
                                             <%=movies[i].year%>
                                         </p>
                                         <p><b>Movie Length: </b>
-                                            <%=movies[i].length%>
+                                            <%=movies[i].length%> Minutes
                                         </p>
                                         <p><b>Main Actors: </b>
                                             <% for (var j=0; j < movies[i].main_actors.length; j++) { %>
@@ -180,6 +180,7 @@
 
     <script src="js/main.js"></script>
     <script src="js/sidenav.js"></script>
+    <script src="js/cart.js"></script>
 </body>
 
 </html>

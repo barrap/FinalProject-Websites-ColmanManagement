@@ -1,8 +1,11 @@
 body {
     background-color: #35363a;
-    color: white
+    color: white;
+    
 }
-
+h3 {
+    text-shadow: 2px 2px #19beca;
+}
 .form-control {
     background-color: #343b42;
     border-radius: 50px;
@@ -16,7 +19,7 @@ body {
 #error_message {
     color: red;
     font-size: 30px;
-    
+
 }
 
 .input_text {

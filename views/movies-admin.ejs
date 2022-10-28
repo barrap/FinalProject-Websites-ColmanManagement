@@ -9,11 +9,12 @@
         integrity="sha384-+4j30LffJ4tgIMrq9CwHvn0NjEvmuDCOfk6Rpg2xg7zgOxWWtLtozDEEVvBPgHqE" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="img/Blockbuster_logo.svg.png">
     <link rel="stylesheet" href="css/main_style.css">
+    <link rel="stylesheet" href="css/sidenav.css">
 </head>
 
 <body>
     <div id="sidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="javascript:void(0)" class="closebtn">&times;</a>
         <a href="/movies">Home page</a>
         <a href="/movies">Movies</a>
         <a href="/customers">Clients</a>
@@ -25,7 +26,7 @@
             <div class="row">
                 <nav class="navbar bg-dark">
                     <div class="container-fluid">
-                        <span id="sidenavBtn" onclick="openNav()">&#9776;</span>
+                        <span id="sidenavBtn">&#9776;</span>
                         <a href="/searchMovies" style="margin-right: 10px"><button class="btn btn-outline-warning"
                                 type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -33,7 +34,7 @@
                                     <path
                                         d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                                 </svg> Search Movies</button></a>
-                        <a href="addMovie.html"><button class="btn btn-outline-primary" type="button">
+                        <a href="/addMoviePage"><button class="btn btn-outline-primary" type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                                     <path
@@ -51,7 +52,7 @@
                         <form action="/addOrder" method="post">
                             <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
@@ -117,7 +118,7 @@
                                             <%=movies[i].year%>
                                         </p>
                                         <p><b>Movie Length: </b>
-                                            <%=movies[i].length%>
+                                            <%=movies[i].length%> Minutes
                                         </p>
                                         <p><b>Main Actors: </b>
                                             <% for (var j=0; j < movies[i].main_actors.length; j++) { %>
@@ -176,7 +177,7 @@
                             <!-- Update modal -->
                             <div class="modal fade" id="updateModal<%=i%>" tabindex="-1"
                                 aria-labelledby="updateModalLabel<%=i%>" aria-hidden="true">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="updateModalLabel<%=i%>">Update info for:
@@ -186,42 +187,80 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="/updateMovies" method="post">
+                                            <form action="/updateMovies" method="post"
+                                                onsubmit="return validateUpdateBeforeSubmit()">
                                                 <div class="form-floating">
                                                     <input readonly class="d-none" name="title"
                                                         value="<%=movies[i]._id%>">
                                                 </div>
-                                                <div class="form-floating">
-                                                    Synopsis: <input name="preview" class="update_input">
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Synopsis</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="preview"
+                                                            id="preview">
+                                                    </div>
+                                                    <span id="preview_message"></span>
                                                 </div>
-                                                <div class="form-floating">
-                                                    Director: <input name="director" class="update_input">
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Director</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="director"
+                                                            id="director">
+                                                    </div>
+                                                    <span id="director_message"></span>
                                                 </div>
-                                                <div class="form-floating">
-                                                    Publish Year: <input name="year" type="number" class="update_input">
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Year of publish</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="number" class="form-control" name="year" id="year">
+                                                    </div>
+                                                    <span id="year_message"></span>
                                                 </div>
-                                                <div class="form-floating">
-                                                    Movie Length: <input name="length" type="number"
-                                                        class="update_input">
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Movie Length</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="number" class="form-control" name="length"
+                                                            id="length">
+                                                    </div>
+                                                    <span id="length_message"></span>
                                                 </div>
-                                                <div class="form-floating">
-                                                    Main Actors (split by ,): <input name="actors" class="update_input">
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Main Actors (Split By
+                                                        ,)</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="actors"
+                                                            id="actors">
+                                                    </div>
+                                                    <span id="actors_message"></span>
                                                 </div>
-                                                <div class="form-floating">
-                                                    Genre (split by ,): <input name="genre" class="update_input">
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Genre (Split By ,)</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="genre" id="genre">
+                                                    </div>
+                                                    <span id="genre_message"></span>
                                                 </div>
-                                                <div class="form-floating">
-                                                    Trailer Link: <input name="link" class="update_input">
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Trailer Link</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="link" id="link">
+                                                    </div>
+                                                    <span id="link_message"></span>
                                                 </div>
-                                                <div class="form-floating">
-                                                    Cost: <input name="cost" type="number" class="update_input">
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Cost</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="number" class="form-control" name="cost" id="cost">
+                                                    </div>
+                                                    <span id="cost_message"></span>
                                                 </div>
 
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                            <button type="submit" id="saveChangesBtn" class="btn btn-primary">Save
+                                                changes</button>
                                         </div>
                                         </form>
                                     </div>
@@ -259,6 +298,8 @@
 
     <script src="js/main.js"></script>
     <script src="js/sidenav.js"></script>
+    <script src="js/updateMovie.js"></script>
+    <script src="js/cart.js"></script>
 </body>
 
 </html>

@@ -6,6 +6,7 @@ const moviesController = require('../controllers/movies');
 const CustomerController = require("../controllers/customers")
 const router = express.Router();
 
+// Public dir path (for static files)
 const public_dir_path = "C:\\Users\\barra\\Desktop\\לימודים\\שנה ב\\סמסטר קיץ\\פיתוח אפליקציות אינטרנטיות\\מטלות\\final - project\\public"
 
 router.get("/", (req, res) => {
@@ -29,6 +30,7 @@ router.post("/updateUser", CustomerController.update)
 // Movies routing
 router.get('/movies', moviesController.findAll);
 router.post("/deleteMovie", moviesController.deleteMovie)
+router.get("/addMoviePage", moviesController.addMoviePage)
 router.post("/addMovie", moviesController.addMovie)
 router.get("/search", moviesController.search)
 router.get("/searchMovies", moviesController.searchMovies)
