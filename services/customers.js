@@ -43,7 +43,7 @@ async function deleteCustomer(username) {
 
 // Function to get the data on all the customer
 async function getAllCustomers() {
-    
+
     // Sorts the Customer by thier username
     return await Customer.find().sort({ _id: 1 })
 }
@@ -63,13 +63,16 @@ async function getCustomer(username) {
 // Function to update a customer details
 async function update(username, new_phone, new_location, new_password) {
 
+    // Gets the customer data
+    const customer = await Customer.findOne({ _id: username })
+    
     // checks if a new phone number was provided
     if (new_phone) {
         await Customer.updateOne({ _id: username }, { phone: new_phone })
     }
 
     // Checks if a new location was provided
-    if (new_location) {
+    if (new_location != customer.location) {
         await Customer.updateOne({ _id: username }, { location: new_location })
     }
 
