@@ -7,10 +7,10 @@ const CustomerController = require("../controllers/customers")
 const router = express.Router();
 
 // Public dir path (for static files)
-const public_dir_path = "C:\\Users\\barra\\Desktop\\לימודים\\שנה ב\\סמסטר קיץ\\פיתוח אפליקציות אינטרנטיות\\מטלות\\final - project\\public"
+const public_dir_path = "../public"
 
 router.get("/", (req, res) => {
-        res.sendFile(public_dir_path + "\\homepage.html")
+        res.sendFile("homepage.html",  { root: 'public' })
 })
 
 
