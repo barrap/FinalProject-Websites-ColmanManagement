@@ -3,7 +3,7 @@
 const url = require("url")
 const MovieService = require('../services/movies');
 const customersService = require("../services/customers");
-const public_dir_path = "C:\\Users\\barra\\Desktop\\לימודים\\שנה ב\\סמסטר קיץ\\פיתוח אפליקציות אינטרנטיות\\מטלות\\final - project\\public"
+const public_dir_path = "../public"
 
 
 // Function to get the data on all the movies
