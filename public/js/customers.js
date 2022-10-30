@@ -11,10 +11,11 @@ $(() => {
 
         // Saves the admin status for each customer
         admin_status = admin_statuses[i].innerText
+        console.log(admin_status + " " + typeof admin_status)
 
         // Checks if a user is an admin
-        if (admin_statuses == "True") {
-            $("#admin-status_" + (i + 1)).html("<form action='/removeAdmin' method='post'>\
+        if (admin_status === "True") {
+            $("#admin_status_" + (i + 1)).html("<form action='/removeAdmin' method='post'>\
                 <input readonly class='d-none' name='username'\
                 value='"+ username + "'>\
                 <button type='submit' class='btn btn-outline-warning'>\
@@ -25,7 +26,7 @@ $(() => {
             </form >")
         }
         else {
-            $("#admin-status_" + (i + 1)).html("<form action='/addAdmin' method='post'>\
+            $("#admin_status_" + (i + 1)).html("<form action='/addAdmin' method='post'>\
             <input readonly class='d-none' name='username'\
                 value='"+ username + "'>\
             <button type='submit' class='btn btn-outline-primary'>\
