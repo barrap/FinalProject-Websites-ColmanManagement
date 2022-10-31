@@ -35,5 +35,7 @@ router.post("/addMovie", moviesController.addMovie)
 router.get("/search", moviesController.search)
 router.get("/searchMovies", moviesController.searchMovies)
 router.post("/updateMovies", moviesController.update)
+router.post("/addOrder", moviesController.order)
+router.post("/paying", moviesController.paying)
 
 module.exports = router;

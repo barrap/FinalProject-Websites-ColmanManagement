@@ -1,0 +1,46 @@
+body {
+    background-color: #35363a;
+    color: white
+}
+
+.form-control {
+    background-color: #343b42;
+    border-radius: 50px;
+    color: white;
+}
+
+#headline {
+    margin-bottom: 0px !important;
+}
+
+span {
+    color: red
+}
+
+#error_message {
+    color: red;
+    font-size: 30px;
+
+}
+
+.input_text {
+    width: 35%;
+}
+
+.div_input {
+    padding-left: 200px;
+}
+
+.div_choice_input {
+    padding-right: 73%;
+    padding-top: 5px;
+}
+label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,
+label {
+    margin: .4rem 0;
+}

@@ -2,6 +2,7 @@
 // Import the neccesary modules 
 const url = require("url")
 const MovieService = require('../services/movies');
+const CreditCardService = require('../services/creditCard');
 const customersService = require("../services/customers");
 const public_dir_path = "../public"
 
@@ -278,6 +279,71 @@ const update = (req, res) => {
     }
 }
 
+// Function to add order 
+const order = (req, res) => {
+
+    // Checks if the users is logged in
+    if (req.session.username != null) {
+
+        // Gets the user data
+        const customer = customersService.getCustomer(req.session.username)
+        customer.then(cust => {
+
+            // Checks if the user exists
+            if (cust) {
+                    res.render("addOrder.ejs", { username: { username: cust._id } })
+            }
+
+            // The user doesn't exists so redirects to the home page
+            else {
+                res.redirect("/")
+            }
+        })
+    }
+
+    // The user isn't logged in so redirects to the home page
+    else {
+        res.redirect("/")
+    }
+}
+
+// Function to add payment 
+const paying = (req, res) => {
+
+    // Checks if the users is logged in
+    if (req.session.username != null) {
+
+        // Gets the user data
+        const customer = customersService.getCustomer(req.session.username)
+        customer.then(cust => {
+
+            // Checks if the user exists
+            if (cust) {
+                try {
+                    const result = CreditCardService.addCard(req.body.cardNumber,req.body.id,req.body.date,req.body.secNum)
+                    result.then(r => {
+                        res.redirect("/movies")
+                    })
+                }
+                catch (e) {
+                    res.render("../views/addMovie", { message: { status: "Movie already exists" } })
+                }
+                
+            }
+
+            // The user doesn't exists so redirects to the home page
+            else {
+                res.redirect("/")
+            }
+        })
+    }
+
+    // The user isn't logged in so redirects to the home page
+    else {
+        res.redirect("/")
+    }
+}
+
 // Exports the neccesary functions
 module.exports = {
     findAll,
@@ -286,5 +352,7 @@ module.exports = {
     addMoviePage,
     searchMovies,
     search,
-    update
+    update,
+    order,
+    paying
 };
