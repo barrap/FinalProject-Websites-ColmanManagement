@@ -2,9 +2,9 @@ const creditCard = require('../models/creditCard')
 
 const mongoose = require('mongoose');
 
-async function getCreditCard(owner_id) {
+async function getCreditCard(username) {
 
-    const credit_cards = await creditCard.findOne({ _owner_id: owner_id });
+    const credit_cards = await creditCard.findOne({ _username: username });
 
     // Returns the credit cards of specific customer
     return credit_cards
@@ -12,14 +12,14 @@ async function getCreditCard(owner_id) {
 
 // Function to delete a card
 async function deleteCard(card_number) {
-    await creditCard.deleteOne({ _card_number: card_number })
+    await creditCard.deleteOne({ _id: card_number })
 }
 
 // Adds new card to the database 
-async function addCard(card_number, owner_id, exp_date, digits){
+async function addCard(card_number, username, exp_date, digits){
     const credit_card = new creditCard({
-        _card_number: card_number, 
-        _owner_id: owner_id,
+        _id: card_number, 
+        _username: username,
         _exp_date: exp_date, 
         _digits: digits
     })
