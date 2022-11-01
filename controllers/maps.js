@@ -9,7 +9,6 @@ const Alllocations = (req, res) => {
     //const result = MovieService.getAllCustomers();
     result.then( 
         r=> {
-            console.log(Array.from(r));
             res.render("../views/locations", {stores: Array.from(r)})
         })
 }
