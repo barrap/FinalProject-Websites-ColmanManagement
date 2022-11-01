@@ -3,7 +3,8 @@ const express = require('express');
 
 // Imports the required modules
 const moviesController = require('../controllers/movies');
-const CustomerController = require("../controllers/customers")
+const CustomerController = require("../controllers/customers");
+const LocationController = require("../controllers/maps");
 const router = express.Router();
 
 // Public dir path (for static files)
@@ -36,6 +37,10 @@ router.get("/search", moviesController.search)
 router.get("/searchMovies", moviesController.searchMovies)
 router.post("/updateMovies", moviesController.update)
 router.post("/addOrder", moviesController.order)
-router.post("/paying", moviesController.paying)
+router.post("/paying", moviesController.paying);
+
+// Locations routing
+router.get("/locations", LocationController.Alllocations);
+
 
 module.exports = router;

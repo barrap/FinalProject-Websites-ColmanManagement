@@ -13,7 +13,7 @@ async function getLocationsByCity(city) {
 // Return all locations
 async function getLocations()
 {
-    return await location_db.find();
+    return await location_db.find({},{_id:0, Lat:1, Len:1})
 }
 
 // Adds new location to the database 

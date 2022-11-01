@@ -11,7 +11,34 @@
     <link rel="stylesheet" href="css/main_style.css">
     <link rel="stylesheet" href="css/sidenav.css">
     <link rel="stylesheet" href="css/map.css">
-    <script type="module" src="js/map.js"></script>
+
+    <script type="module">
+        // Initialize and add the map
+        function initMap() {
+        
+        const tel_aviv = { lat: 32.08552355994881, lng: 34.78216797643222 };
+
+        // The map, centered at tel aviv
+        const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 8,
+        center: tel_aviv
+        });
+
+        var _locations = [<%= stores %>];
+
+        _locations.forEach( location =>{
+        {
+            new google.maps.Marker(
+                {
+                    position: {lat: parseFloat(location["Lat"]), lng: parseFloat(location["Len"])}, 
+                    map: map
+                });
+        }
+        })
+    }
+
+        window.initMap = initMap;
+    </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
 
@@ -21,7 +48,7 @@
         <a href="/movies">Home page</a>
         <a href="/movies">Movies</a>
         <a href="/customers">Clients</a>
-        <a href="locationMap.html">Locations</a>
+        <a href="/locations">Locations</a>
         <a href="/logout">Logout</a>
     </div>
     <div id="main">
@@ -44,10 +71,7 @@
             <nav class="navbar">
                 <div class="container-fluid">
                     <span>
-                        <a class="navbar-brand" href="locationMap.html">Locations</a>
-                        <a class="navbar-brand" href="#">#</a>
-                        <a class="navbar-brand" href="#">#</a>
-                        <a class="navbar-brand" href="#"> # # # </a>
+                        <a class="navbar-brand" href="/locations">Locations</a>
                     </span>
                 </div>
             </nav>
@@ -66,8 +90,5 @@
         defer></script>
 
     <script src="js/sidenav.js"></script>
-
-
 </body>
-
 </html>
