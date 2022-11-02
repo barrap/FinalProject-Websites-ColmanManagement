@@ -1,6 +1,8 @@
 const creditCard = require('../models/creditCard')
 
 const mongoose = require('mongoose');
+mongoose.connect(process.env.CONNECTION_STRING)
+
 
 async function getCreditCard(username) {
 

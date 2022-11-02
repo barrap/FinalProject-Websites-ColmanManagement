@@ -10,6 +10,13 @@ async function getTvShows() {
     return await TvShows.find();
 }
 
+// Count tvshows
+async function countTVShows()
+{
+    const data = await TvShows.count()
+    return data;
+}
+
 // Function to delete a tv show
 async function deleteTvShow(tvshow_name) {
     await TvShows.deleteOne({ _id: tvshow_name })
@@ -89,5 +96,6 @@ module.exports = {
     deleteTvShow,
     addTvShow,
     search,
-    update
+    update,
+    countTVShows
 }

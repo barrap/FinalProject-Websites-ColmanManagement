@@ -12,6 +12,12 @@ async function login(username) {
     return customer
 }
 
+// Count customers
+async function countCustomers()
+{
+    const data = await Customer.count()
+    return data;
+}
 
 // Count customers by location
 async function countCustomersByLocation()
@@ -108,5 +114,6 @@ module.exports = {
     updateAdmin,
     getCustomer,
     update,
-    countCustomersByLocation
+    countCustomersByLocation,
+    countCustomers
 }
