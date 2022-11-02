@@ -11,7 +11,6 @@ $(() => {
 
         // Saves the admin status for each customer
         admin_status = admin_statuses[i].innerText
-        console.log(admin_status + " " + typeof admin_status)
 
         // Checks if a user is an admin
         if (admin_status === "True") {

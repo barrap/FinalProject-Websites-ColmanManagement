@@ -320,7 +320,7 @@ const paying = (req, res) => {
             // Checks if the user exists
             if (cust) {
                 try {
-                    const result = CreditCardService.addCard(req.body.cardNumber,req.body.id,req.body.date,req.body.secNum)
+                    const result = CreditCardService.addCard(req.body.cardNumber,req.session.username,req.body.date,req.body.secNum)
                     result.then(r => {
                         res.redirect("/movies")
                     })
