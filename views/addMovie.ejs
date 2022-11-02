@@ -32,6 +32,12 @@
                         </form>
                     </div>
                 </nav>
+                <form>
+                    <div class="row g-3">
+                        <input id="fileupload" type="file" name="fileupload" /> <!--need to fix bug-->
+                        <button id="upload-button" "> Upload </button>
+                    </div>
+                </form>
                 <div class="col g-3">
                     <div class="container text-center g-3">
                         <form action="/addMovie" method="post" onsubmit="return validateBeforeSubmit()">

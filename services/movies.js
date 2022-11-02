@@ -141,6 +141,11 @@ async function update(title, new_preview, new_director, new_year, new_length, ne
     }
 }
 
+// Function to add JSON
+async function uploadJson(json) {
+    await Movie.create(json)
+}
+
 // Exports the neccesary modules
 module.exports = {
     getMovies,
@@ -150,5 +155,6 @@ module.exports = {
     update,
     countMoviesByYear,
     countMovies,
-    countMoviesByDirector
+    countMoviesByDirector,
+    uploadJson
 }

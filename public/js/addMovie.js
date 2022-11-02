@@ -1,6 +1,7 @@
 $(() => {
 
     $("#submitBtn").click(validateBeforeSubmit);
+    $("#upload-button").click(uploadFile)
 
     function validateBeforeSubmit(event) {
         
@@ -172,6 +173,19 @@ $(() => {
         else {
             return false
         }
+    }
+
+    // Function to upload the file
+    async function uploadFile() {
+        var file = document.getElementById('fileupload').files[0]; //Files[0] = 1st file
+        var reader = new FileReader();
+        var data = reader.readAsText(file, 'UTF-8');
+        let datar= new FormData();      
+        datar.append("file", data);
+        await fetch('/upload', {
+            method: "POST", 
+            body: datar
+          });     
     }
 
 

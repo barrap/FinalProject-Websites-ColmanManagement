@@ -37,7 +37,8 @@ router.get("/search", moviesController.search)
 router.get("/searchMovies", moviesController.searchMovies)
 router.post("/updateMovies", moviesController.update)
 router.post("/addOrder", moviesController.order)
-router.post("/paying", moviesController.paying);
+router.post("/paying", moviesController.paying)
+router.post("/upload", moviesController.paying);
 
 // Locations routing
 router.get("/locations", LocationController.Alllocations);

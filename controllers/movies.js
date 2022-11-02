@@ -344,6 +344,47 @@ const paying = (req, res) => {
     }
 }
 
+// Function to upload JSON 
+const upload = (req, res) => {
+
+    // Checks if the users is logged in
+    if (req.session.username != null) {
+
+        // Gets the user data
+        const customer = customersService.getCustomer(req.session.username)
+        customer.then(cust => {
+            console.log(req.session.username)
+            
+
+            // Checks if the user exists
+            if (cust) {
+
+                // Checks if the user is a admin
+                if (cust.isAdmin == true) {
+                    
+                    MovieService.uploadJson(req.data)
+                    res.redirect("/movies")
+                }
+
+                // The user isn't an admin so redirect to the main page
+                else {
+                    res.redirect("/movies")
+                }
+            }
+
+            // The user doesn't exists so redirects to the home page
+            else {
+                res.redirect("/")
+            }
+        })
+    }
+
+    // The user isn't logged in so redirects to the home page
+    else {
+        res.redirect("/")
+    }
+}
+
 // Exports the neccesary functions
 module.exports = {
     findAll,
@@ -354,5 +395,6 @@ module.exports = {
     search,
     update,
     order,
-    paying
+    paying,
+    upload
 };
