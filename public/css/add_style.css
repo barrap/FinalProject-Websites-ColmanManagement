@@ -74,3 +74,20 @@ span {
     color: green;
     font-size: 30px;
 }
+
+footer {
+    position: fixed;
+    margin-top: 10px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #060606;
+}
+
+.navbar-brand {
+    color: #818181
+}
+
+.navbar-brand:hover {
+    color: #504e4e
+}

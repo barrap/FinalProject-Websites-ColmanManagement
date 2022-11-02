@@ -5,36 +5,33 @@ mongoose.connect(process.env.CONNECTION_STRING)
 
 
 // Count movies group by year
-async function countMoviesByYear()
-{
+async function countMoviesByYear() {
     const data = await Movie.aggregate([
         {
-          $group: {
-            _id: '$year',
-            count: { $sum: 1 } // this means that the count will increment by 1
-          }
+            $group: {
+                _id: '$year',
+                count: { $sum: 1 } // this means that the count will increment by 1
+            }
         }
-      ]);
+    ]);
     return data;
 }
 
 // Count movies group by director
-async function countMoviesByDirector()
-{
+async function countMoviesByDirector() {
     const data = await Movie.aggregate([
         {
-          $group: {
-            _id: '$director',
-            count: { $sum: 1 } // this means that the count will increment by 1
-          }
+            $group: {
+                _id: '$director',
+                count: { $sum: 1 } // this means that the count will increment by 1
+            }
         }
-      ]);
+    ]);
     return data;
 }
 
 // Count movies
-async function countMovies()
-{
+async function countMovies() {
     const data = await Movie.count()
     return data;
 }
@@ -42,7 +39,7 @@ async function countMovies()
 // Function to get all the movies
 async function getMovies() {
 
-    return await Movie.find();
+    return await Movie.find().sort({ _id: 1 });
 }
 
 // Function to delete a movie
@@ -127,7 +124,7 @@ async function update(title, new_preview, new_director, new_year, new_length, ne
     if (new_actors[0] != '') {
         await Movie.updateOne({ _id: title }, { main_actors: new_actors })
     }
-    
+
     // checks if a new genres were provided
     if (new_genre[0] != '') {
         await Movie.updateOne({ _id: title }, { type: new_genre })
@@ -151,7 +148,7 @@ module.exports = {
     addMovie,
     search,
     update,
-    countMoviesByYear, 
+    countMoviesByYear,
     countMovies,
     countMoviesByDirector
 }
