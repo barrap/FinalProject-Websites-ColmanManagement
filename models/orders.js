@@ -6,7 +6,9 @@ const order = new Schema({
     total_price: Number,
     movies: Array,
     user_id: String,
-    date: Date
+    year: Number,
+    month: Number, 
+    day: Number
 })
 
 
