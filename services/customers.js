@@ -13,6 +13,20 @@ async function login(username) {
 }
 
 
+// Count customers by location
+async function countCustomersByLocation()
+{
+    const data = await Customer.aggregate([
+        {
+          $group: {
+            _id: '$location',
+            count: { $sum: 1 } // this means that the count will increment by 1
+          }
+        }
+      ]);
+    return data;
+}
+
 // Function to register a new customer
 async function register(fullname, username, password, location, isAdmin, phone) {
 
@@ -93,5 +107,6 @@ module.exports = {
     getAllCustomers,
     updateAdmin,
     getCustomer,
-    update
+    update,
+    countCustomersByLocation
 }
