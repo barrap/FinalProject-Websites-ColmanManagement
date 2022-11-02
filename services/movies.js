@@ -4,6 +4,41 @@ const mongoose = require('mongoose');
 mongoose.connect(process.env.CONNECTION_STRING)
 
 
+// Count movies group by year
+async function countMoviesByYear()
+{
+    const data = await Movie.aggregate([
+        {
+          $group: {
+            _id: '$year',
+            count: { $sum: 1 } // this means that the count will increment by 1
+          }
+        }
+      ]);
+    return data;
+}
+
+// Count movies group by director
+async function countMoviesByDirector()
+{
+    const data = await Movie.aggregate([
+        {
+          $group: {
+            _id: '$director',
+            count: { $sum: 1 } // this means that the count will increment by 1
+          }
+        }
+      ]);
+    return data;
+}
+
+// Count movies
+async function countMovies()
+{
+    const data = await Movie.count()
+    return data;
+}
+
 // Function to get all the movies
 async function getMovies() {
 
@@ -115,5 +150,8 @@ module.exports = {
     deleteMovie,
     addMovie,
     search,
-    update
+    update,
+    countMoviesByYear, 
+    countMovies,
+    countMoviesByDirector
 }
