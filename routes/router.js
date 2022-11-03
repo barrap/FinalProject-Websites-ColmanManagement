@@ -3,6 +3,7 @@ const express = require('express');
 
 // Imports the required modules
 const moviesController = require('../controllers/movies');
+const TVShowsController = require('../controllers/tvshows');
 const CustomerController = require("../controllers/customers");
 const LocationController = require("../controllers/maps");
 const router = express.Router();
@@ -43,5 +44,11 @@ router.post("/upload", moviesController.paying);
 // Locations routing
 router.get("/locations", LocationController.Alllocations);
 
+// TV Shows routing
+router.get('/tvshows', TVShowsController.findAll);
+router.post('/deleteShow', TVShowsController.deleteTvshow);
+router.get("/addShowPage",TVShowsController.addShowPage)
+router.post("/addTVShow", TVShowsController.addTVShow)
+router.post("/updateShows", TVShowsController.update)
 
 module.exports = router;
