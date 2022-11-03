@@ -98,20 +98,21 @@ const addTVShow = (req, res) => {
         // Gets the user data
         const customer = customersService.getCustomer(req.session.username)
         customer.then(cust => {
-
             // Checks if the user exists
             if (cust) {
 
                 // Checks if the user is a admin
                 if (cust.isAdmin == true) {
                     try {
-                        const result = TVShowsService.addTvShow(req.body.title, parseInt(req.body.year, 10), req.body.description, parseInt(req.body.episodes, 10), 
-                            req.body.types.split(","), req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
+                        console.log(req.body)
+                        const result = TVShowsService.addTvShow(req.body.title, parseInt(req.body.year, 10), req.body.preview, parseInt(req.body.episodes, 10), 
+                            req.body.genre.split(","), req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
                         result.then(r => {
                             res.redirect("/tvshows")
                         })
                     }
                     catch (e) {
+                        console.log(e.message)                        
                         res.render("../views/addTVShow", { message: { status: "TV Show already exists" } })
                     }
 

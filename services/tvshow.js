@@ -26,7 +26,8 @@ async function deleteTvShow(tvshow_name) {
 function addTvShow(title, year, description, episodes, types, trailer, price) {
 
     // Define the new tv show
-    var tvshow = new tvshow({
+    
+    var tvshows = new TvShows({
         _id: title,
         year: year,
         description: description,
@@ -38,7 +39,7 @@ function addTvShow(title, year, description, episodes, types, trailer, price) {
     })
 
     // Tries and save the tv show
-    return tvshow.save();
+    return tvshows.save();
 }
 
 // Function to search the array
