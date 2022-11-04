@@ -4,9 +4,10 @@ const Schema = mongoose.Schema
 
 const tvshow = new Schema({
     _id: String,  // name of the tv show
+    shortTitle: String,
     description: String,
-    year: String, 
-    episodes: Number, 
+    year: String,
+    seasons: Number,
     type: Array,
     trailer: String,
     price: Number

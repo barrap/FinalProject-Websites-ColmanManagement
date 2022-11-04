@@ -7,6 +7,11 @@ body {
     color: white;
 }
 
+h1 {
+    color: white;
+    text-decoration: underline;
+}
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -24,7 +29,7 @@ body {
 }
 
 footer {
-    position: fixed; 
+    position: fixed;
     margin-top: 10px;
     left: 0;
     bottom: 0;
@@ -39,4 +44,3 @@ footer {
 .navbar-brand:hover {
     color: #504e4e
 }
-

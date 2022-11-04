@@ -31,7 +31,7 @@ async function login(req, res) {
 
                 // Saves the username is the cookie (for future use) and redirects to the main page
                 req.session.username = username
-                res.redirect("/movies")
+                res.redirect("/main")
             }
 
             // The password that was enterd is wrong
@@ -65,7 +65,7 @@ async function register(req, res) {
 
         // if successful than saves the username and redirects to the main page
         req.session.username = req.body.username
-        res.redirect("/movies")
+        res.redirect("/main")
     }
     catch (e) {
 
@@ -102,7 +102,7 @@ function deleteCustomer(req, res) {
 
                 // The user isn't an admin so redirect to the main page
                 else {
-                    res.redirect("/movies")
+                    res.redirect("/main")
                 }
             }
 
@@ -228,7 +228,7 @@ function getAllCustomers(req, res) {
 
                 // The user isn't an admin so redirect to the main page
                 else {
-                    res.redirect("/movies")
+                    res.redirect("/main")
                 }
             }
 
@@ -271,7 +271,7 @@ function addAdmin(req, res) {
 
                 // The user isn't an admin so redirect to the main page
                 else {
-                    res.redirect("/movies")
+                    res.redirect("/main")
                 }
             }
 
@@ -313,7 +313,7 @@ function removeAdmin(req, res) {
 
                 // The user isn't an admin so redirect to the main page
                 else {
-                    res.redirect("/movies")
+                    res.redirect("/main")
                 }
             }
 

@@ -10,9 +10,12 @@ async function getTvShows() {
     return await TvShows.find();
 }
 
+async function getTVShow(tvshow) {
+    return await TvShows.find({ shortTitle: tvshow })
+}
+
 // Count tvshows
-async function countTVShows()
-{
+async function countTVShows() {
     const data = await TvShows.count()
     return data;
 }
@@ -23,15 +26,16 @@ async function deleteTvShow(tvshow_name) {
 }
 
 // Function to add a tv show
-function addTvShow(title, year, description, episodes, types, trailer, price) {
+function addTvShow(title, shortTitle, year, description, seasons, types, trailer, price) {
 
     // Define the new tv show
-    
+
     var tvshows = new TvShows({
         _id: title,
+        shortTitle: shortTitle,
         year: year,
         description: description,
-        episodes: episodes,
+        seasons: seasons,
         type: types,
         trailer: trailer,
         price: price
@@ -55,6 +59,9 @@ async function search(param, value) {
         case "year":
             return await TvShows.find({ "year": { "$gte": parseInt(value, 10) } })
             break;
+        case "seasons":
+            return await TvShows.find({ "seasons": { "$gte": parseInt(value, 10) } })
+            break;
         case "cost":
             return await TvShows.find({ "price": { "$gte": parseInt(value, 10) } })
             break;
@@ -64,17 +71,17 @@ async function search(param, value) {
 }
 
 // Function to update data about the tvshow
-async function update(title, new_year, new_episodes, new_description, new_trailer, new_cost) {
+async function update(title, new_year, new_seasons, new_description, new_trailer, new_cost) {
     // checks if a new year was provided
     if (new_year) {
         await TvShows.updateOne({ _id: title }, { year: new_year })
     }
 
-    // checks if a new episodes was provided
-    if (new_episodes) {
+    // checks if a new seasons was provided
+    if (new_seasons) {
         await TvShows.updateOne({ _id: title }, { episodes: new_episodes })
     }
-    
+
     // checks if a new description was provided
     if (new_description) {
         await TvShows.updateOne({ _id: title }, { description: new_description })
@@ -94,6 +101,7 @@ async function update(title, new_year, new_episodes, new_description, new_traile
 // Exports the neccesary modules
 module.exports = {
     getTvShows,
+    getTVShow,
     deleteTvShow,
     addTvShow,
     search,

@@ -203,16 +203,17 @@ $(() => {
                 + "<td>" + Number(cart[i].count * cart[i].price).toFixed(2) + "</td>"
                 + "</tr>";
         }
+        var cart_price = totalCartPrice()
 
         // Saves all the titles and the total price of the cart (in order to save the order in the right way)
         document.getElementById("all_titles").setAttribute("value", getAllTitles())
-        document.getElementById("total_price").setAttribute("Value", Number(totalCartPrice()))
+        document.getElementById("total_price").setAttribute("Value", Number(cart_price))
 
         // Displays the cart
         $('.show-cart').html(output);
 
         // Dislays the total cost of the cart
-        $('.total-cart').html(totalCartPrice());
+        $('.total-cart').html("Total price: " + cart_price + "$");
 
         // Displays the number of items in the cart
         document.getElementById("cart_counter").innerHTML = "(" + cartCount() + ")"

@@ -4,11 +4,11 @@ $(() => {
     $("#upload-button").click(uploadFile)
 
     function validateBeforeSubmit(event) {
-        
+
         // Gets all the values
         var show_title = $("#title").val()
         var show_year = $("#year").val()
-        var episodes = $("#episodes").val()
+        var seasons = $("#seasons").val()
         var genre = $("#genre").val()
         var preview = $("#preview").val()
         var trailer = $("#link").val()
@@ -17,7 +17,7 @@ $(() => {
         // gets all the input elements
         var show_title_html = document.getElementById("title")
         var show_year_html = document.getElementById("year")
-        var episodes_html = document.getElementById("episodes")
+        var seasons_html = document.getElementById("seasons")
         var genre_html = document.getElementById("genre")
         var preview_html = document.getElementById("preview")
         var trailer_html = document.getElementById("link")
@@ -26,7 +26,7 @@ $(() => {
         // gets all the span elements (for the error messages)
         var title_message = document.getElementById("title_message")
         var year_message = document.getElementById("year_message")
-        var episodes_message = document.getElementById("episodes_message")
+        var seasons_message = document.getElementById("seasons_message")
         var genre_message = document.getElementById("genre_message")
         var preview_message = document.getElementById("preview_message")
         var trailer_message = document.getElementById("link_message")
@@ -35,7 +35,7 @@ $(() => {
         // boolean variable declaration
         var show_title_bool = false
         var year_bool = false
-        var episodes_bool = false
+        var seasons_bool = false
         var actors_bool = false
         var genre_bool = false
         var preview_bool = false
@@ -67,18 +67,18 @@ $(() => {
             year_bool = true
         }
 
-        
 
-        // Checks if a number of episodes was provided
-        if (episodes == "") {
-            episodes_html.style.borderColor = "red"
-            episodes_message.innerHTML = "Number of episodes can't be empty"
-            episodes_bool = false
+
+        // Checks if a number of seasons was provided
+        if (seasons == "") {
+            seasons_html.style.borderColor = "red"
+            seasons_message.innerHTML = "Number of seasons can't be empty"
+            seasons_bool = false
         }
         else {
-            episodes_html.style.borderColor = "green"
-            episodes_message.innerHTML = ""
-            episodes_bool = true
+            seasons_html.style.borderColor = "green"
+            seasons_message.innerHTML = ""
+            seasons_bool = true
         }
 
 
@@ -139,7 +139,7 @@ $(() => {
 
 
         // Checks if all the condition are met
-        if (show_title_bool & year_bool & episodes_bool & genre_bool & preview_bool & trailer_bool & cost_bool) {
+        if (show_title_bool & year_bool & seasons_bool & genre_bool & preview_bool & trailer_bool & cost_bool) {
             return true
         }
         else {
@@ -152,12 +152,12 @@ $(() => {
         var file = document.getElementById('fileupload').files[0]; //Files[0] = 1st file
         var reader = new FileReader();
         var data = reader.readAsText(file, 'UTF-8');
-        let datar= new FormData();      
+        let datar = new FormData();
         datar.append("file", data);
         await fetch('/upload', {
-            method: "POST", 
+            method: "POST",
             body: datar
-          });     
+        });
     }
 
 

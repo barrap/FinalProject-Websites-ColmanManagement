@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TV Show Catalog</title>
+    <title>Movie Catalog</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.rtl.min.css"
         integrity="sha384-+4j30LffJ4tgIMrq9CwHvn0NjEvmuDCOfk6Rpg2xg7zgOxWWtLtozDEEVvBPgHqE" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="img/Blockbuster_logo.svg.png">
@@ -17,7 +17,7 @@
         <a href="javascript:void(0)" class="closebtn">&times;</a>
         <a href="/movies">Home page</a>
         <a href="/movies">Movies</a>
-        <a href="#">TV Shows</a>
+        <a href="/tvshows">TV Shows</a>
         <a href="/customers">Clients</a>
         <a href="/locations">Locations</a>
         <a href="/logout">Logout</a>
@@ -28,19 +28,19 @@
                 <nav class="navbar bg-dark">
                     <div class="container-fluid">
                         <span id="sidenavBtn">&#9776;</span>
-                        <a href="/searchShows" style="margin-right: 10px"><button class="btn btn-outline-warning"
+                        <a href="/searchMovies" style="margin-right: 10px"><button class="btn btn-outline-warning"
                                 type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-search" viewBox="0 0 16 16">
                                     <path
                                         d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                </svg> Search TV Shows</button></a>
-                        <a href="/addShowPage"><button class="btn btn-outline-primary" type="button">
+                                </svg> Search Movies</button></a>
+                        <a href="/addMoviePage"><button class="btn btn-outline-primary" type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                                     <path
                                         d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
-                                </svg> Add TV Show</button></a>
+                                </svg> Add Movie</button></a>
 
 
                         <!-- Button trigger modal -->
@@ -63,7 +63,7 @@
                                         <div class="modal-body">
                                             <div class="form-floating">
                                                 <input readonly class="d-none" name="username"
-                                                    value="<%=shows.username%>">
+                                                    value="<%=results.username%>">
                                             </div>
                                             <table class="show-cart table">
 
@@ -87,7 +87,7 @@
                         <!-- cart Modal End -->
                         <div class="dropdown">
                             <button type="submit" class="btn btn-primary dropbtn">Hello,
-                                <%=shows.username%>
+                                <%=results.username%>
                             </button>
                             <div id="myDropdown" class="dropdown-content">
                                 <a href="/logout">Logout</a>
@@ -97,42 +97,29 @@
                     </div>
                 </nav>
                 <div class="container text-center g-3">
+                    <h1> Movies</h1>
                     <div class="row g-3 results">
-                        <% for (var i=0; i < shows.length; i++) { %>
+                        <% for (var i=0; i < results.movies.length; i++) { %>
                             <div class="col-md-3 col-4">
-                                <div class="card tvshow">
-                                    <iframe src="<%=shows[i].trailer%>" height="230">
+                                <div class="card movie">
+                                    <iframe src="<%=results.movies[i].trailer%>" height="230">
                                     </iframe>
                                     <div class="card-body">
-                                        <h5 class="card-title" id="tvshow<%=i%>">
-                                            <%=shows[i]._id%>
+                                        <h5 class="card-title" id="movie<%=i%>">
+                                            <%=results.movies[i]._id%>
                                         </h5>
                                         <aside>
                                             <p class="card-text"><b>Synopsis: </b>
-                                                <%=shows[i].description%>
+                                                <%=results.movies[i].preview%>
                                             </p>
                                         </aside>
-                                        <p><b>Number of episodes: </b>
-                                            <%=shows[i].episodes%>
-                                        </p>
-                                        <p><b>Publish Year: </b>
-                                            <%=shows[i].year%>
-                                        </p>
-
-                                        <p><b>Genere: </b>
-                                            <% for (var k=0; k < shows[i].type.length; k++) { %>
-                                                <% if(k==shows[i].type.length - 1) {%>
-                                                    <%=shows[i].type[k]%>
-                                                        <%} else { %>
-                                                            <%=shows[i].type[k]%>,
-                                                                <%}%>
-                                                                    <%}%>
-                                        </p>
+                                        <br>
                                         <p><b>Cost: </b>
-                                            <%=shows[i].price%>$
+                                            <%=results.movies[i].price%>$
                                         </p>
-                                        <form action="/deleteShow" method="POST" class="float-end">
-                                            <input readonly class="d-none" name="tvshow_id" value="<%=shows[i]._id%>">
+                                        <form action="/deleteMovie" method="POST" class="float-end">
+                                            <input readonly class="d-none" name="movie_id"
+                                                value="<%=results.movies[i]._id%>">
                                             <button type="submit" class="btn btn-outline-danger"><svg
                                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
@@ -141,13 +128,182 @@
                                                 </svg></button>
                                         </form>
                                         <button type="submit" class="btn btn-outline-success add-to-cart"
-                                            data-name="<%=shows[i]._id%>" data-price="<%=shows[i].price%>"><svg
+                                            data-name="<%=results.movies[i]._id%>"
+                                            data-price="<%=results.movies[i].price%>"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                            </svg></button>
+                                        <a href="/movie?movie=<%=results.movies[i]._id%>" id="movie_link<%=i%>"><button
+                                                class="btn btn-outline-info" type="button">See more</button></a>
+                                        <form class="float-start">
+
+                                            <!-- Update modal trigger button -->
+                                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                                data-bs-target="#MovieupdateModal<%=i%>">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-arrow-clockwise"
+                                                    viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+                                                    <path
+                                                        d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+                                                </svg></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Movie Update modal -->
+                            <div class="modal fade" id="MovieupdateModal<%=i%>" tabindex="-1"
+                                aria-labelledby="MovieupdateModal<%=i%>" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="MovieupdateModal<%=i%>">Update info for:
+                                                <%=results.movies[i]._id%>
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/updateMovies" method="post"
+                                                onsubmit="return validateMovieUpdateBeforeSubmit()">
+                                                <div class="form-floating">
+                                                    <input readonly class="d-none" name="title"
+                                                        value="<%=results.movies[i]._id%>">
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Synopsis</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="preview"
+                                                            id="preview">
+                                                    </div>
+                                                    <span id="preview_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Director</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="director"
+                                                            id="director">
+                                                    </div>
+                                                    <span id="director_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Year of publish</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="number" class="form-control" name="year" id="year">
+                                                    </div>
+                                                    <span id="year_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Movie Length</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="number" class="form-control" name="length"
+                                                            id="length">
+                                                    </div>
+                                                    <span id="length_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Main Actors (Split By
+                                                        ,)</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="actors"
+                                                            id="actors">
+                                                    </div>
+                                                    <span id="actors_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Genre (Split By ,)</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="genre" id="genre">
+                                                    </div>
+                                                    <span id="genre_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Trailer Link</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="link" id="link">
+                                                    </div>
+                                                    <span id="link_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Cost</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="number" class="form-control" name="cost" id="cost">
+                                                    </div>
+                                                    <span id="cost_message"></span>
+                                                </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" id="saveChangesBtn" class="btn btn-primary">Save
+                                                changes</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Movie Update modal end -->
+                            <%}%>
+                    </div>
+                    <br>
+                    <h1>Tv Shows</h1>
+                    <div class="row g-3 results">
+                        <% for (var i=0; i < results.shows.length; i++) { %>
+                            <div class="col-md-3 col-4">
+                                <div class="card tvshow">
+                                    <iframe src="<%=results.shows[i].trailer%>" height="230">
+                                    </iframe>
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="tvshow<%=i%>">
+                                            <%=results.shows[i]._id%>
+                                        </h5>
+                                        <aside>
+                                            <p class="card-text"><b>Synopsis: </b>
+                                                <%=results.shows[i].description%>
+                                            </p>
+                                        </aside>
+                                        <p><b>Number of episodes: </b>
+                                            <%=results.shows[i].episodes%>
+                                        </p>
+                                        <p><b>Publish Year: </b>
+                                            <%=results.shows[i].year%>
+                                        </p>
+
+                                        <p><b>Genere: </b>
+                                            <% for (var k=0; k < results.shows[i].type.length; k++) { %>
+                                                <% if(k==results.shows[i].type.length - 1) {%>
+                                                    <%=results.shows[i].type[k]%>
+                                                        <%} else { %>
+                                                            <%=results.shows[i].type[k]%>,
+                                                                <%}%>
+                                                                    <%}%>
+                                        </p>
+                                        <p><b>Cost: </b>
+                                            <%=results.shows[i].price%>$
+                                        </p>
+                                        <form action="/deleteShow" method="POST" class="float-end">
+                                            <input readonly class="d-none" name="tvshow_id"
+                                                value="<%=results.shows[i]._id%>">
+                                            <button type="submit" class="btn btn-outline-danger"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                </svg></button>
+                                        </form>
+                                        <button type="submit" class="btn btn-outline-success add-to-cart"
+                                            data-name="<%=results.shows[i]._id%>"
+                                            data-price="<%=results.shows[i].price%>"><svg
                                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                                                 <path
                                                     d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                                             </svg> Add to cart</button>
-                                        <a href="/tvshow?tvshow=<%=shows[i]._id%>" id="tv_link<%=i%>"><button
+                                        <a href="/tvshow?tvshow=<%=results.shows[i]._id%>" id="tv_link<%=i%>"><button
                                                 class="btn btn-outline-info" type="button">See more</button></a>
                                         <form class="float-start">
 
@@ -166,24 +322,24 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Update modal -->
+                            <!-- TV show Update modal -->
                             <div class="modal fade" id="updateModal<%=i%>" tabindex="-1"
                                 aria-labelledby="updateModalLabel<%=i%>" aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="updateModalLabel<%=i%>">Update info for:
-                                                <%=shows[i]._id%>
+                                                <%=results.shows[i]._id%>
                                             </h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <form action="/updateShows" method="post"
-                                                onsubmit="return validateUpdateBeforeSubmit()">
+                                                onsubmit="return validateTVShowUpdateBeforeSubmit()">
                                                 <div class="form-floating">
                                                     <input readonly class="d-none" name="title"
-                                                        value="<%=shows[i]._id%>">
+                                                        value="<%=results.shows[i]._id%>">
                                                 </div>
                                                 <div class="mb-3 row">
                                                     <label class="col-sm-2 col-form-label">Synopsis</label>
@@ -241,7 +397,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Update modal end -->
+                            <!-- TV show Update modal end -->
                             <%}%>
                     </div>
                 </div>
@@ -273,6 +429,7 @@
 
     <script src="js/main.js"></script>
     <script src="js/sidenav.js"></script>
+    <script src="js/updateMovie.js"></script>
     <script src="js/updateShow.js"></script>
     <script src="js/cart.js"></script>
 </body>

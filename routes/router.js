@@ -6,14 +6,17 @@ const moviesController = require('../controllers/movies');
 const TVShowsController = require('../controllers/tvshows');
 const CustomerController = require("../controllers/customers");
 const LocationController = require("../controllers/maps");
+const MainController = require("../controllers/main")
 const router = express.Router();
 
 // Public dir path (for static files)
 const public_dir_path = "../public"
 
 router.get("/", (req, res) => {
-        res.sendFile("homepage.html",  { root: 'public' })
+        res.sendFile("homepage.html", { root: 'public' })
 })
+
+router.get("/main", MainController.mainPage)
 
 
 // Customers routing
@@ -35,7 +38,7 @@ router.get("/movie", moviesController.getMovie)
 router.post("/deleteMovie", moviesController.deleteMovie)
 router.get("/addMoviePage", moviesController.addMoviePage)
 router.post("/addMovie", moviesController.addMovie)
-router.get("/search", moviesController.search)
+router.get("/searchMovie", moviesController.search)
 router.get("/searchMovies", moviesController.searchMovies)
 router.post("/updateMovies", moviesController.update)
 router.post("/addOrder", moviesController.order)
@@ -47,9 +50,12 @@ router.get("/locations", LocationController.Alllocations);
 
 // TV Shows routing
 router.get('/tvshows', TVShowsController.findAll);
+router.get("/tvshow", TVShowsController.getTVShow)
 router.post('/deleteShow', TVShowsController.deleteTvshow);
-router.get("/addShowPage",TVShowsController.addShowPage)
+router.get("/addShowPage", TVShowsController.addShowPage)
 router.post("/addTVShow", TVShowsController.addTVShow)
 router.post("/updateShows", TVShowsController.update)
+router.get("/searchShows", TVShowsController.searchTVShows)
+router.get("/searchTV", TVShowsController.search)
 
 module.exports = router;

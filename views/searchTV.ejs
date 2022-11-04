@@ -33,10 +33,9 @@
                                 <input type="text" class="form-control" placeholder="Search" id="inp_search">
                                 <span class="input-group-text" id="basic-addon1"><select id="search_parameters">
                                         <option value="title">By Title</option>
-                                        <option value="director">By Director</option>
                                         <option value="year">By year</option>
-                                        <option value="length">By Movie Length</option>
-                                        <option value="cost">By Movie Cost</option>
+                                        <option value="seasons">By Number of seasons</option>
+                                        <option value="cost">By Show Cost</option>
                                     </select>
                             </div>
                         </form>
@@ -122,7 +121,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="js/search_movie.js"></script>
+    <script src="js/search_tv.js"></script>
     <script type="text/html" id="search_template">
         <div class="col-md-3 col-4">
             <div class="card">
@@ -133,19 +132,13 @@
                         {_id}
                     </h5>
                     <p class="card-text"><b>Synopsis: </b>
-                        {preview}
-                    </p>
-                    <p><b>Director: </b>
-                        {director}
+                        {description}
                     </p>
                     <p><b>Publish Year: </b>
                         {year}
                     </p>
-                    <p><b>Movie Length: </b>
-                        {length} Minutes
-                    </p>
-                    <p><b>Main Actors: </b>
-                        {main_actors}
+                    <p><b>Number of seasons: </b>
+                        {seasons} Seasons
                     </p>
                     <p><b>Genere: </b>
                         {type}

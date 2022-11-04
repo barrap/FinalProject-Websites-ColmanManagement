@@ -107,7 +107,7 @@ const deleteMovie = (req, res) => {
 
                 // The user isn't an admin so redirect to the main page
                 else {
-                    res.redirect("/movies")
+                    res.redirect("/main")
                 }
             }
 
@@ -155,7 +155,7 @@ const addMovie = (req, res) => {
 
                 // The user isn't an admin so redirect to the main page
                 else {
-                    res.redirect("/movies")
+                    res.redirect("/main")
                 }
             }
 
@@ -192,7 +192,7 @@ const addMoviePage = (req, res) => {
 
                 // The user isn't an admin so redirect to the main page
                 else {
-                    res.redirect("/movies")
+                    res.redirect("/main")
                 }
             }
 
@@ -298,7 +298,7 @@ const update = (req, res) => {
 
                 // The user isn't an admin so redirect to the main page
                 else {
-                    res.redirect("/movies")
+                    res.redirect("/main")
                 }
             }
 
@@ -404,7 +404,7 @@ const upload = (req, res) => {
 
                 // The user isn't an admin so redirect to the main page
                 else {
-                    res.redirect("/movies")
+                    res.redirect("/main")
                 }
             }
 

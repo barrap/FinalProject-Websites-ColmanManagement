@@ -17,6 +17,7 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="/movies">Home page</a>
         <a href="/movies">Movies</a>
+        <a href="/tvshows">TV Shows</a>
         <a href="/locations">Locations</a>
         <a href="/logout">Logout</a>
     </div>
@@ -59,7 +60,7 @@
                                             <table class="show-cart table">
 
                                             </table>
-                                            <div>Total price: $<span class="total-cart"></span></div>
+                                            <div><span class="total-cart"></span></div>
                                             <input readonly class="d-none" name="total_price" id="total_price">
                                             <input readonly class="d-none" name="all_titles" id="all_titles">
                                         </div>
@@ -91,7 +92,7 @@
                     <div class="row g-3 results">
                         <% for (var i=0; i < movies.length; i++) { %>
                             <div class="col-md-3 col-4">
-                                <div class="card">
+                                <div class="card movie">
                                     <iframe src="<%=movies[i].trailer%>" height="230">
                                     </iframe>
                                     <div class="card-body">

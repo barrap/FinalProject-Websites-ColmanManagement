@@ -48,6 +48,42 @@ const findAll = (req, res) => {
     }
 }
 
+// Function to find one movie
+function getTVShow(req, res) {
+
+    const query = url.parse(req.url).query
+    const tvshow = query.split("=")[1]
+    TVshow_result = {}
+
+    // Check if the user is logged in
+    if (req.session.username != null) {
+
+        // Gets the customer data
+        const customer = customersService.getCustomer(req.session.username)
+        customer.then(cust => {
+
+            // Checks if the user exsits
+            if (cust) {
+
+                // Gets the data if the movie
+                const result = TVShowsService.getTVShow(tvshow)
+
+                result.then(r => {
+                    TVshow_result['tvshow_det'] = r
+                    TVshow_result['username'] = cust._id
+                    res.render("../views/tvshow", { tv: TVshow_result })
+                })
+            }
+            else {
+                res.redirect("/")
+            }
+        })
+    }
+    else {
+        res.redirect("/")
+    }
+}
+
 // Function to delete a show
 const deleteTvshow = (req, res) => {
 
@@ -63,7 +99,7 @@ const deleteTvshow = (req, res) => {
 
                 // Checks if the user is a admin
                 if (cust.isAdmin == true) {
-                    const result = TVShowsService.deleteTvShow(req.body.tvshow_id) 
+                    const result = TVShowsService.deleteTvShow(req.body.tvshow_id)
                     result.then(r => {
                         res.redirect("/tvshows")
                     })
@@ -71,7 +107,7 @@ const deleteTvshow = (req, res) => {
 
                 // The user isn't an admin so redirect to the main page
                 else {
-                    res.redirect("/tvshows")
+                    res.redirect("/main")
                 }
             }
 
@@ -104,15 +140,13 @@ const addTVShow = (req, res) => {
                 // Checks if the user is a admin
                 if (cust.isAdmin == true) {
                     try {
-                        console.log(req.body)
-                        const result = TVShowsService.addTvShow(req.body.title, parseInt(req.body.year, 10), req.body.preview, parseInt(req.body.episodes, 10), 
+                        const result = TVShowsService.addTvShow(req.body.title, req.body.title.split(" ").join(""), parseInt(req.body.year, 10), req.body.preview, parseInt(req.body.seasons, 10),
                             req.body.genre.split(","), req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
                         result.then(r => {
                             res.redirect("/tvshows")
                         })
                     }
                     catch (e) {
-                        console.log(e.message)                        
                         res.render("../views/addTVShow", { message: { status: "TV Show already exists" } })
                     }
 
@@ -120,7 +154,7 @@ const addTVShow = (req, res) => {
 
                 // The user isn't an admin so redirect to the main page
                 else {
-                    res.redirect("/tvshows")
+                    res.redirect("/main")
                 }
             }
 
@@ -157,7 +191,7 @@ const addShowPage = (req, res) => {
 
                 // The user isn't an admin so redirect to the main page
                 else {
-                    res.redirect("/tvshows")
+                    res.redirect("/main")
                 }
             }
 
@@ -176,7 +210,7 @@ const addShowPage = (req, res) => {
 
 
 // Function to get the searchMovies page
-const searchMovies = (req, res) => {
+const searchTVShows = (req, res) => {
 
     // Checks if the users is logged in
     if (req.session.username != null) {
@@ -187,7 +221,7 @@ const searchMovies = (req, res) => {
 
             // Checks if the user exists
             if (cust) {
-                res.render("searchMovies.ejs", { username: { username: cust._id } })
+                res.render("searchTV.ejs", { username: { username: cust._id } })
             }
 
             // The user doesn't exists so redirects to the home page
@@ -220,7 +254,7 @@ const search = (req, res) => {
                 const query = url.parse(req.url).query
                 const param = query.split("=")[0]
                 const value = query.split("=")[1]
-                const result = MovieService.search(param, value)
+                const result = TVShowsService.search(param, value)
                 result.then(r => {
                     r['username'] = cust._id
                     res.json(r);
@@ -256,14 +290,14 @@ const update = (req, res) => {
 
                 // Checks if the user is a admin
                 if (cust.isAdmin == true) {
-                    const result = TVShowsService.addTvShow(req.body.title, parseInt(req.body.year, 10), req.body.description, parseInt(req.body.episodes, 10), 
-                            req.body.types.split(","), req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
-                        res.redirect("/tvshows")
+                    const result = TVShowsService.update(req.body.title, parseInt(req.body.year, 10), req.body.description, parseInt(req.body.seasons, 10),
+                        req.body.types.split(","), req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
+                    res.redirect("/tvshows")
                 }
 
                 // The user isn't an admin so redirect to the main page
                 else {
-                    res.redirect("/tvshows")
+                    res.redirect("/main")
                 }
             }
 
@@ -292,7 +326,7 @@ const order = (req, res) => {
 
             // Checks if the user exists
             if (cust) {
-                    res.render("addOrder.ejs", { username: { username: cust._id } })
+                res.render("addOrder.ejs", { username: { username: cust._id } })
             }
 
             // The user doesn't exists so redirects to the home page
@@ -321,7 +355,7 @@ const paying = (req, res) => {
             // Checks if the user exists
             if (cust) {
                 try {
-                    const result = CreditCardService.addCard(req.body.cardNumber,req.session.username,req.body.date,req.body.secNum)
+                    const result = CreditCardService.addCard(req.body.cardNumber, req.session.username, req.body.date, req.body.secNum)
                     result.then(r => {
                         res.redirect("/movies")
                     })
@@ -329,7 +363,7 @@ const paying = (req, res) => {
                 catch (e) {
                     res.render("../views/addMovie", { message: { status: "Movie already exists" } })
                 }
-                
+
             }
 
             // The user doesn't exists so redirects to the home page
@@ -355,21 +389,21 @@ const upload = (req, res) => {
         const customer = customersService.getCustomer(req.session.username)
         customer.then(cust => {
             console.log(req.session.username)
-            
+
 
             // Checks if the user exists
             if (cust) {
 
                 // Checks if the user is a admin
                 if (cust.isAdmin == true) {
-                    
+
                     MovieService.uploadJson(req.data)
-                    res.redirect("/movies")
+                    res.redirect("/tvshows")
                 }
 
                 // The user isn't an admin so redirect to the main page
                 else {
-                    res.redirect("/movies")
+                    res.redirect("/main")
                 }
             }
 
@@ -389,10 +423,11 @@ const upload = (req, res) => {
 // Exports the neccesary functions
 module.exports = {
     findAll,
+    getTVShow,
     deleteTvshow,
     addTVShow,
     addShowPage,
-    searchMovies,
+    searchTVShows,
     search,
     update,
     order,

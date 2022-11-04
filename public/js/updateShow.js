@@ -1,9 +1,9 @@
 $(() => {
 
-    $("#saveChangesBtn").click(validateUpdateBeforeSubmit);
+    $("#saveChangesBtn").click(validateTVShowUpdateBeforeSubmit);
 
-    function validateUpdateBeforeSubmit(event) {
-        
+    function validateTVShowUpdateBeforeSubmit(event) {
+
         // Gets all the values
         var trailer = $("#link").val()
 

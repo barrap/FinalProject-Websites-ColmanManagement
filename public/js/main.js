@@ -28,10 +28,23 @@ toggle between hiding and showing the dropdown content */
     }
 
     var movies = document.getElementsByClassName("movie")
+    if (movies) {
+        for (var i = 0; i < movies.length; i++) {
+            var movie_title = document.getElementById("movie" + i).innerHTML
+            var movie_page_link = document.getElementById("movie_link" + i)
+            movie_page_link.setAttribute("href", "/movie?movie=" + movie_title.split(" ").join(""))
+        }
 
-    for (var i = 0; i < movies.length; i++) {
-        var movie_title = document.getElementById("movie" + i).innerHTML
-        var movie_page_link = document.getElementById("movie_link" + i)
-        movie_page_link.setAttribute("href", "/movie?movie=" + movie_title.split(" ").join(""))
     }
+
+
+    var tv_shows = document.getElementsByClassName("tvshow")
+    if (tv_shows) {
+        for (var i = 0; i < tv_shows.length; i++) {
+            var tv_show_title = document.getElementById("tvshow" + i).innerHTML
+            var tv_show_page_link = document.getElementById("tv_link" + i)
+            tv_show_page_link.setAttribute("href", "/tvshow?tvshow=" + tv_show_title.split(" ").join(""))
+        }
+    }
+
 })

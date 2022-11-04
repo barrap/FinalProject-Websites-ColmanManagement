@@ -1,7 +1,7 @@
 $(() => {
     $("#inp_search").keyup(function () {
             $.ajax({
-                url: "/search?"+$("#search_parameters").val() + "=" + $("#inp_search").val(),
+                url: "/searchTV?"+$("#search_parameters").val() + "=" + $("#inp_search").val(),
             }).done(function (res) {
                 $(".results").html("")
 
