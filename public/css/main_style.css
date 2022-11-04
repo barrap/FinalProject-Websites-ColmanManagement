@@ -24,7 +24,7 @@ body {
 }
 
 footer {
-    position: relative; 
+    position: fixed; 
     margin-top: 10px;
     left: 0;
     bottom: 0;
