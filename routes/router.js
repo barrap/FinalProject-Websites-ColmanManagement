@@ -7,6 +7,7 @@ const TVShowsController = require('../controllers/tvshows');
 const CustomerController = require("../controllers/customers");
 const LocationController = require("../controllers/maps");
 const MainController = require("../controllers/main")
+const statsController = require("../controllers/stats")
 const router = express.Router();
 
 // Public dir path (for static files)
@@ -57,5 +58,10 @@ router.post("/addTVShow", TVShowsController.addTVShow)
 router.post("/updateShows", TVShowsController.update)
 router.get("/searchShows", TVShowsController.searchTVShows)
 router.get("/searchTV", TVShowsController.search)
+
+
+// Stats routing
+router.get("/admin-stats", statsController.GetData);
+
 
 module.exports = router;
