@@ -15,27 +15,27 @@
     <script type="module">
         // Initialize and add the map
         function initMap() {
-        
-        const tel_aviv = { lat: 32.08552355994881, lng: 34.78216797643222 };
 
-        // The map, centered at tel aviv
-        const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 8,
-        center: tel_aviv
-        });
+            const tel_aviv = { lat: 32.08552355994881, lng: 34.78216797643222 };
 
-        var _locations = [<%= stores %>];
+            // The map, centered at tel aviv
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 8,
+                center: tel_aviv
+            });
 
-        _locations.forEach( location =>{
-        {
-            new google.maps.Marker(
+            var _locations = [<%= stores %>];
+
+            _locations.forEach(location => {
                 {
-                    position: {lat: parseFloat(location["Lat"]), lng: parseFloat(location["Len"])}, 
-                    map: map
-                });
+                    new google.maps.Marker(
+                        {
+                            position: { lat: parseFloat(location["Lat"]), lng: parseFloat(location["Len"]) },
+                            map: map
+                        });
+                }
+            })
         }
-        })
-    }
 
         window.initMap = initMap;
     </script>
@@ -45,7 +45,7 @@
 <body>
     <div id="sidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="/movies">Home page</a>
+        <a href="/main">Home page</a>
         <a href="/movies">Movies</a>
         <a href="/tvshows">TV Shows</a>
         <a href="/customers">Clients</a>
@@ -73,6 +73,7 @@
                 <div class="container-fluid">
                     <span>
                         <a class="navbar-brand" href="/locations">Locations</a>
+                        <a class="navbar-brand" href="/main">Home Page</a>
                     </span>
                 </div>
             </nav>
@@ -92,4 +93,5 @@
 
     <script src="js/sidenav.js"></script>
 </body>
+
 </html>
