@@ -8,7 +8,7 @@ $(() => {
     function OuterAddToCart(event) {
 
         // Gets the data needed
-        var movie_title = $(this).data('name')
+        var movie_title = $(this).data('name').toString()
         var short_movie_title = movie_title.split(" ").join("")
         var price = Number($(this).data('price'))
 
@@ -45,7 +45,7 @@ $(() => {
         for (var item in cart) {
 
             // Checks if we found the right item
-            if (cart[item].shortTitle === movie_title) {
+            if (cart[item].shortTitle === movie_title.toString()) {
 
                 // Increases the count and saves the cart
                 cart[item].count++
@@ -99,7 +99,7 @@ $(() => {
         for (var item in cart) {
 
             // Checks if we found the right item
-            if (cart[item].shortTitle === name) {
+            if (cart[item].shortTitle === name.toString()) {
 
                 // Sets the new item count
                 cart[item].count = count
@@ -124,7 +124,7 @@ $(() => {
         for (var item in cart) {
 
             // Checks if we found the right item
-            if (cart[item].shortTitle === name) {
+            if (cart[item].shortTitle === name.toString()) {
 
                 // Decrease the amount of the item by 1
                 cart[item].count--
@@ -149,7 +149,7 @@ $(() => {
         for (var item in cart) {
 
             // Checks if we found the right item
-            if (cart[item].shortTitle === name) {
+            if (cart[item].shortTitle === name.toString()) {
                 cart.splice(item, 1)
                 break
             }
@@ -178,7 +178,7 @@ $(() => {
         for (var item in cart) {
             title_arr.push(cart[item].title)
         }
-        
+
         // Returns the title aray
         return title_arr
     }
@@ -207,7 +207,7 @@ $(() => {
         // Saves all the titles and the total price of the cart (in order to save the order in the right way)
         document.getElementById("all_titles").setAttribute("value", getAllTitles())
         document.getElementById("total_price").setAttribute("Value", Number(totalCartPrice()))
-        
+
         // Displays the cart
         $('.show-cart').html(output);
 

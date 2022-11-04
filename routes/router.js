@@ -30,6 +30,7 @@ router.post("/updateUser", CustomerController.update)
 
 // Movies routing
 router.get('/movies', moviesController.findAll);
+router.get("/movie", moviesController.getMovie)
 router.post("/deleteMovie", moviesController.deleteMovie)
 router.get("/addMoviePage", moviesController.addMoviePage)
 router.post("/addMovie", moviesController.addMovie)

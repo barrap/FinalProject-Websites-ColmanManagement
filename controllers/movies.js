@@ -48,6 +48,42 @@ const findAll = (req, res) => {
     }
 }
 
+// Function to find one movie
+function getMovie(req, res) {
+
+    const query = url.parse(req.url).query
+    const movie = query.split("=")[1]
+    movie_result = {}
+
+    // Check if the user is logged in
+    if (req.session.username != null) {
+
+        // Gets the customer data
+        const customer = customersService.getCustomer(req.session.username)
+        customer.then(cust => {
+
+            // Checks if the user exsits
+            if (cust) {
+
+                // Gets the data if the movie
+                const result = MovieService.getMovie(movie)
+
+                result.then(r => {
+                    movie_result['movie_det'] = r
+                    movie_result['username'] = cust._id
+                    res.render("../views/movie", { movie: movie_result })
+                })
+            }
+            else {
+                res.redirect("/")
+            }
+        })
+    }
+    else {
+        res.redirect("/")
+    }
+}
+
 // Function to delete a movie
 const deleteMovie = (req, res) => {
 
@@ -105,7 +141,7 @@ const addMovie = (req, res) => {
                 // Checks if the user is a admin
                 if (cust.isAdmin == true) {
                     try {
-                        const result = MovieService.addMovie(req.body.title, parseInt(req.body.year, 10), req.body.director, parseInt(req.body.length, 10),
+                        const result = MovieService.addMovie(req.body.title, req.body.title.split(" ").join(""), parseInt(req.body.year, 10), req.body.director, parseInt(req.body.length, 10),
                             req.body.actors.split(","), req.body.genre.split(","), req.body.preview, req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
                         result.then(r => {
                             res.redirect("/movies")
@@ -291,7 +327,7 @@ const order = (req, res) => {
 
             // Checks if the user exists
             if (cust) {
-                    res.render("addOrder.ejs", { username: { username: cust._id } })
+                res.render("addOrder.ejs", { username: { username: cust._id } })
             }
 
             // The user doesn't exists so redirects to the home page
@@ -320,7 +356,7 @@ const paying = (req, res) => {
             // Checks if the user exists
             if (cust) {
                 try {
-                    const result = CreditCardService.addCard(req.body.cardNumber,req.body.id,req.body.date,req.body.secNum)
+                    const result = CreditCardService.addCard(req.body.cardNumber, req.body.id, req.body.date, req.body.secNum)
                     result.then(r => {
                         res.redirect("/movies")
                     })
@@ -328,7 +364,7 @@ const paying = (req, res) => {
                 catch (e) {
                     res.render("../views/addMovie", { message: { status: "Movie already exists" } })
                 }
-                
+
             }
 
             // The user doesn't exists so redirects to the home page
@@ -347,6 +383,7 @@ const paying = (req, res) => {
 // Exports the neccesary functions
 module.exports = {
     findAll,
+    getMovie,
     deleteMovie,
     addMovie,
     addMoviePage,

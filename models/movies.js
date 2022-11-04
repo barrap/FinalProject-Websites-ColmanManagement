@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const Movie = new Schema({
     _id: String,
+    shortTitle: String,
     year: String,
     director: String,
     length: Number, 

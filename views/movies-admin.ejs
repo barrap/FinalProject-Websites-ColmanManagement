@@ -99,11 +99,11 @@
                     <div class="row g-3 results">
                         <% for (var i=0; i < movies.length; i++) { %>
                             <div class="col-md-3 col-4">
-                                <div class="card">
+                                <div class="card movie">
                                     <iframe src="<%=movies[i].trailer%>" height="230">
                                     </iframe>
                                     <div class="card-body">
-                                        <h5 class="card-title">
+                                        <h5 class="card-title" id="movie<%=i%>">
                                             <%=movies[i]._id%>
                                         </h5>
                                         <aside>
@@ -111,33 +111,7 @@
                                                 <%=movies[i].preview%>
                                             </p>
                                         </aside>
-                                        <p><b>Director: </b>
-                                            <%=movies[i].director%>
-                                        </p>
-                                        <p><b>Publish Year: </b>
-                                            <%=movies[i].year%>
-                                        </p>
-                                        <p><b>Movie Length: </b>
-                                            <%=movies[i].length%> Minutes
-                                        </p>
-                                        <p><b>Main Actors: </b>
-                                            <% for (var j=0; j < movies[i].main_actors.length; j++) { %>
-                                                <% if(j==movies[i].main_actors.length - 1) {%>
-                                                    <%=movies[i].main_actors[j]%>
-                                                        <%} else { %>
-                                                            <%=movies[i].main_actors[j]%>,
-                                                                <%}%>
-                                                                    <%}%>
-                                        </p>
-                                        <p><b>Genere: </b>
-                                            <% for (var k=0; k < movies[i].type.length; k++) { %>
-                                                <% if(k==movies[i].type.length - 1) {%>
-                                                    <%=movies[i].type[k]%>
-                                                        <%} else { %>
-                                                            <%=movies[i].type[k]%>,
-                                                                <%}%>
-                                                                    <%}%>
-                                        </p>
+                                        <br>
                                         <p><b>Cost: </b>
                                             <%=movies[i].price%>$
                                         </p>
@@ -156,7 +130,9 @@
                                                 fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                                                 <path
                                                     d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                            </svg> Add to cart</button>
+                                            </svg></button>
+                                        <a href="/movie?movie=<%=movies[i]._id%>" id="movie_link<%=i%>"><button
+                                                class="btn btn-outline-info" type="button">See more</button></a>
                                         <form class="float-start">
 
                                             <!-- Update modal trigger button -->

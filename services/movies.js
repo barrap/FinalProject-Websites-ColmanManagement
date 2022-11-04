@@ -42,17 +42,22 @@ async function getMovies() {
     return await Movie.find().sort({ _id: 1 });
 }
 
+async function getMovie(movie) {
+    return await Movie.find({ shortTitle: movie })
+}
+
 // Function to delete a movie
 async function deleteMovie(id) {
     await Movie.deleteOne({ _id: id })
 }
 
 // Function to add a movie
-function addMovie(title, year, director, length, main_actors, types, preview, trailer, price) {
+function addMovie(title, shortTitle, year, director, length, main_actors, types, preview, trailer, price) {
 
     // Define the new movie
     var movie = new Movie({
         _id: title,
+        shortTitle: shortTitle,
         year: year,
         director: director,
         length: length,
@@ -144,6 +149,7 @@ async function update(title, new_preview, new_director, new_year, new_length, ne
 // Exports the neccesary modules
 module.exports = {
     getMovies,
+    getMovie,
     deleteMovie,
     addMovie,
     search,
