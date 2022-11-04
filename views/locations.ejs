@@ -7,8 +7,8 @@
     <title>Store Locations</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.rtl.min.css"
         integrity="sha384-+4j30LffJ4tgIMrq9CwHvn0NjEvmuDCOfk6Rpg2xg7zgOxWWtLtozDEEVvBPgHqE" crossorigin="anonymous">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link rel="icon" type="image/x-icon" href="img/Blockbuster_logo.svg.png">
-    <link rel="stylesheet" href="css/main_style.css">
     <link rel="stylesheet" href="css/sidenav.css">
     <link rel="stylesheet" href="css/map.css">
 
@@ -20,7 +20,7 @@
 
             // The map, centered at tel aviv
             const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 8,
+                zoom: 7,
                 center: tel_aviv
             });
 
@@ -63,6 +63,12 @@
                                 <h5 class="text-white" id="headline">Our Stores Locations</h5>
                             </div>
                         </form>
+                        <a href="/addLocationPage"><button class="btn btn-outline-primary" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                                </svg> Add Location</button></a>
                     </div>
                 </nav>
                 <div id="map"></div>

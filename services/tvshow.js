@@ -7,7 +7,7 @@ mongoose.connect(process.env.CONNECTION_STRING)
 // Function to get all the tv shows
 async function getTvShows() {
 
-    return await TvShows.find();
+    return await TvShows.find().sort({ _id: 1 });
 }
 
 async function getTVShow(tvshow) {

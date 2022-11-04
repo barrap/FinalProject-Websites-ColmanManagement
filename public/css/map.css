@@ -1,8 +1,41 @@
 /* Set the size of the div element that contains the map */
 #map {
-    margin-top: 30px;
-    height: 600px;
-    /* The height is 400 pixels */
-    width: 100%;
-    /* The width is the width of the web page */
-  }
+  margin-top: 30px;
+  height: 700px;
+  /* The height is 400 pixels */
+  width: 100%;
+  /* The width is the width of the web page */
+}
+
+body {
+  background-color: #35363a;
+}
+
+footer {
+  position: fixed;
+  margin-top: 10px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #060606;
+}
+
+.navbar-brand {
+  color: #818181
+}
+
+.navbar-brand:hover {
+  color: #504e4e
+}
+
+table {
+  color: white;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border-bottom: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}

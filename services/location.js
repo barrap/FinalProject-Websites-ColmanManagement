@@ -11,30 +11,32 @@ async function getLocationsByCity(city) {
 }
 
 // Return all locations
-async function getLocations()
-{
-    return await location_db.find({},{_id:0, Lat:1, Len:1})
+async function getLocations() {
+    return await location_db.find({}, { _id: 0, Lat: 1, Len: 1 })
+}
+async function getCities() {
+    return await location_db.find({}, { _id: 0, city: 1 }).sort({ city: 1 })
 }
 
 // Adds new location to the database 
-async function addLocation(city, lat, len){
-    const location = new location({
-        city: city, 
+async function addLocation(city, lat, len) {
+    var location = new location_db({
+        city: city,
         Lat: lat,
-        Len: len, 
+        Len: len,
     });
     return await location.save();
 }
 
 // Delete location by city
-async function deleteLocation(city)
-{
+async function deleteLocation(city) {
     await location_db.deleteOne({ city: city });
 }
 
 module.exports = {
     getLocationsByCity,
-    getLocations, 
+    getLocations,
+    getCities,
     addLocation,
     deleteLocation
 };

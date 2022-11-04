@@ -48,6 +48,8 @@ router.post("/upload", moviesController.paying);
 
 // Locations routing
 router.get("/locations", LocationController.Alllocations);
+router.get("/addLocationPage", LocationController.addLocationPage)
+router.post("/addLocation", LocationController.addLocation)
 
 // TV Shows routing
 router.get('/tvshows', TVShowsController.findAll);
