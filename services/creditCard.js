@@ -12,6 +12,14 @@ async function getCreditCard(username) {
     return credit_cards
 }
 
+async function getCardByNumber(cardnumber)
+{
+    const credit_cards = await creditCard.findOne({ _id: cardnumber });
+
+    // Returns card object by card number
+    return credit_cards
+}
+
 // Function to delete a card
 async function deleteCard(card_number) {
     await creditCard.deleteOne({ _id: card_number })
@@ -34,5 +42,6 @@ async function addCard(card_number, username, exp_date, digits){
 module.exports = {
     deleteCard,
     addCard,
-    getCreditCard
+    getCreditCard,
+    getCardByNumber
 }

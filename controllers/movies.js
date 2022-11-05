@@ -349,7 +349,6 @@ const order = (req, res) => {
                 cards.then(r =>{
                     information['username'] = cust._id
                     information['cards'] = r
-                    console.log(information.cards)
                     res.render("addOrder.ejs", { info: information })
                 }
                 )

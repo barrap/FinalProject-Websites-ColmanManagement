@@ -1,6 +1,17 @@
 $(() => {
-    $("#submitBtn").click(validateBeforeSubmit);
+    const CreditCardService = require('../services/creditCard');
 
+    $("#submitBtn").click(validateBeforeSubmit);
+    var flag = false
+    function getChoice(value)
+    {
+        const card = CreditCardService.getCardByNumber(value)
+        document.getElementById("cardNumber").value = card._id
+        document.getElementById("fullname").value = card._username
+        document.getElementById("id").value = "1234567890"
+        document.getElementById("date").value = card._exp_date
+        document.getElementById("secNum").value = card._digits
+    }
     function validateBeforeSubmit(event) {
 
         // Checks the validity of the ID number
@@ -112,6 +123,7 @@ $(() => {
 
         // Checks that all input is valid
         if (phone_valid && password_valid && fullname_valid && username_valid) {
+            
             return true
         }
         else {
