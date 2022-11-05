@@ -262,6 +262,5 @@ $(() => {
 
     $("#order").click(() => {
         displayCart()
-        clearCart()
     })
 });
