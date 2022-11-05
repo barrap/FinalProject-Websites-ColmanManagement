@@ -1,6 +1,16 @@
 const Customer = require("../models/customers");
 const crypto = require('crypto');
 
+// Function to add order
+async function addOrder(username)
+{
+    // Tries to find the customer by the username
+    const cust = await Customer.findOne({ _id: username })
+    order = parseInt(cust.orders)
+    order = order+1
+
+    await Customer.updateOne({ _id: username }, { orders: order })
+}
 
 // Function to login to the store
 async function login(username) {
@@ -115,5 +125,6 @@ module.exports = {
     getCustomer,
     update,
     countCustomersByLocation,
-    countCustomers
+    countCustomers,
+    addOrder
 }

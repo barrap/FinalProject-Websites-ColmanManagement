@@ -382,10 +382,18 @@ const paying = (req, res) => {
             // Checks if the user exists
             if (cust) {
                 try {
-                    const result = CreditCardService.addCard(req.body.cardNumber, req.session.username, req.body.date, req.body.secNum)
-                    result.then(r => {
+                    
+                    customersService.addOrder(req.session.username)
+                    if(CreditCardService.getCardByNumber(req.body.cardNumber))
+                    {
                         res.redirect("/main")
-                    })
+                    }
+                    else{
+                        const result = CreditCardService.addCard(req.body.cardNumber, req.session.username, req.body.date, req.body.secNum)
+                        result.then(r => {
+                            res.redirect("/main")
+                        })
+                    }
                 }
                 catch (e) {
                     res.render("../views/main", { message: { status: "" } })
