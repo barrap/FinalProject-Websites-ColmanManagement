@@ -95,11 +95,13 @@
                         <div id="poll">
                             <h3>would you like to choose previous payment method?</h3>
                             <form>
-                              
-                            Yes: <input type="radio" name="vote" value="0" onclick="getVote(this.value)"><br>
-                            No: <input type="radio" name="vote" value="1" onclick="getVote(this.value)">
+                            <%for(i=0;i < info.cards.length ;i++) { %>
+                                *****<%=info.cards[i]._id.slice(-4) %> : <input type="radio" name="vote" value="0" onclick="getChoice(this.value)"><br>
+                            <% } %> 
+                            
+                            
                             </form>
-                            </div>
+                        </div>
                         <form action="/paying" method="post" onsubmit="return validateBeforeSubmit()">
                             <div class="mb-3 row text-center div_input">
                                 <label class="col-sm-2 col-form-label">Card Number</label>
