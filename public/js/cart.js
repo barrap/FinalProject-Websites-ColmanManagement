@@ -1,6 +1,7 @@
 $(() => {
 
     $(".add-to-cart").click(OuterAddToCart);
+    
 
     cart = []
 
@@ -262,5 +263,10 @@ $(() => {
 
     $("#order").click(() => {
         displayCart()
+        
+    })
+    $("#submitBtn").click(() => {
+        clearCart()
+        
     })
 });
