@@ -28,6 +28,7 @@
     color: #818181;
     display: block;
     transition: 0.3s;
+    font-family: "heebo";
 }
 
 .sidenav a:hover {
@@ -44,4 +45,9 @@
 
 #main {
     transition: margin-left .5s;
+}
+
+@font-face {
+    font-family: "heebo";
+    src: url('../Heebo-Regular.ttf')
 }

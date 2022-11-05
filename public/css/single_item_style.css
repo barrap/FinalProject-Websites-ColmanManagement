@@ -1,6 +1,7 @@
 body {
     background-color: #35363a;
     color: white;
+    font-family: "heebo";
 }
 
 .total-cart {
@@ -46,4 +47,9 @@ iframe {
     width: 1000px;
     margin-left: 400px;
 
+}
+
+@font-face {
+    font-family: "heebo";
+    src: url('../Heebo-Regular.ttf')
 }

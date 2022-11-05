@@ -1,6 +1,7 @@
 body {
     background-color: #35363a;
-    color: white
+    color: white;
+    font-family: "heebo";
 }
 
 .form-control {
@@ -35,6 +36,7 @@ span {
     padding-right: 73%;
     padding-top: 5px;
 }
+
 label {
     display: block;
     font: 1rem 'Fira Sans', sans-serif;
@@ -43,4 +45,9 @@ label {
 input,
 label {
     margin: .4rem 0;
+}
+
+@font-face {
+    font-family: "heebo";
+    src: url('../Heebo-Regular.ttf')
 }

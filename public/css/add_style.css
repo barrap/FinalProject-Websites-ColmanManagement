@@ -1,6 +1,7 @@
 body {
     background-color: #35363a;
-    color: white
+    color: white;
+    font-family: "heebo";
 }
 
 .form-control {
@@ -90,4 +91,9 @@ footer {
 
 .navbar-brand:hover {
     color: #504e4e
+}
+
+@font-face {
+    font-family: "heebo";
+    src: url('../Heebo-Regular.ttf')
 }

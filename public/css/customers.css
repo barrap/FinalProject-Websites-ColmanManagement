@@ -1,6 +1,7 @@
 table {
     color: white;
     border-collapse: collapse;
+    font-family: "heebo";
 }
 
 td,
@@ -45,4 +46,9 @@ footer {
 
 .navbar-brand:hover {
     color: #504e4e
+}
+
+@font-face {
+    font-family: "heebo";
+    src: url('../Heebo-Regular.ttf')
 }

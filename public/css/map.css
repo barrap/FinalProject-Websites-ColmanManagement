@@ -9,6 +9,7 @@
 
 body {
   background-color: #35363a;
+  font-family: "heebo";
 }
 
 footer {
@@ -38,4 +39,9 @@ th {
   border-bottom: 1px solid #dddddd;
   text-align: center;
   padding: 8px;
+}
+
+@font-face {
+  font-family: "heebo";
+  src: url('../Heebo-Regular.ttf')
 }

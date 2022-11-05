@@ -2,6 +2,7 @@ body {
     background-color: #35363a;
     color: white;
     text-shadow: 2px 2px #19beca;
+    font-family: "heebo";
 }
 
 .form-control {
@@ -23,6 +24,16 @@ body {
 .home_logo {
     width: 30%;
     height: 30%;
+}
+
+video {
+    width: 492px;
+    height:369px;
+}
+
+@font-face {
+    font-family: "heebo";
+    src: url('../Heebo-Regular.ttf')
 }
 
 

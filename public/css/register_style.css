@@ -1,6 +1,7 @@
 body {
     background-color: #35363a;
-    color: white
+    color: white;
+    font-family: "heebo";
 }
 
 .form-control {
@@ -34,4 +35,9 @@ span {
 .div_choice_input {
     padding-right: 73%;
     padding-top: 5px;
+}
+
+@font-face {
+    font-family: "heebo";
+    src: url('../Heebo-Regular.ttf')
 }

@@ -71,7 +71,14 @@ function getTVShow(req, res) {
                 result.then(r => {
                     TVshow_result['tvshow_det'] = r
                     TVshow_result['username'] = cust._id
-                    res.render("../views/tvshow", { tv: TVshow_result })
+
+                    // Checks if the user is admin
+                    if (cust.isAdmin == true) {
+                        res.render("../views/tvshow-admin", { tv: TVshow_result })
+                    }
+                    else {
+                        res.render("../views/tvshow", { tv: TVshow_result })
+                    }
                 })
             }
             else {
@@ -221,7 +228,15 @@ const searchTVShows = (req, res) => {
 
             // Checks if the user exists
             if (cust) {
-                res.render("searchTV.ejs", { username: { username: cust._id } })
+
+                // Checks if the is admin
+                if (cust.isAdmin == true) {
+                    res.render("searchTV-admin.ejs", { username: { username: cust._id } })
+                }
+                else {
+                    res.render("searchTV.ejs", { username: { username: cust._id } })
+                }
+
             }
 
             // The user doesn't exists so redirects to the home page

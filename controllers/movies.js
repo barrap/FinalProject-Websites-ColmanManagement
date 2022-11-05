@@ -71,7 +71,15 @@ function getMovie(req, res) {
                 result.then(r => {
                     movie_result['movie_det'] = r
                     movie_result['username'] = cust._id
-                    res.render("../views/movie", { movie: movie_result })
+
+                    // Checks if the user is admin
+                    if (cust.isAdmin == true) {
+                        res.render("../views/movie-admin", { movie: movie_result })
+                    }
+                    else {
+                        res.render("../views/movie", { movie: movie_result })
+                    }
+
                 })
             }
             else {
@@ -222,7 +230,14 @@ const searchMovies = (req, res) => {
 
             // Checks if the user exists
             if (cust) {
-                res.render("searchMovies.ejs", { username: { username: cust._id } })
+
+                // Checks if the user is admin
+                if (cust.isAdmin == true) {
+                    res.render("searchMovies-admin.ejs", { username: { username: cust._id } })
+                }
+                else {
+                    res.render("searchMovies.ejs", { username: { username: cust._id } })
+                }
             }
 
             // The user doesn't exists so redirects to the home page
@@ -356,7 +371,7 @@ const paying = (req, res) => {
             // Checks if the user exists
             if (cust) {
                 try {
-                    const result = CreditCardService.addCard(req.body.cardNumber,req.session.username,req.body.date,req.body.secNum)
+                    const result = CreditCardService.addCard(req.body.cardNumber, req.session.username, req.body.date, req.body.secNum)
                     result.then(r => {
                         res.redirect("/movies")
                     })
@@ -390,14 +405,14 @@ const upload = (req, res) => {
         const customer = customersService.getCustomer(req.session.username)
         customer.then(cust => {
             console.log(req.session.username)
-            
+
 
             // Checks if the user exists
             if (cust) {
 
                 // Checks if the user is a admin
                 if (cust.isAdmin == true) {
-                    
+
                     MovieService.uploadJson(req.data)
                     res.redirect("/movies")
                 }

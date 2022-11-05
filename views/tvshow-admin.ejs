@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TV Shows Catalog</title>
+    <title>Movie Catalog</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.rtl.min.css"
         integrity="sha384-+4j30LffJ4tgIMrq9CwHvn0NjEvmuDCOfk6Rpg2xg7zgOxWWtLtozDEEVvBPgHqE" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="img/Blockbuster_logo.svg.png">
-    <link rel="stylesheet" href="css/main_style.css">
+    <link rel="stylesheet" href="css/single_item_style.css">
     <link rel="stylesheet" href="css/sidenav.css">
 </head>
 
@@ -17,7 +17,8 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="/main">Home page</a>
         <a href="/movies">Movies</a>
-        <a href="#">TV Shows</a>
+        <a href="/tvshows">TV Shows</a>
+        <a href="/customers">Clients</a>
         <a href="/locations">Locations</a>
         <a href="/logout">Logout</a>
     </header>
@@ -27,13 +28,28 @@
                 <nav class="navbar bg-dark">
                     <div class="container-fluid">
                         <span id="sidenavBtn" onclick="openNav()">&#9776;</span>
-                        <a href="/searchShows" style="margin-right: 10px"><button class="btn btn-outline-warning"
+                        <a href="/tvshows"><button class="btn btn-outline-info" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-house-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                                    <path fill-rule="evenodd"
+                                        d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+                                </svg></button></a>
+                        <a href="/searchMovies" style="margin-right: 10px"><button class="btn btn-outline-warning"
                                 type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-search" viewBox="0 0 16 16">
                                     <path
                                         d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                </svg> Search Shows</button></a>
+                                </svg> Search TV Shows</button></a>
+                        <button type="submit" class="btn btn-outline-success add-to-cart"
+                            data-name="<%=tv.tvshow_det[0]._id%>" data-price="<%=tv.tvshow_det[0].price%>"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-cart" viewBox="0 0 16 16">
+                                <path
+                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                            </svg> Add to cart</button>
 
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -54,8 +70,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="form-floating">
-                                                <input readonly class="d-none" name="username"
-                                                    value="<%=shows.username%>">
+                                                <input readonly class="d-none" name="username" value="<%=tv.username%>">
                                             </div>
                                             <table class="show-cart table">
 
@@ -79,7 +94,7 @@
                         <!-- cart Modal End -->
                         <div class="dropdown">
                             <button type="submit" class="btn btn-primary dropbtn">Hello,
-                                <%=shows.username%>
+                                <%=tv.username%>
                             </button>
                             <div id="myDropdown" class="dropdown-content">
                                 <a href="/logout">Logout</a>
@@ -90,52 +105,39 @@
                 </nav>
                 <div class="container text-center g-3">
                     <div class="row g-3 results">
-                        <% for (var i=0; i < shows.length; i++) { %>
-                            <div class="col-md-3 col-4">
-                                <div class="card">
-                                    <iframe src="<%=shows[i].trailer%>" height="230">
-                                    </iframe>
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-                                            <%=shows[i]._id%>
-                                        </h5>
-                                        <aside>
-                                            <p class="card-text"><b>Synopsis: </b>
-                                                <%=shows[i].preview%>
-                                        </aside>
-                                        </p>
-                                        <p><b>Publish Year: </b>
-                                            <%=shows[i].year%>
-                                        </p>
-                                        <p><b>Number of episodes: </b>
-                                            <%=shows[i].episodes%> Minutes
-                                        </p>
+                        <div class="col-md-3 col-4">
+                            <iframe src="<%=tv.tvshow_det[0].trailer%>">
+                            </iframe>
+                        </div>
+                        <div class="row g-3">
+                            <aside>
+                                <h5 class="card-title"><b>Movie Title: </b>
+                                    <%=tv.tvshow_det[0]._id%>
+                                </h5>
+                            </aside>
+                            <p class="card-text"><b>Synopsis: </b>
+                                <%=tv.tvshow_det[0].description%>
 
-                                        <p><b>Genere: </b>
-                                            <% for (var k=0; k < shows[i].type.length; k++) { %>
-                                                <% if(k==shows[i].type.length - 1) {%>
-                                                    <%=shows[i].type[k]%>
-                                                        <%} else { %>
-                                                            <%=shows[i].type[k]%>,
-                                                                <%}%>
-                                                                    <%}%>
-                                        </p>
-                                        <p><b>Cost: </b>
-                                            <%=shows[i].price%>$
-                                        </p>
-                                        <button type="submit" class="btn btn-outline-success add-to-cart"
-                                            data-name="<%=shows[i]._id%>" data-price="<%=shows[i].price%>"><svg
-                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                            </svg></button>
-                                        <a href="/tvshow?tvshow=<%=shows[i]._id%>" id="tv_link<%=i%>"><button
-                                                class="btn btn-outline-info" type="button">See more</button></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <%}%>
+                            </p>
+                            <p><b>Publish Year: </b>
+                                <%=tv.tvshow_det[0].year%>
+                            </p>
+                            <p><b>Number of seasons: </b>
+                                <%=tv.tvshow_det[0].seasons%> Seasons
+                            </p>
+                            <p><b>Genere: </b>
+                                <% for (var k=0; k < tv.tvshow_det[0].type.length; k++) { %>
+                                    <% if(k==tv.tvshow_det[0].type.length - 1) {%>
+                                        <%=tv.tvshow_det[0].type[k]%>
+                                            <%} else { %>
+                                                <%=tv.tvshow_det[0].type[k]%>,
+                                                    <%}%>
+                                                        <%}%>
+                            </p>
+                            <p><b>Cost: </b>
+                                <%=tv.tvshow_det[0].price%>$
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

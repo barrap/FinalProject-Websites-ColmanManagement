@@ -1,6 +1,7 @@
 body {
     background-color: #35363a;
     color: white;
+    font-family: "heebo";
     
 }
 h3 {
@@ -32,4 +33,9 @@ h3 {
 
 a {
     text-decoration: none;
+}
+
+@font-face {
+    font-family: "heebo";
+    src: url('../Heebo-Regular.ttf')
 }

@@ -3,7 +3,7 @@ const locationsService = require('../services/location');
 const customersService = require('../services/customers')
 
 const Alllocations = (req, res) => {
-    results = {}
+
     // Checks if the user is logged in
     if (req.session.username != null) {
 
@@ -16,15 +16,27 @@ const Alllocations = (req, res) => {
 
                 const result = locationsService.getLocations()
                 result.then(r => {
-                    res.render("../views/locations", { stores: Array.from(r) })
+
+                    // Checks if the user is admin
+                    if (cust.isAdmin == true) {
+                        res.render("../views/locations-admin", { stores: Array.from(r) })
+                    }
+
+                    // user is not an admin so send to regular locations page
+                    else {
+                        res.render("../views/locations", { stores: Array.from(r) })
+                    }
                 })
             }
+
+            // user doesn't exists so send to homepage
             else {
                 res.redirect("/")
             }
         })
-
     }
+
+    // user isn't logged in so send to homepage
     else {
         res.redirect("/")
     }

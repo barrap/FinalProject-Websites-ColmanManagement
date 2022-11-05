@@ -1,5 +1,6 @@
 body {
     background-color: #35363a;
+    font-family: "heebo";
 }
 
 #inp_search {
@@ -64,4 +65,9 @@ footer {
 
 .navbar-brand:hover {
     color: #504e4e
+}
+
+@font-face {
+    font-family: "heebo";
+    src: url('../Heebo-Regular.ttf')
 }
