@@ -6,6 +6,18 @@ body {
 .card {
     background-color: #060606;
     color: white;
+    height: 590px;
+}
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
 }
 
 h1 {

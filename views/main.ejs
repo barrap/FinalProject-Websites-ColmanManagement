@@ -100,7 +100,7 @@
                     <div class="row g-3 results">
                         <% for (var i=0; i < results.movies.length; i++) { %>
                             <div class="col-md-3 col-4">
-                                <div class="card movie">
+                                <div class="card movie container">
                                     <iframe src="<%=results.movies[i].trailer%>" height="230">
                                     </iframe>
                                     <div class="card-body">
@@ -116,17 +116,19 @@
                                         <p><b>Cost: </b>
                                             <%=results.movies[i].price%>$
                                         </p>
-                                        <button type="submit" class="btn btn-outline-success add-to-cart"
-                                            data-name="<%=results.movies[i]._id%>"
-                                            data-price="<%=results.movies[i].price%>"><svg
-                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                            </svg></button>
-                                        <a href="/movie?movie=<%=results.movies[i]._id%>" id="movie_link<%=i%>"><button
-                                                class="btn btn-outline-info" type="button">See more</button></a>
-                                        <form class="float-start">
+                                        <div class="buttons row">
+                                            <button type="submit" class="btn btn-success add-to-cart col-8"
+                                                data-name="<%=results.movies[i]._id%>"
+                                                data-price="<%=results.movies[i].price%>"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                                </svg></button>
+                                            <a href="/movie?movie=<%=results.movies[i]._id%>" id="movie_link<%=i%>"
+                                                class="col-4"><button class="btn btn-outline-info" type="button">See
+                                                    more</button></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -137,7 +139,7 @@
                     <div class="row g-3 results">
                         <% for (var i=0; i < results.shows.length; i++) { %>
                             <div class="col-md-3 col-4">
-                                <div class="card tvshow">
+                                <div class="card tvshow container">
                                     <iframe src="<%=results.shows[i].trailer%>" height="230">
                                     </iframe>
                                     <div class="card-body">
@@ -154,17 +156,21 @@
                                                 <p><b>Cost: </b>
                                                     <%=results.shows[i].price%>$
                                                 </p>
-                                                <button type="submit" class="btn btn-outline-success add-to-cart"
-                                                    data-name="<%=results.shows[i]._id%>"
-                                                    data-price="<%=results.shows[i].price%>"><svg
-                                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                                    </svg></button>
-                                                <a href="/tvshow?tvshow=<%=results.shows[i]._id%>"
-                                                    id="tv_link<%=i%>"><button class="btn btn-outline-info"
-                                                        type="button">See more</button></a>
+                                                <div class="buttons row">
+                                                    <button type="submit"
+                                                        class="btn btn-success add-to-cart col-8"
+                                                        data-name="<%=results.shows[i]._id%>"
+                                                        data-price="<%=results.shows[i].price%>"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                                        </svg></button>
+                                                    <a href="/tvshow?tvshow=<%=results.shows[i]._id%>"
+                                                        id="tv_link<%=i%>" class="col-4"><button
+                                                            class="btn btn-outline-info" type="button">See
+                                                            more</button></a>
+                                                </div>
                                     </div>
                                 </div>
                             </div>

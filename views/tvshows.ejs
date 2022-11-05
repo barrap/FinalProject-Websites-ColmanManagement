@@ -92,7 +92,7 @@
                     <div class="row g-3 results">
                         <% for (var i=0; i < shows.length; i++) { %>
                             <div class="col-md-3 col-4">
-                                <div class="card">
+                                <div class="card container">
                                     <iframe src="<%=shows[i].trailer%>" height="230">
                                     </iframe>
                                     <div class="card-body">
@@ -101,7 +101,7 @@
                                         </h5>
                                         <aside>
                                             <p class="card-text"><b>Synopsis: </b>
-                                                <%=shows[i].preview%>
+                                                <%=shows[i].description%>
                                         </aside>
                                         </p>
                                         <p><b>Publish Year: </b>
@@ -123,15 +123,17 @@
                                         <p><b>Cost: </b>
                                             <%=shows[i].price%>$
                                         </p>
-                                        <button type="submit" class="btn btn-outline-success add-to-cart"
-                                            data-name="<%=shows[i]._id%>" data-price="<%=shows[i].price%>"><svg
-                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                            </svg></button>
-                                        <a href="/tvshow?tvshow=<%=shows[i]._id%>" id="tv_link<%=i%>"><button
-                                                class="btn btn-outline-info" type="button">See more</button></a>
+                                        <div class="buttons row">
+                                            <button type="submit" class="btn btn-success add-to-cart col-8"
+                                                data-name="<%=shows[i]._id%>" data-price="<%=shows[i].price%>"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                                </svg></button>
+                                            <a href="/tvshow?tvshow=<%=shows[i]._id%>" id="tv_link<%=i%>" class="col-4"><button
+                                                    class="btn btn-outline-info" type="button">See more</button></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
