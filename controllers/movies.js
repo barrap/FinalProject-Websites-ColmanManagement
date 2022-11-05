@@ -332,6 +332,7 @@ const update = (req, res) => {
 
 // Function to add order 
 const order = (req, res) => {
+    information = {}
 
     // Checks if the users is logged in
     if (req.session.username != null) {
@@ -339,10 +340,21 @@ const order = (req, res) => {
         // Gets the user data
         const customer = customersService.getCustomer(req.session.username)
         customer.then(cust => {
+            
 
             // Checks if the user exists
             if (cust) {
-                res.render("addOrder.ejs", { username: { username: cust._id } })
+                
+                cards = CreditCardService.getCreditCard(cust._id)
+                cards.then(r =>{
+                    information['username'] = cust._id
+                    information['cards'] = r
+                    console.log(information.cards)
+                    res.render("addOrder.ejs", { info: information })
+                }
+                )
+                
+                
             }
 
             // The user doesn't exists so redirects to the home page
@@ -373,11 +385,11 @@ const paying = (req, res) => {
                 try {
                     const result = CreditCardService.addCard(req.body.cardNumber, req.session.username, req.body.date, req.body.secNum)
                     result.then(r => {
-                        res.redirect("/movies")
+                        res.redirect("/main")
                     })
                 }
                 catch (e) {
-                    res.render("../views/addMovie", { message: { status: "Movie already exists" } })
+                    res.render("../views/main", { message: { status: "" } })
                 }
 
             }

@@ -6,8 +6,8 @@ mongoose.connect(process.env.CONNECTION_STRING)
 
 async function getCreditCard(username) {
 
-    const credit_cards = await creditCard.findOne({ _username: username });
-
+    const credit_cards = await creditCard.find({ _username: username });
+    
     // Returns the credit cards of specific customer
     return credit_cards
 }
@@ -33,5 +33,6 @@ async function addCard(card_number, username, exp_date, digits){
 // Exports the neccesary modules
 module.exports = {
     deleteCard,
-    addCard
+    addCard,
+    getCreditCard
 }

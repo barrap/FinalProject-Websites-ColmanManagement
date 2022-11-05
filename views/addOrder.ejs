@@ -36,7 +36,7 @@
                         </button>
                         <div class="dropdown">
                             <button type="submit" class="btn btn-primary dropbtn">Hello,
-                                <%=username.username%>
+                                <%=info.username%>
                             </button>
                             <div id="myDropdown" class="dropdown-content">
                                 <a href="/logout">Logout</a>
@@ -60,7 +60,7 @@
                                     <div class="modal-body">
                                         <div class="form-floating">
                                             <input readonly class="d-none" name="username"
-                                                value="<%{username.username}%>">
+                                                value="<%{info.username}%>">
                                         </div>
                                         <table class="show-cart table">
 
@@ -92,6 +92,14 @@
                         <div>Total price: $<span class="total-cart"></span></div>
                         <h3>Payment Details:</h3>
                         <br>
+                        <div id="poll">
+                            <h3>would you like to choose previous payment method?</h3>
+                            <form>
+                              
+                            Yes: <input type="radio" name="vote" value="0" onclick="getVote(this.value)"><br>
+                            No: <input type="radio" name="vote" value="1" onclick="getVote(this.value)">
+                            </form>
+                            </div>
                         <form action="/paying" method="post" onsubmit="return validateBeforeSubmit()">
                             <div class="mb-3 row text-center div_input">
                                 <label class="col-sm-2 col-form-label">Card Number</label>
@@ -134,6 +142,7 @@
                             <button class="btn btn-primary" type="submit" id="submitBtn">Order</button>
                         </form>
                     </div>
+                    
                 </div>
             </div>
         </div>
