@@ -10,6 +10,13 @@ async function getLocationsByCity(city) {
     return await location_db.find({ city: city });
 }
 
+// Count locations
+async function countLocations()
+{
+    const data = await location_db.count()
+    return data;
+}
+
 // Return all locations
 async function getLocations() {
     return await location_db.find({}, { _id: 0, Lat: 1, Len: 1 })
@@ -38,5 +45,6 @@ module.exports = {
     getLocations,
     getCities,
     addLocation,
-    deleteLocation
+    deleteLocation, 
+    countLocations
 };
