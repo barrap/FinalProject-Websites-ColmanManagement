@@ -119,9 +119,96 @@ const addLocation = (req, res) => {
     }
 }
 
+const deleteLocationPage = (req, res) => {
+
+    // Checks if the user is logged in
+    if (req.session.username != null) {
+
+        // Gets the users data
+        const customer = customersService.getCustomer(req.session.username)
+        customer.then(cust => {
+
+            // Checks if the user exists
+            if (cust) {
+
+                // Checks if user is admin
+                if (cust.isAdmin == true) {
+
+                    // Gets the city information
+                    const cities_data = locationsService.getCities()
+                    cities_data.then(cities => {
+                        cities['username'] = cust._id
+                        res.render("../views/deleteLocation", { cities: cities })
+                    })
+                }
+
+                // User isn't an admin so redirects to main location page
+                else {
+                    res.redirect("/locations")
+                }
+            }
+
+            // The user doesn't exists so redirects to homepage
+            else {
+                res.redirect("/")
+            }
+        })
+    }
+
+    // User isn't logged in so redirects to homepage
+    else {
+        res.redirect("/")
+    }
+}
+
+const deleteLocation = (req, res) => {
+
+    // Checks if the user is logged in
+    if (req.session.username != null) {
+        
+        var city = req.body.city
+
+        // Gets the users data
+        const customer = customersService.getCustomer(req.session.username)
+        customer.then(cust => {
+
+            // Checks if the user exists
+            if (cust) {
+
+                // Checks if user is admin
+                if (cust.isAdmin == true) {
+
+                    // Tries and delete the city
+                    const results = locationsService.deleteLocation(req.body.city)
+                    results.then(results => {
+                        res.redirect("/locations")
+                    })
+                }
+
+                // User isn't an admin so redirects to main location page
+                else {
+                    res.redirect("/locations")
+                }
+            }
+
+            // The user doesn't exists so redirects to homepage
+            else {
+                res.redirect("/")
+            }
+        })
+    }
+
+    // User isn't logged in so redirects to homepage
+    else {
+        res.redirect("/")
+    }
+}
+
 // Exports all the function
 module.exports = {
     Alllocations,
     addLocationPage,
-    addLocation
+    addLocation,
+    deleteLocationPage,
+    deleteLocation
 }

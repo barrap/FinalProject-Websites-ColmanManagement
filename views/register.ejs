@@ -59,10 +59,11 @@
                             <label class="col-sm-2 col-form-label">City:</label>
                             <div class="col-sm-10 div_choice_input">
                                 <select name="location" id="location" required>
-                                    <option value="Tel-Aviv">Tel-Aviv</option>
-                                    <option value="Jerusalem">Jerusalem</option>
-                                    <option value="Haifa">Haifa</option>
-                                    <option value="Eilat">Eilat</option>
+                                    <% for (var i=0; i< data.cities.length; i++) {%>
+                                        <option value="<%=data.cities[i].city%>">
+                                            <%=data.cities[i].city%>
+                                        </option>
+                                        <%}%>
                                 </select>
                             </div>
                         </div>
@@ -88,7 +89,7 @@
                     </form>
                     <br>
                     <div id="error_message">
-                        <%=message.status%>
+                        <%=data.status%>
                     </div>
                 </div>
             </div>

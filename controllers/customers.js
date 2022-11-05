@@ -1,4 +1,5 @@
 const customersService = require("../services/customers")
+const locationsService = require("../services/location")
 const crypto = require('crypto');
 
 
@@ -51,9 +52,16 @@ async function login(req, res) {
 
 // Function to get the registration page
 function registerPage(req, res) {
+    data = {}
+    const cities = locationsService.getCities()
+    cities.then(city => {
+        data['cities'] = city
+        data['status'] = ""
+        // Sends the registration page with empty message
+        res.render("register.ejs", { data: data })
+    })
 
-    // Senda the registration page with empty message
-    res.render("register.ejs", { message: { status: "" } })
+
 }
 
 // Function to try and registar
@@ -69,11 +77,16 @@ async function register(req, res) {
     }
     catch (e) {
 
-        // The username already exists
-        res.render("../views/register", { message: { status: "Username already exsits" } })
+        data = {}
+        const cities = locationsService.getCities()
+        cities.then(city => {
+            data['cities'] = city
+            data['status'] = "Username already exsits"
+
+            // The username already exists
+            res.render("../views/register", { data: data })
+        })
     }
-
-
 }
 
 // Function to delete a customer

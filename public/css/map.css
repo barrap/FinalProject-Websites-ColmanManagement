@@ -29,19 +29,11 @@ footer {
   color: #504e4e
 }
 
-table {
-  color: white;
-  border-collapse: collapse;
-}
-
-td,
-th {
-  border-bottom: 1px solid #dddddd;
-  text-align: center;
-  padding: 8px;
-}
-
 @font-face {
   font-family: "heebo";
   src: url('../Heebo-Regular.ttf')
+}
+
+#addlocation {
+  margin-right: 15px;
 }
