@@ -113,7 +113,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-3 mb-4">
-                                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;max-height: 7rem;">
                                     <div class="card-header">Amount of users</div>
                                     <div class="card-body">
                                       <h5 class="card-title"><%=data.count_users%></h5>
@@ -121,7 +121,7 @@
                                   </div>
                             </div>
                             <div class="col-lg-3 mb-4">
-                                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;max-height: 7rem">
                                     <div class="card-header">Amount of movies</div>
                                     <div class="card-body">
                                       <h5 class="card-title"><%=data.count_movies%></h5>
@@ -129,7 +129,7 @@
                                   </div>
                             </div>
                             <div class="col-lg-3 mb-4">
-                                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;max-height: 7rem">
                                     <div class="card-header">Amount of tv shows</div>
                                     <div class="card-body">
                                       <h5 class="card-title"><%=data.count_tvshows%></h5>
@@ -137,7 +137,7 @@
                                   </div>
                             </div>
                             <div class="col-lg-3 mb-4">
-                                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;max-height: 7rem">
                                     <div class="card-header">Amount of stores</div>
                                     <div class="card-body">
                                       <h5 class="card-title"><%=data.count_locations%></h5>
@@ -159,14 +159,15 @@
                                             arraydata.push({"year": count_movies[i].toString(), 
                                             "amount_of_movies":count_movies[i+1]})
                                             }
-                                        const divID = document.getElementById("chartdiv1");
+                                        const divID1 = document.getElementById("chartdiv1");
 
-                                        divID.appendChild(Plot.plot({
+                                        divID1.append(Plot.plot({
                                         marks: [
                                           Plot.barY(arraydata, {x: "year", y: "amount_of_movies"})
                                         ],
-                                        Style: {
-                                            fill: "transparent"
+                                        style: {
+                                            background: "transparent",
+                                            color: "#adb5bd"
                                         }
                                       }))
                                     </script>
@@ -174,33 +175,76 @@
                                 <div class="col-lg-6 mb-4" id="chartdiv2">
                                 <script>
                                     var arraydata = []
-                                    count_movies_by_director_arr = [<%= count_movies_by_director %>];
+                                    count_movies_tmp  = "<%=count_movies_by_director %>"
+                                    count_movies_by_director_arr = count_movies_tmp.split(",")
+                                    console.log(count_movies_by_director_arr)
                                     for (let i = 0; i < count_movies_by_director_arr.length; i+=2) {
                                         arraydata.push({"Director":count_movies_by_director_arr[i].toString(), 
-                                        "amount_of_movies":count_movies_by_director_arr[i+1]})
+                                        "amount_of_movies":parseInt(count_movies_by_director_arr[i+1])})
                                       }
                                     const divID2 = document.getElementById("chartdiv2");
 
-                                    divID.appendChild(Plot.plot({
+                                    divID2.append(Plot.plot({
                                     marks: [
                                       Plot.barY(arraydata, {x: "Director", y: "amount_of_movies"})
                                     ],
-                                    Style: {
-                                        background: "transperent"
-                                    }
+                                    style: {
+                                            background: "transparent",
+                                            color: "#adb5bd"
+                                        }
                                   }))
                                 </script>
                                 </div>
                     </div>
-                    <div class="container text-center g-3">
-                        <div class="container">
-                            <div class="col-lg-6 mb-4">
+                    <div class="row">
+                        <div class="col-lg-6 mb-4" id="chartdiv4">
+                        <script>
+                            var arraydata = []
+                            count_movies_tmp  = "<%=count_customer_by_location %>"
+                            count_movies_by_director_arr = count_movies_tmp.split(",")
+                            console.log(count_movies_by_director_arr)
+                            for (let i = 0; i < count_movies_by_director_arr.length; i+=2) {
+                                arraydata.push({"City":count_movies_by_director_arr[i].toString(), 
+                                "amount_of_customers":parseInt(count_movies_by_director_arr[i+1])})
+                              }
+                            const divID4 = document.getElementById("chartdiv4");
 
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                            </div>
+                            divID4.append(Plot.plot({
+                            marks: [
+                              Plot.barY(arraydata, {x: "City", y: "amount_of_customers"})
+                            ],
+                            style: {
+                                    background: "transparent",
+                                    color: "#adb5bd"
+                                }
+                          }))
+                        </script>
                         </div>
-                    </div>
+                        <div class="col-lg-6 mb-4" id="chartdiv3">
+                            <script>
+                                count_order_by_month_array_tmp = [<%= count_order_by_month_array %>];
+                                arraydata = []
+                                console.log(count_order_by_month_array_tmp)
+                                for (let i = 0; i < count_order_by_month_array_tmp.length; i+=3) {
+                                    arraydata.push({"date": count_order_by_month_array_tmp[i].toString() + "-" + count_order_by_month_array_tmp[i + 1].toString(),
+                                    "total_orders_payment":count_order_by_month_array_tmp[i+2]})
+                                    }
+                                console.log(arraydata)
+                                const divID3 = document.getElementById("chartdiv3");
+
+                                divID3.append(Plot.plot({
+                                marks: [
+                                  Plot.barY(arraydata, {x: "date", y: "total_orders_payment"})
+                                ],
+                                style: {
+                                    background: "transparent",
+                                    color: "#adb5bd"
+                                }
+                              }))
+                            </script>
+                        </div>
+                        
+            </div>
                 </div>
             </div>
             </div>
