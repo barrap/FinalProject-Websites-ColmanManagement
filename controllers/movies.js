@@ -344,7 +344,6 @@ const order = (req, res) => {
 
             // Checks if the user exists
             if (cust) {
-                
                 cards = CreditCardService.getCreditCard(cust._id)
                 cards.then(r =>{
                     information['username'] = cust._id

@@ -119,12 +119,15 @@ $(() => {
 
         // Checks that all input is valid
         if ((phone_valid && password_valid && fullname_valid && username_valid) | flag == true) {
+            // Defining the credit card details as the chosen one
             const card = CreditCardService.getCardByNumber(value)
             document.getElementById("cardNumber").value = card._id
             document.getElementById("fullname").value = card._username
             document.getElementById("id").value = "1234567890"
             document.getElementById("date").value = card._exp_date
             document.getElementById("secNum").value = card._digits
+
+
             return true
         }
         else {
