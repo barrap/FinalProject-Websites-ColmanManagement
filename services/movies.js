@@ -12,8 +12,10 @@ async function countMoviesByYear() {
                 _id: '$year',
                 count: { $sum: 1 } // this means that the count will increment by 1
             }
-        }
-    ]);
+        },
+        {$sort: {year: 1}}
+    ])
+
     return data;
 }
 
