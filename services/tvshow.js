@@ -4,6 +4,32 @@ const mongoose = require('mongoose');
 mongoose.connect(process.env.CONNECTION_STRING)
 
 
+// Count shows group by year
+async function countShowsByYear() {
+    const data = await TvShows.aggregate([
+        {
+            $group: {
+                _id: '$year',
+                count: { $sum: 1 } // this means that the count will increment by 1
+            }
+        }
+    ]);
+    return data;
+}
+
+// Count shows group by genre
+async function countShowsByGenre() {
+    const data = await TvShows.aggregate([
+        {
+            $group: {
+                _id: '$type',
+                count: { $sum: 1 } // this means that the count will increment by 1
+            }
+        }
+    ]);
+    return data;
+}
+
 // Function to get all the tv shows
 async function getTvShows() {
 
@@ -57,13 +83,13 @@ async function search(param, value) {
             return await TvShows.find({ "_id": { "$regex": value, "$options": "i" } })
             break;
         case "year":
-            return await TvShows.find({ "year": { "$gte": parseInt(value, 10) } })
+            return await TvShows.find({ "year": parseInt(value)  })
             break;
         case "seasons":
             return await TvShows.find({ "seasons": { "$gte": parseInt(value, 10) } })
             break;
         case "cost":
-            return await TvShows.find({ "price": { "$gte": parseInt(value, 10) } })
+            return await TvShows.find({ "price": {"$lte" : parseInt(value,10) }})
             break;
         default:
             break;
@@ -106,5 +132,7 @@ module.exports = {
     addTvShow,
     search,
     update,
-    countTVShows
+    countTVShows,
+    countShowsByYear,
+    countShowsByGenre
 }
