@@ -195,13 +195,13 @@ $(() => {
             // Define the item output html
             output += "<tr>"
                 + "<td name='title'>" + cart[i].title + "</td>"
-                + "<td name='price'>(" + cart[i].price + ")</td>"
+                + "<td name='price'>(" + cart[i].price + "$)</td>"
                 + "<td><div class='input-group'><button type='button' class='minus-item input-group-addon btn btn-outline-primary' data-name=" + cart[i].shortTitle + ">-</button>"
                 + "<input type='number' class='item-count form-control' data-name='" + cart[i].shortTitle + "' value='" + cart[i].count + "'>"
                 + "<button type='button' class='plus-item btn btn-outline-primary input-group-addon' data-name=" + cart[i].shortTitle + ">+</button></div></td>"
                 + "<td><button type='button' class='delete-item btn btn-outline-danger' data-name=" + cart[i].shortTitle + ">X</button></td>"
                 + " = "
-                + "<td>" + Number(cart[i].count * cart[i].price).toFixed(2) + "</td>"
+                + "<td>" + Number(cart[i].count * cart[i].price).toFixed(2) + "$</td>"
                 + "</tr>";
         }
         var cart_price = totalCartPrice()

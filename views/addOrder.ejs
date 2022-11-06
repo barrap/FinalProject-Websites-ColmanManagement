@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.rtl.min.css"
         integrity="sha384-+4j30LffJ4tgIMrq9CwHvn0NjEvmuDCOfk6Rpg2xg7zgOxWWtLtozDEEVvBPgHqE" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="img/Blockbuster_logo.svg.png">
-    <link rel="stylesheet" href="css/search_style.css">
+    <link rel="stylesheet" href="css/order_style.css">
     <link rel="stylesheet" href="css/credit_card.css">
     <link rel="stylesheet" href="css/sidenav.css">
 </head>
@@ -28,12 +28,7 @@
                 <nav class="navbar bg-dark">
                     <div class="container-fluid">
                         <span id="sidenavBtn" onclick="openNav()">&#9776;</span>
-
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#cartModal">
-                            Cart <span id="cart_counter"></span>
-                        </button>
+                        <h3>Order Summary</h3>
                         <div class="dropdown">
                             <button type="submit" class="btn btn-primary dropbtn">Hello,
                                 <%=info.username%>
@@ -65,7 +60,7 @@
                                         <table class="show-cart table">
 
                                         </table>
-                                        <div>Total price: $<span class="total-cart"></span></div>
+                                        <div><span class="total-cart"></span></div>
                                         <input readonly class="d-none" name="total_price" id="total_price">
                                         <input readonly class="d-none" name="all_titles" id="all_titles">
                                     </div>
@@ -89,7 +84,7 @@
                     <div class="row g-3 results">
                         <table class="show-cart table">
                         </table>
-                        <div>Total price: $<span class="total-cart"></span></div>
+                        <div><span class="total-cart"></span></div>
                         <h3>Payment Details:</h3>
                         <br>
                         <div id="poll">
