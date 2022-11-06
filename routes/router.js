@@ -18,6 +18,7 @@ router.get("/", (req, res) => {
 })
 
 router.get("/main", MainController.mainPage)
+router.post("/filter", MainController.filter)
 
 
 // Customers routing

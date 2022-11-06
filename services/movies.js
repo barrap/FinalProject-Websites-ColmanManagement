@@ -17,6 +17,34 @@ async function countMoviesByYear() {
     return data;
 }
 
+// Count movies group by genre
+async function countMoviesByGenre() {
+    const data = await Movie.aggregate([
+        {
+            $group: {
+                _id: '$type',
+                count: { $sum: 1 } // this means that the count will increment by 1
+            }
+        }
+    ]);
+    return data;
+}
+
+// Count movies group by price
+async function countMoviesByPrice() {
+    const data = await Movie.aggregate([
+        {
+            $group: {
+                _id: '$price',
+                count: { $sum: 1 } // this means that the count will increment by 1
+            }
+        }
+    ]);
+    return data;
+}
+
+
+
 // Count movies group by director
 async function countMoviesByDirector() {
     const data = await Movie.aggregate([
@@ -89,7 +117,7 @@ async function search(param, value) {
             return await Movie.find({ "director": { "$regex": value, "$options": "i" } })
             break;
         case "year":
-            return await Movie.find({ "year": { "$gte": parseInt(value, 10) } })
+            return await Movie.find({ "year": parseInt(value, 10) })
             break;
         case "length":
             return await Movie.find({ "length": { "$gte": parseInt(value, 10) } })
@@ -162,5 +190,7 @@ module.exports = {
     countMoviesByYear,
     countMovies,
     countMoviesByDirector,
-    uploadJson
+    uploadJson,
+    countMoviesByGenre,
+    countMoviesByPrice
 }
