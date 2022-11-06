@@ -422,7 +422,6 @@ const upload = (req, res) => {
         // Gets the user data
         const customer = customersService.getCustomer(req.session.username)
         customer.then(cust => {
-            console.log(req.session.username)
 
 
             // Checks if the user exists

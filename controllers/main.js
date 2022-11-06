@@ -33,8 +33,13 @@ const filter = (req, res) => {
                     genres = [];
                     for(i = 0; i<y.length; i++)
                     {
-                        console.log(y[i]._id)
+                        for(j=0; j<y[i]._id.length; j++)
+                        {
+                            genres.push(y[i]._id[j])
+                        }
                     }
+                    ugenres = [...new Set(genres)]
+                    results['genre'] = ugenres
                     
                 })
 
@@ -51,36 +56,61 @@ const filter = (req, res) => {
 
                  // Gets all the movies
 
-                 if(req.body.Publishing_year != 'None')
-                 {
-                    console.log((req.body.Publishing_year).slice(0, -1))
-                     movies = MovieService.search("year",req.body.Publishing_year.slice(0, -1))
-                 }
+                 movies = MovieService.search("cost",req.body.price)
 
-                 else
-                 {
-                    movies  = MovieService.getMovies()
-                 }
-
-                movies.then(mov => {
-                    results['movies'] = mov
-                    // Gets the data of all the tv shows
-                    const tv_shows = TVShowsService.getTvShows()
-                    tv_shows.then(tv => {
-                        results['shows'] = tv
-                        results['username'] = cust._id
-
-                        // Checks if the user is admin
-                        if (cust.isAdmin == true) {
-                            res.render("../views/main-admin", { results: results })
+                 movies.then(m => {
+                    if(req.body.Publishing_year != 'none')
+                    {
+                        temp_movies = []
+                        for (i =0;i< m.length; i++)
+                        {
+                            if(m[i].year == req.body.Publishing_year.slice(0, -1))
+                            {
+                                temp_movies.push(m[i])
+                            }
                         }
+                        m = temp_movies
+                        
+                    }
 
-                        // The user is not an admin
-                        else {
-                            res.render("../views/main", { results: results })
+
+                    if(req.body.genre != 'none')
+                    {
+                        temp_movies = []
+                        for (i =0;i< m.length; i++)
+                        {
+                            for(j=0;j<m[i].type.length;j++)
+                            {
+                                if(m[i].type[j] == req.body.genre)
+                                {
+                                    temp_movies.push(m[i])
+                                }
+                            }
                         }
-                    })
+                        m = temp_movies
+                    }
+                    console.log(req.body.genre)
+                    results['movies'] = m
                 })
+
+                 
+                
+                const tv_shows = TVShowsService.getTvShows()
+                tv_shows.then(tv => {
+                    results['shows'] = tv
+                    results['username'] = cust._id
+
+                    // Checks if the user is admin
+                    if (cust.isAdmin == true) {
+                        res.render("../views/main-admin", { results: results })
+                    }
+
+                    // The user is not an admin
+                    else {
+                        res.render("../views/main", { results: results })
+                    }
+                })
+                
 
             }
 
@@ -128,8 +158,14 @@ function mainPage(req, res) {
                     genres = [];
                     for(i = 0; i<y.length; i++)
                     {
-                        console.log(y[i]._id)
+                        for(j=0; j<y[i]._id.length; j++)
+                        {
+                            genres.push(y[i]._id[j])
+                        }
                     }
+                    ugenres = [...new Set(genres)]
+                    results['genre'] = ugenres
+                    
                     
                 })
 

@@ -116,12 +116,12 @@
                                               <br>
                                             Genre: <select name="genre" id="genre">
                                                 <option value="none">None</option>
-                                                <option value="saab">Saab</option>
-                                                <option value="opel">Opel</option>
-                                                <option value="audi">Audi</option>
+                                                <% for (var i=0; i < results.genre.length; i++) { %>
+                                                    <option value="<%=results.genre[i]%>"><%=results.genre[i]%></option>
+                                                    <%}%>
                                               </select>
                                               <br>
-                                            Maximun Price:<input type="range" value="24" min="1" max="100" oninput="this.nextElementSibling.value = this.value">
+                                            Maximun Price:<input type="range" value="24" min="1" max="100" oninput="this.nextElementSibling.value = this.value", name="price", id="price">
                                             <output>24</output>
                                         </div>
                                         <div class="modal-footer">
