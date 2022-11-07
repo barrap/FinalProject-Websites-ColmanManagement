@@ -12,8 +12,10 @@ async function countMoviesByYear() {
                 _id: '$year',
                 count: { $sum: 1 } // this means that the count will increment by 1
             }
-        }
-    ]);
+        },
+        {$sort: {year: 1}}
+    ])
+
     return data;
 }
 
@@ -44,7 +46,6 @@ async function countMoviesByPrice() {
 }
 
 
-
 // Count movies group by director
 async function countMoviesByDirector() {
     const data = await Movie.aggregate([
@@ -54,7 +55,7 @@ async function countMoviesByDirector() {
                 count: { $sum: 1 } // this means that the count will increment by 1
             }
         }
-    ]);
+    ]).limit(5);
     return data;
 }
 
