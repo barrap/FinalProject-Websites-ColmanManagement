@@ -42,7 +42,65 @@
                                     <path
                                         d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
                                 </svg> Add Movie</button></a>
+                        <!-- Button triger modal for filter -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#filterModal">
+                            Filter <span id="filter"></span>
+                        </button>
 
+                        <!-- filter Modal -->
+                        <form>
+                            <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Choose filters:</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Publishing year: <select name="Publishing_year" id="year">
+                                                <option value="none">None</option>
+                                                <% for (var i=0; i < results.years.length; i++) { %>
+                                                    <option value="<%=results.years[i]%>"><%=results.years[i]%></option>
+                                                    <%}%>
+
+                                              </select>
+                                              <br>
+                                            Genre: <select name="genre" id="genre">
+                                                <option value="none">None</option>
+                                                <% for (var i=0; i < results.genre.length; i++) { %>
+                                                    <option value="<%=results.genre[i]%>"><%=results.genre[i]%></option>
+                                                    <%}%>
+                                              </select>
+                                              <br>
+                                              Director:<select name="dir" id="dir">
+                                                <option value="none">None</option>
+                                                <% for (var i=0; i < results.dir.length; i++) { %>
+                                                    <option value="<%=results.dir[i]%>"><%=results.dir[i]%></option>
+                                                    <%}%>
+                                              </select>
+                                              <br>
+                                              Length: <input type="range" value="120" min="1" max="300" oninput="this.nextElementSibling.value = this.value", name="len", id="len">
+                                              <output>120</output>
+                                              <br>
+                                            Maximun Price:<input type="range" value="24" min="1" max="100" oninput="this.nextElementSibling.value = this.value", name="price", id="price">
+                                            <output>24</output>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-danger" id="clear">Clear
+                                                Selection</button>
+                                            <button type="button" class="btn btn-primary" id="filterbtn">Filter</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- filter Modal End -->
 
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -64,7 +122,7 @@
                                         <div class="modal-body">
                                             <div class="form-floating">
                                                 <input readonly class="d-none" name="username"
-                                                    value="<%=movies.username%>">
+                                                    value="<%=results.movies.username%>">
                                             </div>
                                             <table class="show-cart table">
 
@@ -88,7 +146,7 @@
                         <!-- cart Modal End -->
                         <div class="dropdown">
                             <button type="submit" class="btn btn-primary dropbtn">Hello,
-                                <%=movies.username%>
+                                <%=results.movies.username%>
                             </button>
                             <div id="myDropdown" class="dropdown-content">
                                 <a href="/logout">Logout</a>
@@ -99,28 +157,28 @@
                 </nav>
                 <div class="container text-center g-3">
                     <div class="row g-3 results">
-                        <% for (var i=0; i < movies.length; i++) { %>
+                        <% for (var i=0; i < results.movies.length; i++) { %>
                             <div class="col-md-3 col-4">
                                 <div class="card movie">
-                                    <iframe src="<%=movies[i].trailer%>" height="230">
+                                    <iframe src="<%=results.movies[i].trailer%>" height="230">
                                     </iframe>
                                     <div class="card-body">
                                         <h5 class="card-title" id="movie<%=i%>">
-                                            <%=movies[i]._id%>
+                                            <%=results.movies[i]._id%>
                                         </h5>
                                         <aside>
                                             <p class="card-text"><b>Synopsis: </b>
-                                                <%=movies[i].preview%>
+                                                <%=results.movies[i].preview%>
                                             </p>
                                         </aside>
                                         <br>
                                         <p><b>Cost: </b>
-                                            <%=movies[i].price%>$
+                                            <%=results.movies[i].price%>$
                                         </p>
                                         <div class="buttons">
                                             <form action="/deleteMovie" method="POST" class="float-end">
                                                 <input readonly class="d-none" name="movie_id"
-                                                    value="<%=movies[i]._id%>">
+                                                    value="<%=results.movies[i]._id%>">
                                                 <button type="submit" class="btn btn-outline-danger"><svg
                                                         xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-trash3-fill"
@@ -130,13 +188,13 @@
                                                     </svg></button>
                                             </form>
                                             <button type="submit" class="btn btn-outline-success add-to-cart"
-                                                data-name="<%=movies[i]._id%>" data-price="<%=movies[i].price%>"><svg
+                                                data-name="<%=results.movies[i]._id%>" data-price="<%=results.movies[i].price%>"><svg
                                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                                                     <path
                                                         d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                                                 </svg></button>
-                                            <a href="/movie?movie=<%=movies[i]._id%>" id="movie_link<%=i%>"><button
+                                            <a href="/movie?movie=<%=results.movies[i]._id%>" id="movie_link<%=i%>"><button
                                                     class="btn btn-outline-info" type="button">See more</button></a>
                                             <form class="float-start">
 
@@ -163,7 +221,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="updateModalLabel<%=i%>">Update info for:
-                                                <%=movies[i]._id%>
+                                                <%=results.movies[i]._id%>
                                             </h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
@@ -173,7 +231,7 @@
                                                 onsubmit="return validateUpdateBeforeSubmit()">
                                                 <div class="form-floating">
                                                     <input readonly class="d-none" name="title"
-                                                        value="<%=movies[i]._id%>">
+                                                        value="<%=results.movies[i]._id%>">
                                                 </div>
                                                 <div class="mb-3 row">
                                                     <label class="col-sm-2 col-form-label">Synopsis</label>
@@ -282,6 +340,48 @@
     <script src="js/sidenav.js"></script>
     <script src="js/updateMovie.js"></script>
     <script src="js/cart.js"></script>
+    <script src="js/filter_movies.js"></script>
+    <script type="text/html" id="show_template">
+        <div class="col-md-3 col-4">
+            <div class="card">
+                <div class="card-body">
+                    <iframe src="{trailer}" height="230">
+                    </iframe>
+                    <h5 class="card-title">
+                        {_id}
+                    </h5>
+                    <p class="card-text"><b>Synopsis: </b>
+                        {preview}
+                    </p>
+                    <p><b>Director: </b>
+                        {director}
+                    </p>
+                    <p><b>Publish Year: </b>
+                        {year}
+                    </p>
+                    <p><b>Movie Length: </b>
+                        {length} Minutes
+                    </p>
+                    <p><b>Main Actors: </b>
+                        {main_actors}
+                    </p>
+                    <p><b>Genere: </b>
+                        {type}
+                    </p>
+                    <p><b>Cost: </b>
+                        {price}$
+                    </p>
+                    <button type="submit" class="btn btn-outline-success add-to-cart"
+                                            data-name="{_id}" data-price="{price}"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                            </svg> Add to cart</a>
+                </div>
+            </div>
+        </div>
+    </script>
 </body>
 
 </html>
