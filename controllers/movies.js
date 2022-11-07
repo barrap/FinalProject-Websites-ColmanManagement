@@ -517,7 +517,7 @@ const filter = (req, res) => {
                 const max_price = query.split("+")[2]
                 const dir = query.split("+")[3]
                 const len = query.split("+")[4]
-                price_movies = MovieService.search("cost",max_price)
+                price_movies = MovieService.getMovies()
                 price_movies.then(y=>{
                     
                     if(year !="none")
@@ -568,8 +568,17 @@ const filter = (req, res) => {
                             t_movies.push(y[i])
                         }
                     }
-
                     y=t_movies
+                    t_movies=[]
+                    for(i=0;i<y.length;i++)
+                    {
+                        if(y[i].price <= max_price)
+                        {
+                            t_movies.push(y[i])
+                        }
+                    }
+                    y=t_movies
+
                     result = y
                     console.log(result)
                     result['username'] = cust._id

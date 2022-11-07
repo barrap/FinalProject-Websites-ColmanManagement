@@ -19,20 +19,48 @@ const findAll = (req, res) => {
 
             // Checks if the user exists
             if (cust) {
-
-                // gets the data of all the shows in the DB
-                const result = TVShowsService.getTvShows()
-                result.then(r => {
-                    r['username'] = cust._id
-
-                    // Checks if the user is a admin
-                    if (cust.isAdmin == true) {
-                        res.render("../views/tvshows-admin", { shows: r });
+                // Gets all publishing years
+                years = [];
+                year = TVShowsService.countShowsByYear()
+                year.then(y => {
+                    for(i = 0; i<y.length; i++)
+                    {
+                        years.push(y[i]._id)
                     }
-                    else {
-                        res.render("../views/tvshows", { shows: r });
-                    }
+                    results['years'] = years
                 })
+                
+
+                // Gets all genres
+                genres = [];
+                genreM = TVShowsService.countShowsByGenre()
+                genreM.then(y => {
+                    for(i = 0; i<y.length; i++)
+                    {
+                        for(j=0; j<y[i]._id.length; j++)
+                        {
+                            genres.push(y[i]._id[j])
+                        }
+                    }
+                    results['genre'] = [...new Set(genres)]
+
+                    // gets the data of all the shows in the DB
+                    const shows = TVShowsService.getTvShows()
+                    shows.then(r => {
+                        results['username'] = cust._id
+                        results['shows'] = r
+                        // Checks if the user is a admin
+                        if (cust.isAdmin == true) {
+                            res.render("../views/tvshows-admin", { results: results });
+                        }
+                        else {
+                            res.render("../views/tvshows", { results: results });
+                        }
+                    })
+                })
+                
+
+                
             }
 
             // The user doesn't exists so redirects to the home page
@@ -433,6 +461,98 @@ const upload = (req, res) => {
         res.redirect("/")
     }
 }
+const filter = (req, res) => {
+
+    // Checks if the users is logged in
+    if (req.session.username != null) {
+
+        // Gets the user data
+        const customer = customersService.getCustomer(req.session.username)
+        customer.then(cust => {
+            
+
+            // Checks if the user exists
+            if (cust) {
+                // Parse the get request to get both the parameters and the value
+                const query = url.parse(req.url).query
+                const year = query.split("+")[0]
+                const genre = query.split("+")[1]
+                const max_price = query.split("+")[2]
+                const eps = query.split("+")[3]
+                price_shows = TVShowsService.getTvShows()
+                price_shows.then(y=>{
+                    
+                    if(year !="none")
+                    {
+                        t_shows=[]
+                        for(i=0;i<y.length;i++)
+                        {
+                            if(y[i].year == year)
+                            {
+                                t_shows.push(y[i])
+                            }
+                        }
+                        y=t_shows
+                        
+                    }
+                    if(genre!="none")
+                    {
+                        t_shows=[]
+                        for(i=0;i<y.length;i++)
+                        {
+                            for(j=0;j<y[i].type.length;j++)
+                            {
+                                if(y[i].type[j] == genre)
+                                {
+                                    t_shows.push(y[i])
+                                }
+                            }
+                        }
+                        
+                        y=t_shows
+                    }
+                    /*t_shows=[]
+                    for(i=0;i<y.length;i++)
+                    {
+                        console.log(y[i].description)
+                        if(y[i].seasons <= eps)
+                        {
+                            t_shows.push(y[i])
+                        }
+                    }
+                    
+                    y=t_shows*/
+                    t_shows=[]
+                    for(i=0;i<y.length;i++)
+                    {
+                        if(y[i].price <= max_price)
+                        {
+                            t_shows.push(y[i])
+                        }
+                        
+                    }
+                    
+                    y=t_shows
+                    result = y
+                    result['username'] = cust._id
+                    console.log(result)
+                    res.json(result);
+                })
+                
+            }
+
+            // The user doesn't exists so redirects to the home page
+            else {
+                res.redirect("/")
+            }
+        })
+    }
+
+    // The user isn't logged in so redirects to the home page
+    else {
+        res.redirect("/")
+    }
+}
 
 // Exports the neccesary functions
 module.exports = {
@@ -446,5 +566,6 @@ module.exports = {
     update,
     order,
     paying,
-    upload
+    upload,
+    filter
 };
