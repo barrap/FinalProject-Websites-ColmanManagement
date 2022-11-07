@@ -24,47 +24,43 @@ const findAll = (req, res) => {
                 years = [];
                 year = MovieService.countMoviesByYear()
                 year.then(y => {
-                    for(i = 0; i<y.length; i++)
-                    {
+                    for (i = 0; i < y.length; i++) {
                         years.push(y[i]._id)
                     }
                     results['years'] = years
                 })
-                
+
 
                 // Gets all genres
                 genres = [];
                 genreM = MovieService.countMoviesByGenre()
                 genreM.then(y => {
-                    for(i = 0; i<y.length; i++)
-                    {
-                        for(j=0; j<y[i]._id.length; j++)
-                        {
+                    for (i = 0; i < y.length; i++) {
+                        for (j = 0; j < y[i]._id.length; j++) {
                             genres.push(y[i]._id[j])
                         }
                     }
                     results['genre'] = [...new Set(genres)]
                 })
-                
+
 
                 // Gets all director
                 dirs = [];
                 dir = MovieService.countMoviesByDirector()
                 dir.then(y => {
-                    for(i = 0; i<y.length; i++)
-                    {
+                    for (i = 0; i < y.length; i++) {
                         dirs.push(y[i]._id)
                     }
                     results['dir'] = dirs
                 })
-                
+
 
                 // Gets all the movies
                 const movies = MovieService.getMovies()
                 movies.then(mov => {
                     results['movies'] = mov
                     // Gets the data of all the tv shows
-                    
+
                     results['username'] = cust._id
 
                     // Checks if the user is admin
@@ -76,7 +72,7 @@ const findAll = (req, res) => {
                     else {
                         res.render("../views/movies", { results: results })
                     }
-                
+
                 })
             }
 
@@ -385,19 +381,19 @@ const order = (req, res) => {
         // Gets the user data
         const customer = customersService.getCustomer(req.session.username)
         customer.then(cust => {
-            
+
 
             // Checks if the user exists
             if (cust) {
                 cards = CreditCardService.getCreditCard(cust._id)
-                cards.then(r =>{
+                cards.then(r => {
                     information['username'] = cust._id
                     information['cards'] = r
                     res.render("addOrder.ejs", { info: information })
                 }
                 )
-                
-                
+
+
             }
 
             // The user doesn't exists so redirects to the home page
@@ -426,13 +422,12 @@ const paying = (req, res) => {
             // Checks if the user exists
             if (cust) {
                 try {
-                    
+
                     customersService.addOrder(req.session.username)
-                    if(CreditCardService.getCardByNumber(req.body.cardNumber))
-                    {
+                    if (CreditCardService.getCardByNumber(req.body.cardNumber)) {
                         res.redirect("/main")
                     }
-                    else{
+                    else {
                         const result = CreditCardService.addCard(req.body.cardNumber, req.session.username, req.body.date, req.body.secNum)
                         result.then(r => {
                             res.redirect("/main")
@@ -506,86 +501,68 @@ const filter = (req, res) => {
         // Gets the user data
         const customer = customersService.getCustomer(req.session.username)
         customer.then(cust => {
-            
+
 
             // Checks if the user exists
             if (cust) {
                 // Parse the get request to get both the parameters and the value
+                console.log(req.url)
                 const query = url.parse(req.url).query
                 const year = query.split("+")[0]
                 const genre = query.split("+")[1]
                 const max_price = query.split("+")[2]
-                const dir = query.split("+")[3]
+                const director = query.split("+")[3]
                 const len = query.split("+")[4]
-                price_movies = MovieService.getMovies()
-                price_movies.then(y=>{
-                    
-                    if(year !="none")
-                    {
-                        t_movies=[]
-                        for(i=0;i<y.length;i++)
-                        {
-                            if(y[i].year == year)
-                            {
-                                t_movies.push(y[i])
-                            }
-                        }
-                        y=t_movies
-                        console.log(y)
-                    }
-                    if(genre!="none")
-                    {
-                        t_movies=[]
-                        for(i=0;i<y.length;i++)
-                        {
-                            for(j=0;j<y[i].type.length;j++)
-                            {
-                                if(y[i].type[j] == genre)
-                                {
-                                    t_movies.push(y[i])
-                                }
-                            }
-                        }
-                        y=t_movies
-                    }
-                    if(dir !="none")
-                    {
-                        t_movies=[]
-                        for(i=0;i<y.length;i++)
-                        {
-                            if(y[i].director == dir)
-                            {
-                                t_movies.push(y[i])
-                            }
-                        }
-                        y=t_movies
-                    }
-                    t_movies=[]
-                    for(i=0;i<y.length;i++)
-                    {
-                        if(y[i].length <= len)
-                        {
-                            t_movies.push(y[i])
-                        }
-                    }
-                    y=t_movies
-                    t_movies=[]
-                    for(i=0;i<y.length;i++)
-                    {
-                        if(y[i].price <= max_price)
-                        {
-                            t_movies.push(y[i])
-                        }
-                    }
-                    y=t_movies
 
-                    result = y
-                    console.log(result)
-                    result['username'] = cust._id
-                    console.log(result)
-                    res.json(result);
-                })
-                
+                if (year != "none" && genre != "none" && director != "none") {
+                    const results = MovieService.getMoviesByYearAndGenreAndDirector(year, genre, director, max_price, len)
+                    results.then(r => {
+                        r['username'] = cust._id
+                        res.json(r);
+                    })
+                }
+                else if (year != "none" && genre != "none") {
+                    const results = MovieService.getMoviesByYearAndGenre(year, genre, max_price, len)
+                    results.then(r => {
+                        r['username'] = cust._id
+                        res.json(r);
+                    })
+                }
+                else if (year != "none" && director != "none") {
+                    const results = MovieService.getMoviesByYearAndDirector(year, director, max_price, len)
+                    results.then(r => {
+                        r['username'] = cust._id
+                        res.json(r);
+                    })
+                }
+                else if (genre != "none" && director != "none") {
+                    const results = MovieService.getMoviesGenreAndDirector(genre, director, max_price, len)
+                    results.then(r => {
+                        r['username'] = cust._id
+                        res.json(r);
+                    })
+                }
+                else if (year != "none") {
+                    const results = MovieService.getMoviesByYear(year, max_price, len)
+                    results.then(r => {
+                        r['username'] = cust._id
+                        res.json(r);
+                    })
+                }
+                else if (genre != "none") {
+                    const results = MovieService.getMoviesByGenre(genre, max_price, len)
+                    results.then(r => {
+                        r['username'] = cust._id
+                        res.json(r);
+                    })
+                }
+                else {
+                    const results = MovieService.getMoviesByDirector(director, max_price, len)
+                    results.then(r => {
+                        r['username'] = cust._id
+                        res.json(r);
+                    })
+                }
             }
 
             // The user doesn't exists so redirects to the home page
@@ -596,6 +573,38 @@ const filter = (req, res) => {
     }
 
     // The user isn't logged in so redirects to the home page
+    else {
+        res.redirect("/")
+    }
+}
+
+const allMovies = (req, res) => {
+
+    // Checks that the user is signed in
+    if (req.session.username != null) {
+
+        // Gets the data of the user
+        const customer = customersService.getCustomer(req.session.username)
+        customer.then(cust => {
+
+            // Checks that the user exists
+            if (cust) {
+
+                // Gets the movies data 
+                const results = MovieService.getMovies()
+                results.then(r => {
+                    res.json(r)
+                })
+            }
+
+            // User doesn't exist - redirects to main page
+            else {
+                res.redirect("/")
+            }
+        })
+    }
+
+    // User not signed in - redirects to main page
     else {
         res.redirect("/")
     }
@@ -614,5 +623,6 @@ module.exports = {
     order,
     paying,
     upload,
-    filter
+    filter,
+    allMovies
 };

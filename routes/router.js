@@ -53,6 +53,7 @@ router.post("/addOrder", moviesController.order)
 router.post("/paying", moviesController.paying)
 router.post("/upload", moviesController.upload);
 router.get("/filter_movies", moviesController.filter)
+router.get("/allMovies", moviesController.allMovies)
 
 // Locations routing
 router.get("/locations", LocationController.Alllocations);

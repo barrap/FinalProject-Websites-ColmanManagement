@@ -54,6 +54,12 @@ async function deleteTvShow(tvshow_name) {
 // Function to add a tv show
 function addTvShow(title, shortTitle, year, description, seasons, types, trailer, price) {
 
+    new_types = []
+    new_types.push(types[0])
+    for (var i = 1; i < types.length; i++) {
+        new_types.push(types[i].replace(" ", ""))
+    }
+
     // Define the new tv show
 
     var tvshows = new TvShows({
@@ -62,7 +68,7 @@ function addTvShow(title, shortTitle, year, description, seasons, types, trailer
         year: year,
         description: description,
         seasons: seasons,
-        type: types,
+        type: new_types,
         trailer: trailer,
         price: price
 
@@ -83,13 +89,13 @@ async function search(param, value) {
             return await TvShows.find({ "_id": { "$regex": value, "$options": "i" } })
             break;
         case "year":
-            return await TvShows.find({ "year": parseInt(value)  })
+            return await TvShows.find({ "year": parseInt(value) })
             break;
         case "seasons":
             return await TvShows.find({ "seasons": { "$gte": parseInt(value, 10) } })
             break;
         case "cost":
-            return await TvShows.find({ "price": {"$lte" : parseInt(value,10) }})
+            return await TvShows.find({ "price": { "$lte": parseInt(value, 10) } })
             break;
         default:
             break;

@@ -1,32 +1,61 @@
 $(() => {
-    
+
     $("#filterbtn").click(function () {
-        
-            $.ajax({
-                url: "/filter_movies?"+$("#year").val() + "+" + $("#genre").val()+ "+" + $("#price").val()
+
+        $.ajax({
+            url: "/filter_movies?" + $("#year").val() + "+" + $("#genre").val() + "+" + $("#price").val()
                 + "+" + $("#dir").val() + "+" + $("#len").val()
-            }).done(function (res) {
-                $(".results").html("")
+        }).done(function (res) {
+            $(".results").html("")
+            console.log(res)
+            // Runs on all the results
+            for (let i = 0; i < res.length; i++) {
+                const element = res[i];
 
-                // Runs on all the results
-                for (let i = 0; i < res.length; i++) {
-                    const element = res[i];
+                // Gets the template for the results
+                let template = $("#show_template").html()
 
-                    // Gets the template for the results
-                    let template = $("#show_template").html()
-                    
-                    // Runs on all the data in the element
-                    for (const key in element) {
+                // Runs on all the data in the element
+                for (const key in element) {
 
-                        // Saves the data in the information
-                        template = template.replaceAll('{' + key + '}', element[key])
-                    }
-
-                    // Append the new template
-                    $(".results").append(template)
-
+                    // Saves the data in the information
+                    template = template.replaceAll('{' + key + '}', element[key])
                 }
+                template = template.replaceAll("{i}", i)
 
-            });
+                // Append the new template
+                $(".results").append(template)
+
+            }
+
+        });
+    })
+
+    $("#clear").click(function () {
+        $.ajax({
+            url: "/allMovies"
+        }).done(function (res) {
+            $(".results").html("")
+
+            // Runs on all the results
+            for (let i = 0; i < res.length; i++) {
+                const element = res[i];
+
+                // Gets the template for the results
+                let template = $("#show_template").html()
+
+                // Runs on all the data in the element
+                for (const key in element) {
+
+                    // Saves the data in the information
+                    template = template.replaceAll('{' + key + '}', element[key])
+                }
+                template = template.replaceAll("{i}", i)
+
+                // Append the new template
+                $(".results").append(template)
+
+            }
+        })
     })
 })

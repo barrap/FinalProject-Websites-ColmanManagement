@@ -13,7 +13,7 @@ async function countMoviesByYear() {
                 count: { $sum: 1 } // this means that the count will increment by 1
             }
         },
-        {$sort: {year: 1}}
+        { $sort: { year: 1 } }
     ])
 
     return data;
@@ -82,6 +82,17 @@ async function deleteMovie(id) {
 
 // Function to add a movie
 function addMovie(title, shortTitle, year, director, length, main_actors, types, preview, trailer, price) {
+    new_types = []
+    new_types.push(types[0])
+    for (var i = 1; i < types.length; i++) {
+        new_types.push(types[i].replace(" ", ""))
+    }
+
+    new_actors = []
+    new_actors.push(main_actors[0])
+    for (var i = 1; i < main_actors.length; i++) {
+        new_actors.push(main_actors[i].replace(" ", ""))
+    }
 
     // Define the new movie
     var movie = new Movie({
@@ -90,8 +101,8 @@ function addMovie(title, shortTitle, year, director, length, main_actors, types,
         year: year,
         director: director,
         length: length,
-        main_actors: main_actors,
-        type: types,
+        main_actors: new_actors,
+        type: new_types,
         preview: preview,
         trailer: trailer,
         price: price
@@ -180,6 +191,36 @@ async function uploadJson(json) {
     await Movie.create(json)
 }
 
+
+
+async function getMoviesByYearAndGenreAndDirector(year, genre, director, max_price, len) {
+    return await Movie.find({ $and: [{ "year": year }, { "type": { $in: [genre] } }, { "director": director }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
+}
+
+async function getMoviesByYearAndGenre(year, genre, max_price, len) {
+    return await Movie.find({ $and: [{ "year": year }, { "type": { $in: [genre] } }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
+}
+
+async function getMoviesByYearAndDirector(year, director, max_price, len) {
+    return await Movie.find({ $and: [{ "year": year }, { "director": director }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
+}
+
+async function getMoviesGenreAndDirector(genre, director, max_price, len) {
+    return await Movie.find({ $and: [{ "type": { $in: [genre] } }, { "director": director }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
+}
+
+async function getMoviesByYear(year, max_price, len) {
+    return await Movie.find({ $and: [{ "year": year }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
+}
+
+async function getMoviesByGenre(genre, max_price, len) {
+    return await Movie.find({ $and: [{ "type": { $in: [genre] } }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
+}
+
+async function getMoviesByDirector(director, max_price, len) {
+    return await Movie.find({ $and: [{ "director": director }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
+}
+
 // Exports the neccesary modules
 module.exports = {
     getMovies,
@@ -193,5 +234,12 @@ module.exports = {
     countMoviesByDirector,
     uploadJson,
     countMoviesByGenre,
-    countMoviesByPrice
+    countMoviesByPrice,
+    getMoviesByYearAndGenreAndDirector,
+    getMoviesByYearAndGenre,
+    getMoviesByYearAndDirector,
+    getMoviesGenreAndDirector,
+    getMoviesByYear,
+    getMoviesByGenre,
+    getMoviesByDirector
 }

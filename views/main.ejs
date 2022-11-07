@@ -54,7 +54,7 @@
                             Cart <span id="cart_counter"></span>
                         </button>
 
-                        
+
 
 
                         <!-- cart Modal -->
@@ -94,7 +94,7 @@
                         </form>
                         <!-- cart Modal End -->
 
-                        <!-- cart Modal -->
+                        <!-- filter Modal -->
                         <form>
                             <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
@@ -109,19 +109,25 @@
                                             Publishing year: <select name="Publishing_year" id="year">
                                                 <option value="none">None</option>
                                                 <% for (var i=0; i < results.years.length; i++) { %>
-                                                    <option value="<%=results.years[i]%>"><%=results.years[i]%></option>
+                                                    <option value="<%=results.years[i]%>">
+                                                        <%=results.years[i]%>
+                                                    </option>
                                                     <%}%>
 
-                                              </select>
-                                              <br>
+                                            </select>
+                                            <br>
                                             Genre: <select name="genre" id="genre">
                                                 <option value="none">None</option>
                                                 <% for (var i=0; i < results.genre.length; i++) { %>
-                                                    <option value="<%=results.genre[i]%>"><%=results.genre[i]%></option>
+                                                    <option value="<%=results.genre[i]%>">
+                                                        <%=results.genre[i]%>
+                                                    </option>
                                                     <%}%>
-                                              </select>
-                                              <br>
-                                            Maximun Price:<input type="range" value="24" min="1" max="100" oninput="this.nextElementSibling.value = this.value", name="price", id="price">
+                                            </select>
+                                            <br>
+                                            Maximun Price:<input type="range" value="24" min="1" max="100"
+                                                oninput="this.nextElementSibling.value = this.value" , name="price" ,
+                                                id="price">
                                             <output>24</output>
                                         </div>
                                         <div class="modal-footer">
@@ -136,7 +142,7 @@
                                 </div>
                             </div>
                         </form>
-                        <!-- cart Modal End -->
+                        <!-- filter Modal End -->
                         <div class="dropdown">
                             <button type="submit" class="btn btn-primary dropbtn">Hello,
                                 <%=results.username%>
@@ -210,8 +216,7 @@
                                                     <%=results.shows[i].price%>$
                                                 </p>
                                                 <div class="buttons row">
-                                                    <button type="submit"
-                                                        class="btn btn-success add-to-cart col-8"
+                                                    <button type="submit" class="btn btn-success add-to-cart col-8"
                                                         data-name="<%=results.shows[i]._id%>"
                                                         data-price="<%=results.shows[i].price%>"><svg
                                                             xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -256,13 +261,13 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
-    <script src="js/filter_main.js"></script>   
+    <script src="js/filter_main.js"></script>
     <script src="js/main.js"></script>
     <script src="js/sidenav.js"></script>
     <script src="js/updateMovie.js"></script>
     <script src="js/updateShow.js"></script>
     <script src="js/cart.js"></script>
-    
+
     <script type="text/html" id="show_template">
         <div class="col-md-3 col-4">
             <div class="card">

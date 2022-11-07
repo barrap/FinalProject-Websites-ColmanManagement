@@ -55,12 +55,12 @@
                                     <path
                                         d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
                                 </svg> Add TV Show</button></a>
-                                
-                         <!-- Button triger modal for filter -->
-                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                         data-bs-target="#filterModal">
-                         Filter <span id="filter"></span>
-                     </button>
+
+                        <!-- Button triger modal for filter -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#filterModal">
+                            Filter <span id="filter"></span>
+                        </button>
 
 
                         <!-- Button trigger modal -->
@@ -105,7 +105,7 @@
                             </div>
                         </form>
                         <!-- cart Modal End -->
-                        <!-- cart Modal -->
+                        <!-- filter Modal -->
                         <form action="/filter" method="post">
                             <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
@@ -120,19 +120,25 @@
                                             Publishing year: <select name="Publishing_year" id="year">
                                                 <option value="none">None</option>
                                                 <% for (var i=0; i < results.years.length; i++) { %>
-                                                    <option value="<%=results.years[i]%>"><%=results.years[i]%></option>
+                                                    <option value="<%=results.years[i]%>">
+                                                        <%=results.years[i]%>
+                                                    </option>
                                                     <%}%>
 
-                                              </select>
-                                              <br>
+                                            </select>
+                                            <br>
                                             Genre: <select name="genre" id="genre">
                                                 <option value="none">None</option>
                                                 <% for (var i=0; i < results.genre.length; i++) { %>
-                                                    <option value="<%=results.genre[i]%>"><%=results.genre[i]%></option>
+                                                    <option value="<%=results.genre[i]%>">
+                                                        <%=results.genre[i]%>
+                                                    </option>
                                                     <%}%>
-                                              </select>
-                                              <br>
-                                            Maximun Price:<input type="range" value="24" min="1" max="100" oninput="this.nextElementSibling.value = this.value", name="price", id="price">
+                                            </select>
+                                            <br>
+                                            Maximun Price:<input type="range" value="24" min="1" max="100"
+                                                oninput="this.nextElementSibling.value = this.value" , name="price" ,
+                                                id="price">
                                             <output>24</output>
                                         </div>
                                         <div class="modal-footer">
@@ -147,7 +153,7 @@
                                 </div>
                             </div>
                         </form>
-                        <!-- cart Modal End -->
+                        <!-- filter Modal End -->
                         <div class="dropdown">
                             <button type="submit" class="btn btn-primary dropbtn">Hello,
                                 <%=results.username%>
