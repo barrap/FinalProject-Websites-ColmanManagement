@@ -72,6 +72,7 @@ router.post("/updateShows", TVShowsController.update)
 router.get("/searchShows", TVShowsController.searchTVShows)
 router.get("/searchTV", TVShowsController.search)
 router.get("/filter_tvshows", TVShowsController.filter)
+router.get("/allShows", TVShowsController.allShows)
 
 
 // Stats routing

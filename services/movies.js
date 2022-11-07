@@ -218,7 +218,15 @@ async function getMoviesByGenre(genre, max_price, len) {
 }
 
 async function getMoviesByDirector(director, max_price, len) {
-    return await Movie.find({ $and: [{ "director": director }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
+    return await Movie.find({ $and: [{ "director": director.replace("%20", " ") }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
+}
+
+async function getYears() {
+    return await Movie.find({}, { _id: 0, year: 1 }).distinct('year')
+}
+
+async function getDirectors() {
+    return await Movie.find({}, { _id: 0, director: 1 }).distinct('director')
 }
 
 // Exports the neccesary modules
@@ -241,5 +249,7 @@ module.exports = {
     getMoviesGenreAndDirector,
     getMoviesByYear,
     getMoviesByGenre,
-    getMoviesByDirector
+    getMoviesByDirector,
+    getYears,
+    getDirectors
 }

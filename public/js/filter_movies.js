@@ -7,7 +7,6 @@ $(() => {
                 + "+" + $("#dir").val() + "+" + $("#len").val()
         }).done(function (res) {
             $(".results").html("")
-            console.log(res)
             // Runs on all the results
             for (let i = 0; i < res.length; i++) {
                 const element = res[i];

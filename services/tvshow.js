@@ -130,6 +130,23 @@ async function update(title, new_year, new_seasons, new_description, new_trailer
     }
 }
 
+async function getShowsByYearAndGenre(year, genre, max_price) {
+    return await TvShows.find({ $and: [{ "year": year }, { "type": { $in: [genre] } }, { "price": { "$lte": parseInt(max_price, 10) } }] })
+}
+
+async function getShowsByYear(year, max_price) {
+    return await TvShows.find({ $and: [{ "year": year }, { "price": { "$lte": parseInt(max_price, 10) } }] })
+}
+
+async function getShowsByGenre(genre, max_price) {
+    return await TvShows.find({ $and: [{ "type": { $in: [genre] } }, { "price": { "$lte": parseInt(max_price, 10) } }] })
+}
+
+async function getYears() {
+    return await TvShows.find({}, { _id: 0, year: 1 }).distinct('year')
+}
+
+
 // Exports the neccesary modules
 module.exports = {
     getTvShows,
@@ -140,5 +157,9 @@ module.exports = {
     update,
     countTVShows,
     countShowsByYear,
-    countShowsByGenre
+    countShowsByGenre,
+    getShowsByYearAndGenre,
+    getShowsByYear,
+    getShowsByGenre,
+    getYears,
 }

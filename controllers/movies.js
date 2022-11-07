@@ -9,7 +9,6 @@ const public_dir_path = "../public"
 
 // Function to get the data on all the movies
 const findAll = (req, res) => {
-
     // Checks if the users is logged in
     if (req.session.username != null) {
 
@@ -21,13 +20,9 @@ const findAll = (req, res) => {
             if (cust) {
 
                 // Gets all publishing years
-                years = [];
-                year = MovieService.countMoviesByYear()
+                year = MovieService.getYears()
                 year.then(y => {
-                    for (i = 0; i < y.length; i++) {
-                        years.push(y[i]._id)
-                    }
-                    results['years'] = years
+                    results['years'] = y
                 })
 
 
@@ -45,13 +40,9 @@ const findAll = (req, res) => {
 
 
                 // Gets all director
-                dirs = [];
-                dir = MovieService.countMoviesByDirector()
+                dir = MovieService.getDirectors()
                 dir.then(y => {
-                    for (i = 0; i < y.length; i++) {
-                        dirs.push(y[i]._id)
-                    }
-                    results['dir'] = dirs
+                    results['dir'] = y
                 })
 
 
@@ -506,8 +497,8 @@ const filter = (req, res) => {
             // Checks if the user exists
             if (cust) {
                 // Parse the get request to get both the parameters and the value
-                console.log(req.url)
                 const query = url.parse(req.url).query
+
                 const year = query.split("+")[0]
                 const genre = query.split("+")[1]
                 const max_price = query.split("+")[2]

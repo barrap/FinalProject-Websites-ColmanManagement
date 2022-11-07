@@ -20,25 +20,18 @@ const findAll = (req, res) => {
             // Checks if the user exists
             if (cust) {
                 // Gets all publishing years
-                years = [];
-                year = TVShowsService.countShowsByYear()
+                year = TVShowsService.getYears()
                 year.then(y => {
-                    for(i = 0; i<y.length; i++)
-                    {
-                        years.push(y[i]._id)
-                    }
-                    results['years'] = years
+                    results['years'] = y
                 })
-                
+
 
                 // Gets all genres
                 genres = [];
                 genreM = TVShowsService.countShowsByGenre()
                 genreM.then(y => {
-                    for(i = 0; i<y.length; i++)
-                    {
-                        for(j=0; j<y[i]._id.length; j++)
-                        {
+                    for (i = 0; i < y.length; i++) {
+                        for (j = 0; j < y[i]._id.length; j++) {
                             genres.push(y[i]._id[j])
                         }
                     }
@@ -58,9 +51,9 @@ const findAll = (req, res) => {
                         }
                     })
                 })
-                
 
-                
+
+
             }
 
             // The user doesn't exists so redirects to the home page
@@ -469,7 +462,7 @@ const filter = (req, res) => {
         // Gets the user data
         const customer = customersService.getCustomer(req.session.username)
         customer.then(cust => {
-            
+
 
             // Checks if the user exists
             if (cust) {
@@ -478,67 +471,29 @@ const filter = (req, res) => {
                 const year = query.split("+")[0]
                 const genre = query.split("+")[1]
                 const max_price = query.split("+")[2]
-                const eps = query.split("+")[3]
-                price_shows = TVShowsService.getTvShows()
-                price_shows.then(y=>{
-                    
-                    if(year !="none")
-                    {
-                        t_shows=[]
-                        for(i=0;i<y.length;i++)
-                        {
-                            if(y[i].year == year)
-                            {
-                                t_shows.push(y[i])
-                            }
-                        }
-                        y=t_shows
-                        
-                    }
-                    if(genre!="none")
-                    {
-                        t_shows=[]
-                        for(i=0;i<y.length;i++)
-                        {
-                            for(j=0;j<y[i].type.length;j++)
-                            {
-                                if(y[i].type[j] == genre)
-                                {
-                                    t_shows.push(y[i])
-                                }
-                            }
-                        }
-                        
-                        y=t_shows
-                    }
-                    /*t_shows=[]
-                    for(i=0;i<y.length;i++)
-                    {
-                        console.log(y[i].description)
-                        if(y[i].seasons <= eps)
-                        {
-                            t_shows.push(y[i])
-                        }
-                    }
-                    
-                    y=t_shows*/
-                    t_shows=[]
-                    for(i=0;i<y.length;i++)
-                    {
-                        if(y[i].price <= max_price)
-                        {
-                            t_shows.push(y[i])
-                        }
-                        
-                    }
-                    
-                    y=t_shows
-                    result = y
-                    result['username'] = cust._id
-                    console.log(result)
-                    res.json(result);
-                })
-                
+                /* const eps = query.split("+")[3] */
+
+                if (year != "none" && genre != "none") {
+                    const results = TVShowsService.getShowsByYearAndGenre(year, genre, max_price)
+                    results.then(r => {
+                        r['username'] = cust._id
+                        res.json(r);
+                    })
+                }
+                else if (year != "none") {
+                    const results = TVShowsService.getShowsByYear(year, max_price)
+                    results.then(r => {
+                        r['username'] = cust._id
+                        res.json(r);
+                    })
+                }
+                else if (genre != "none") {
+                    const results = TVShowsService.getShowsByGenre(genre, max_price)
+                    results.then(r => {
+                        r['username'] = cust._id
+                        res.json(r);
+                    })
+                }
             }
 
             // The user doesn't exists so redirects to the home page
@@ -549,6 +504,37 @@ const filter = (req, res) => {
     }
 
     // The user isn't logged in so redirects to the home page
+    else {
+        res.redirect("/")
+    }
+}
+
+const allShows = (req, res) => {
+    // Checks that the user is signed in
+    if (req.session.username != null) {
+
+        // Gets the data of the user
+        const customer = customersService.getCustomer(req.session.username)
+        customer.then(cust => {
+
+            // Checks that the user exists
+            if (cust) {
+
+                // Gets the movies data 
+                const results = TVShowsService.getTvShows()
+                results.then(r => {
+                    res.json(r)
+                })
+            }
+
+            // User doesn't exist - redirects to main page
+            else {
+                res.redirect("/")
+            }
+        })
+    }
+
+    // User not signed in - redirects to main page
     else {
         res.redirect("/")
     }
@@ -567,5 +553,6 @@ module.exports = {
     order,
     paying,
     upload,
-    filter
+    filter,
+    allShows
 };
