@@ -95,7 +95,7 @@
                         <!-- cart Modal End -->
 
                         <!-- cart Modal -->
-                        <form action="/filter" method="post">
+                        <form>
                             <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
@@ -129,7 +129,7 @@
                                                 data-bs-dismiss="modal">Close</button>
                                             <button type="button" class="btn btn-danger" id="clear">Clear
                                                 Selection</button>
-                                            <button type="submit" class="btn btn-primary" id="filter">Filter</button>
+                                            <button type="button" class="btn btn-primary" id="filterbtn">Filter</button>
 
                                         </div>
                                     </div>
@@ -256,11 +256,54 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
+    <script src="js/filter_main.js"></script>   
     <script src="js/main.js"></script>
     <script src="js/sidenav.js"></script>
     <script src="js/updateMovie.js"></script>
     <script src="js/updateShow.js"></script>
     <script src="js/cart.js"></script>
+    
+    <script type="text/html" id="show_template">
+        <div class="col-md-3 col-4">
+            <div class="card">
+                <div class="card-body">
+                    <iframe src="{trailer}" height="230">
+                    </iframe>
+                    <h5 class="card-title">
+                        {_id}
+                    </h5>
+                    <p class="card-text"><b>Synopsis: </b>
+                        {preview}
+                    </p>
+                    <p><b>Director: </b>
+                        {director}
+                    </p>
+                    <p><b>Publish Year: </b>
+                        {year}
+                    </p>
+                    <p><b>Movie Length: </b>
+                        {length} Minutes
+                    </p>
+                    <p><b>Main Actors: </b>
+                        {main_actors}
+                    </p>
+                    <p><b>Genere: </b>
+                        {type}
+                    </p>
+                    <p><b>Cost: </b>
+                        {price}$
+                    </p>
+                    <button type="submit" class="btn btn-outline-success add-to-cart"
+                                            data-name="{_id}" data-price="{price}"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                            </svg> Add to cart</a>
+                </div>
+            </div>
+        </div>
+    </script>
 </body>
 
 </html>

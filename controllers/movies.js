@@ -20,18 +20,63 @@ const findAll = (req, res) => {
             // Checks if the user exists
             if (cust) {
 
-                // gets the data of all the movies in the DB
-                const result = MovieService.getMovies()
-                result.then(r => {
-                    r['username'] = cust._id
+                // Gets all publishing years
+                years = [];
+                year = MovieService.countMoviesByYear()
+                year.then(y => {
+                    for(i = 0; i<y.length; i++)
+                    {
+                        years.push(y[i]._id)
+                    }
+                    results['years'] = years
+                })
+                
 
-                    // Checks if the user is a admin
+                // Gets all genres
+                genres = [];
+                genreM = MovieService.countMoviesByGenre()
+                genreM.then(y => {
+                    for(i = 0; i<y.length; i++)
+                    {
+                        for(j=0; j<y[i]._id.length; j++)
+                        {
+                            genres.push(y[i]._id[j])
+                        }
+                    }
+                    results['genre'] = [...new Set(genres)]
+                })
+                
+
+                // Gets all director
+                dirs = [];
+                dir = MovieService.countMoviesByDirector()
+                dir.then(y => {
+                    for(i = 0; i<y.length; i++)
+                    {
+                        dirs.push(y[i]._id)
+                    }
+                    results['dir'] = dirs
+                })
+                
+
+                // Gets all the movies
+                const movies = MovieService.getMovies()
+                movies.then(mov => {
+                    results['movies'] = mov
+                    // Gets the data of all the tv shows
+                    
+                    results['username'] = cust._id
+
+                    // Checks if the user is admin
                     if (cust.isAdmin == true) {
-                        res.render("../views/movies-admin", { movies: r });
+                        res.render("../views/movies-admin", { results: results })
                     }
+
+                    // The user is not an admin
                     else {
-                        res.render("../views/movies", { movies: r });
+                        res.render("../views/movies", { results: results })
                     }
+                
                 })
             }
 
@@ -453,6 +498,100 @@ const upload = (req, res) => {
     }
 }
 
+const filter = (req, res) => {
+
+    // Checks if the users is logged in
+    if (req.session.username != null) {
+
+        // Gets the user data
+        const customer = customersService.getCustomer(req.session.username)
+        customer.then(cust => {
+            
+
+            // Checks if the user exists
+            if (cust) {
+                // Parse the get request to get both the parameters and the value
+                const query = url.parse(req.url).query
+                const year = query.split("+")[0]
+                const genre = query.split("+")[1]
+                const max_price = query.split("+")[2]
+                const dir = query.split("+")[3]
+                const len = query.split("+")[4]
+                price_movies = MovieService.search("cost",max_price)
+                price_movies.then(y=>{
+                    
+                    if(year !="none")
+                    {
+                        t_movies=[]
+                        for(i=0;i<y.length;i++)
+                        {
+                            if(y[i].year == year)
+                            {
+                                t_movies.push(y[i])
+                            }
+                        }
+                        y=t_movies
+                        console.log(y)
+                    }
+                    if(genre!="none")
+                    {
+                        t_movies=[]
+                        for(i=0;i<y.length;i++)
+                        {
+                            for(j=0;j<y[i].type.length;j++)
+                            {
+                                if(y[i].type[j] == genre)
+                                {
+                                    t_movies.push(y[i])
+                                }
+                            }
+                        }
+                        y=t_movies
+                    }
+                    if(dir !="none")
+                    {
+                        t_movies=[]
+                        for(i=0;i<y.length;i++)
+                        {
+                            if(y[i].director == dir)
+                            {
+                                t_movies.push(y[i])
+                            }
+                        }
+                        y=t_movies
+                    }
+                    t_movies=[]
+                    for(i=0;i<y.length;i++)
+                    {
+                        if(y[i].length <= len)
+                        {
+                            t_movies.push(y[i])
+                        }
+                    }
+
+                    y=t_movies
+                    result = y
+                    console.log(result)
+                    result['username'] = cust._id
+                    console.log(result)
+                    res.json(result);
+                })
+                
+            }
+
+            // The user doesn't exists so redirects to the home page
+            else {
+                res.redirect("/")
+            }
+        })
+    }
+
+    // The user isn't logged in so redirects to the home page
+    else {
+        res.redirect("/")
+    }
+}
+
 // Exports the neccesary functions
 module.exports = {
     findAll,
@@ -465,5 +604,6 @@ module.exports = {
     update,
     order,
     paying,
-    upload
+    upload,
+    filter
 };

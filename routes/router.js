@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
 })
 
 router.get("/main", MainController.mainPage)
-router.post("/filter", MainController.filter)
+router.get("/filter", MainController.filter)
 
 
 // Customers routing
@@ -46,6 +46,7 @@ router.post("/updateMovies", moviesController.update)
 router.post("/addOrder", moviesController.order)
 router.post("/paying", moviesController.paying)
 router.post("/upload", moviesController.upload);
+router.get("/filter_movies", moviesController.filter)
 
 // Locations routing
 router.get("/locations", LocationController.Alllocations);

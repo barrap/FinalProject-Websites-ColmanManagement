@@ -1,13 +1,14 @@
 const TVShowsService = require('../services/tvshow');
 const MovieService = require('../services/movies');
 const customersService = require("../services/customers");
+const url = require("url")
 
 
 const filter = (req, res) => {
-    information = {}
 
     // Checks if the users is logged in
     if (req.session.username != null) {
+        console.log("dd")
 
         // Gets the user data
         const customer = customersService.getCustomer(req.session.username)
@@ -16,102 +17,47 @@ const filter = (req, res) => {
 
             // Checks if the user exists
             if (cust) {
-                // Gets all publishing years
-                year = MovieService.countMoviesByYear()
-                year.then(y => {
-                    years = [];
-                    for(i = 0; i<y.length; i++)
+                // Parse the get request to get both the parameters and the value
+                const query = url.parse(req.url).query
+                const year1 = query.split("+")[0]
+                const genre1 = query.split("+")[1]
+                const max_price = query.split("+")[2]
+                price_movies = MovieService.search("cost",max_price)
+                price_movies.then(y=>{
+                    t_movies=[]
+                    if(year1!="none")
                     {
-                        years.push(y[i]._id)
-                    }
-                    results['years'] = years
-                })
-
-                // Gets all genres
-                genre = MovieService.countMoviesByGenre()
-                genre.then(y => {
-                    genres = [];
-                    for(i = 0; i<y.length; i++)
-                    {
-                        for(j=0; j<y[i]._id.length; j++)
+                        for(i=0;i<y.length;i++)
                         {
-                            genres.push(y[i]._id[j])
-                        }
-                    }
-                    ugenres = [...new Set(genres)]
-                    results['genre'] = ugenres
-                    
-                })
-
-                 // Gets all prices
-                 price = MovieService.countMoviesByPrice()
-                 price.then(y => {
-                     prices = [];
-                     for(i = 0; i<y.length; i++)
-                     {
-                         prices.push(y[i]._id)
-                     }
-                     results['prices'] = prices
-                 })
-
-                 // Gets all the movies
-
-                 movies = MovieService.search("cost",req.body.price)
-
-                 movies.then(m => {
-                    if(req.body.Publishing_year != 'none')
-                    {
-                        temp_movies = []
-                        for (i =0;i< m.length; i++)
-                        {
-                            if(m[i].year == req.body.Publishing_year.slice(0, -1))
+                            if(y[i].year == year1)
                             {
-                                temp_movies.push(m[i])
+                                t_movies.push(y[i])
                             }
                         }
-                        m = temp_movies
-                        
+                        y=t_movies
                     }
-
-
-                    if(req.body.genre != 'none')
+                    t_movies1 =[]
+                    if(genre1!="none")
                     {
-                        temp_movies = []
-                        for (i =0;i< m.length; i++)
+                        for(i=0;i<y.length;i++)
                         {
-                            for(j=0;j<m[i].type.length;j++)
+                            for(j=0;j<y[i].type.length;j++)
                             {
-                                if(m[i].type[j] == req.body.genre)
+                                if(y[i].type[j] == genre1)
                                 {
-                                    temp_movies.push(m[i])
+                                    t_movies1.push(y[i])
                                 }
                             }
                         }
-                        m = temp_movies
+                        y=t_movies1
                     }
-                    console.log(req.body.genre)
-                    results['movies'] = m
-                })
-
-                 
-                
-                const tv_shows = TVShowsService.getTvShows()
-                tv_shows.then(tv => {
-                    results['shows'] = tv
-                    results['username'] = cust._id
-
-                    // Checks if the user is admin
-                    if (cust.isAdmin == true) {
-                        res.render("../views/main-admin", { results: results })
-                    }
-
-                    // The user is not an admin
-                    else {
-                        res.render("../views/main", { results: results })
-                    }
+                    result = y
+                    console.log(result)
+                    result['username'] = cust._id
+                    console.log(result)
+                    res.json(result);
                 })
                 
-
             }
 
             // The user doesn't exists so redirects to the home page
@@ -142,20 +88,29 @@ function mainPage(req, res) {
             if (cust) {
 
                 // Gets all publishing years
+                years = [];
                 year = MovieService.countMoviesByYear()
                 year.then(y => {
-                    years = [];
                     for(i = 0; i<y.length; i++)
                     {
                         years.push(y[i]._id)
                     }
-                    results['years'] = years
+                   
                 })
+                yearS = TVShowsService.countShowsByYear()
+                yearS.then(y=>
+                    {
+                        for(i = 0; i<y.length; i++)
+                        {
+                            years.push(y[i]._id)
+                        }
+                })
+                results['years'] = years
 
                 // Gets all genres
-                genre = MovieService.countMoviesByGenre()
-                genre.then(y => {
-                    genres = [];
+                genres = [];
+                genreM = MovieService.countMoviesByGenre()
+                genreM.then(y => {
                     for(i = 0; i<y.length; i++)
                     {
                         for(j=0; j<y[i]._id.length; j++)
@@ -163,22 +118,19 @@ function mainPage(req, res) {
                             genres.push(y[i]._id[j])
                         }
                     }
-                    ugenres = [...new Set(genres)]
-                    results['genre'] = ugenres
-                    
-                    
                 })
-
-                 // Gets all prices
-                 price = MovieService.countMoviesByPrice()
-                 price.then(y => {
-                     prices = [];
-                     for(i = 0; i<y.length; i++)
-                     {
-                         prices.push(y[i]._id)
-                     }
-                     results['prices'] = prices
-                 })
+                genreS = TVShowsService.countShowsByGenre()
+                genreS.then(y => {
+                    for(i = 0; i<y.length; i++)
+                    {
+                        for(j=0; j<y[i]._id.length; j++)
+                        {
+                            genres.push(y[i]._id[j])
+                        }
+                    }
+                    results['genre'] = [...new Set(genres)]
+                })
+                
                
                 // Gets all the movies
                 const movies = MovieService.getMovies()
