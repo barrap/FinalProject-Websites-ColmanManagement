@@ -5,7 +5,6 @@ $(() => {
     var flag = false
     function getChoice(value)
     {
-        
         flag = true
     }
     function validateBeforeSubmit(event) {
@@ -126,8 +125,6 @@ $(() => {
             document.getElementById("id").value = "1234567890"
             document.getElementById("date").value = card._exp_date
             document.getElementById("secNum").value = card._digits
-
-
             return true
         }
         else {

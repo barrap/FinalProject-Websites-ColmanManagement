@@ -8,6 +8,7 @@ const CustomerController = require("../controllers/customers");
 const LocationController = require("../controllers/maps");
 const MainController = require("../controllers/main")
 const statController = require("../controllers/stats")
+const CreditCardsController = require("../controllers/credit_cards")
 const router = express.Router();
 
 // Public dir path (for static files)
@@ -19,6 +20,11 @@ router.get("/", (req, res) => {
 
 router.get("/main", MainController.mainPage)
 router.get("/filter", MainController.filter)
+
+// Credit cards routing 
+router.get("/updatePayment", CreditCardsController.updatePayment)
+router.post("/deleteCard", CreditCardsController.deleteCard)
+router.post("/addCard",CreditCardsController.addCard)
 
 
 // Customers routing
