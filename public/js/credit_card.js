@@ -1,10 +1,8 @@
 $(() => {
-    const CreditCardService = require('../services/creditCard');
 
     $("#submitBtn").click(validateBeforeSubmit);
     var flag = false
-    function getChoice(value)
-    {
+    function getChoice(value) {
         flag = true
     }
     function validateBeforeSubmit(event) {
@@ -14,9 +12,17 @@ $(() => {
         id_counter = 0;
         var id_message = document.getElementById("id_message")
 
+        // Checks that an ID number was provided
+        if (id == "") {
+            id_message.innerHTML = "id number must be provided<br>"
+            document.getElementById("id").style.borderColor = "red";
+            id_valid = false
+            id_counter++;
+        }
+
         // Makes sure the id number is exectly 9 digits long
         if (id_num.length != 9) {
-            id_message.innerHTML = "id number length must be 9 digits exectly<br>"
+            id_message.innerHTML += "id number length must be 9 digits exectly<br>"
             document.getElementById("id").style.borderColor = "red";
             id_valid = false
             id_counter++;
@@ -40,9 +46,18 @@ $(() => {
         card_counter = 0;
         var cardNumber_message = document.getElementById("cardNumber")
 
+
+        // Checks that a credit card number was provided
+        if (card_num == "") {
+            cardNumber_message.innerHTML = "card number must be provided<br>"
+            document.getElementById("cardNumber").style.borderColor = "red";
+            card_valid = false
+            card_counter++;
+        }
+
         // Makes sure the card number is between 8 to 19 digits long
         if (card_num.length < 8 | card_num.length > 19) {
-            cardNumber_message.innerHTML = "card number length is invalid<br>"
+            cardNumber_message.innerHTML += "card number length is invalid<br>"
             document.getElementById("cardNumber").style.borderColor = "red";
             card_valid = false
             card_counter++;
@@ -61,14 +76,22 @@ $(() => {
             card_valid = true
         }
 
-         // Checks the validity of the security number
+        // Checks the validity of the security number
         var secNum = $("#secNum").val()
         secNum_counter = 0;
         var secNum_message = document.getElementById("secNum")
 
+
+        // Checks that a cvv number was provided
+        if (secNum == "") {
+            secNum_message.innerHTML = "card number must be provided<br>"
+            document.getElementById("secNum").style.borderColor = "red";
+            card_valid = false
+            card_counter++;
+        }
         // Makes sure the secNum number is exactly 3 digits long
         if (secNum.length != 3) {
-            secNum_message.innerHTML = "security number length is invalid<br>"
+            secNum_message.innerHTML += "security number length is invalid<br>"
             document.getElementById("secNum").style.borderColor = "red";
             secNum_valid = false
             secNum_counter++;
@@ -94,37 +117,8 @@ $(() => {
         var fullname_message = document.getElementById("fullname_message")
         fullname_counter = 0
 
-        // Makes sure the name is composed from the right characters
-        if (!(/^[a-zA-z ]+$/.test(fullname))) {
-            fullname_message.innerHTML = "Only Letters are allowed<br>";
-            document.getElementById("fullname").style.borderColor = "red";
-            fullname_valid = false
-            fullname_counter++
-        }
-
-        // Makes sure a full name was provided
-        if (fullname.length == 0) {
-            fullname_message.innerHTML = "Full name can not be empty<br>";
-            document.getElementById("fullname").style.borderColor = "red";
-            fullname_valid = false
-            fullname_counter++
-        }
-        if (fullname_counter == 0) {
-            fullname_message.innerHTM = ""
-            document.getElementById("fullname").style.borderColor = "green";
-            fullname_valid = true
-        }
-
-
         // Checks that all input is valid
-        if ((phone_valid && password_valid && fullname_valid && username_valid) | flag == true) {
-            // Defining the credit card details as the chosen one
-            const card = CreditCardService.getCardByNumber(value)
-            document.getElementById("cardNumber").value = card._id
-            document.getElementById("fullname").value = card._username
-            document.getElementById("id").value = "1234567890"
-            document.getElementById("date").value = card._exp_date
-            document.getElementById("secNum").value = card._digits
+        if (id_valid && card_valid && secNum_valid) {
             return true
         }
         else {
@@ -133,7 +127,7 @@ $(() => {
     }
 
 
-    
+
 
 })
 

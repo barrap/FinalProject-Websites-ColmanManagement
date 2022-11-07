@@ -55,15 +55,12 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-floating">
-                                            <input readonly class="d-none" name="username"
-                                                value="<%{info.username}%>">
+                                            <input readonly class="d-none" name="username" value="<%=info.username%>">
                                         </div>
                                         <table class="show-cart table">
 
                                         </table>
                                         <div><span class="total-cart"></span></div>
-                                        <input readonly class="d-none" name="total_price" id="total_price">
-                                        <input readonly class="d-none" name="all_titles" id="all_titles">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
@@ -91,39 +88,41 @@
                         <div id="poll">
                             <h3>would you like to choose previous payment method?</h3>
                             <form>
-                            <%for(i=0;i < info.cards.length ;i++) { %>
-                                *****<%=info.cards[i]._id.slice(-4) %> : <input type="radio" name="vote" value="0" onclick="getChoice(this.value)"><br>
-                            <% } %> 
-                            
-                            
+                                <%for(i=0;i < info.cards.length ;i++) { %>
+                                    *****<%=info.cards[i]._id.slice(-4) %> : <input type="radio" name="vote" value="0"
+                                            onclick="getChoice(this.value)"><br>
+                                        <% } %>
+
+
                             </form>
                         </div>
                         <form action="/paying" method="post" onsubmit="return validateBeforeSubmit()">
                             <div class="mb-3 row text-center div_input">
                                 <label class="col-sm-2 col-form-label">Card Number</label>
                                 <div class="col-sm-10 input_text">
-                                    <input type="text" class="form-control" name="cardNumber" id="cardNumber" >
+                                    <input type="text" class="form-control" name="cardNumber" id="cardNumber">
                                 </div>
                                 <span id="cardNumber_message"></span>
                             </div>
                             <div class="mb-3 row text-center div_input">
                                 <label class="col-sm-2 col-form-label">Full Name</label>
                                 <div class="col-sm-10 input_text">
-                                    <input type="text" class="form-control" name="fullname" id="fullname" >
+                                    <input type="text" readonly class="form-control" name="fullname" id="fullname"
+                                        value="<%=info.fullname%>">
                                 </div>
                                 <span id="fullname_message"></span>
                             </div>
                             <div class="mb-3 row text-center div_input">
                                 <label class="col-sm-2 col-form-label">Card holder ID</label>
                                 <div class="col-sm-10 input_text">
-                                    <input type="text" class="form-control" name="id" id="id" >
+                                    <input type="text" class="form-control" name="id" id="id">
                                 </div>
                                 <span id="id_message"></span>
                             </div>
                             <div class="mb-3 row text-center div_input">
                                 <label class="col-sm-2 col-form-label">Expiration Date(MM/YY)</label>
                                 <div class="col-sm-10 input_text">
-                                    <input type="month" id="date" name="date" min="2018-03" value="2018-05" >
+                                    <input type="month" id="date" name="date" min="2018-03" value="2018-05">
                                 </div>
                                 <span id="date_message"></span>
                             </div>
@@ -131,16 +130,18 @@
                             <div class="mb-3 row text-center div_input">
                                 <label class="col-sm-2 col-form-label">Security number</label>
                                 <div class="col-sm-10 input_text">
-                                    <input type="text" class="form-control" name="secNum" id="secNum" >
+                                    <input type="text" class="form-control" name="secNum" id="secNum">
                                 </div>
                                 <span id="secNum_message"></span>
                             </div>
+                            <input readonly class="d-none" name="total_price" id="total_price">
+                            <input readonly class="d-none" name="all_titles" id="all_titles">
                             <br>
                             <br>
                             <button class="btn btn-primary" type="submit" id="submitBtn">Order</button>
                         </form>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -170,7 +171,6 @@
     <script src="js/main.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/credit_card.js"></script>
-    <script src="services/credit_card.js"></script>
 </body>
 
 </html>

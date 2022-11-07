@@ -9,6 +9,7 @@ const LocationController = require("../controllers/maps");
 const MainController = require("../controllers/main")
 const statController = require("../controllers/stats")
 const CreditCardsController = require("../controllers/credit_cards")
+const OrderController = require("../controllers/orders")
 const router = express.Router();
 
 // Public dir path (for static files)
@@ -24,7 +25,7 @@ router.get("/filter", MainController.filter)
 // Credit cards routing 
 router.get("/updatePayment", CreditCardsController.updatePayment)
 router.post("/deleteCard", CreditCardsController.deleteCard)
-router.post("/addCard",CreditCardsController.addCard)
+router.post("/addCard", CreditCardsController.addCard)
 
 
 // Customers routing
@@ -49,8 +50,6 @@ router.post("/addMovie", moviesController.addMovie)
 router.get("/searchMovie", moviesController.search)
 router.get("/searchMovies", moviesController.searchMovies)
 router.post("/updateMovies", moviesController.update)
-router.post("/addOrder", moviesController.order)
-router.post("/paying", moviesController.paying)
 router.post("/upload", moviesController.upload);
 router.get("/filter_movies", moviesController.filter)
 router.get("/allMovies", moviesController.allMovies)
@@ -73,6 +72,11 @@ router.get("/searchShows", TVShowsController.searchTVShows)
 router.get("/searchTV", TVShowsController.search)
 router.get("/filter_tvshows", TVShowsController.filter)
 router.get("/allShows", TVShowsController.allShows)
+
+
+// Orders routing
+router.post("/addOrder", OrderController.order)
+router.post("/paying", OrderController.paying)
 
 
 // Stats routing
