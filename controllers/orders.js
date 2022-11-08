@@ -17,7 +17,9 @@ const paying = (req, res) => {
             if (cust) {
                 try {
                     customersService.addOrder(req.session.username)
-                    console.log(req)
+                    cart =parseCart(req.body.cart)
+                    const date = new Date()
+                    OrdersService.addOrder(cart['price'], cart['titles'], req.session.username, date.getFullYear(), date.getMonth(), date.getDate() )
                     if(req.body.vote)
                     {
                         res.redirect("/main")
@@ -33,6 +35,7 @@ const paying = (req, res) => {
                     }
                 }
                 catch (e) {
+                    console.log(e)
                     res.render("../views/main", { message: { status: "" } })
                 }
 
@@ -85,6 +88,30 @@ const order = (req, res) => {
     else {
         res.redirect("/")
     }
+}
+
+function parseCart(cart)
+{
+    cart = cart.slice(2)
+    cart = cart.slice(0,-2)
+    cart_arr = cart.split('},{')
+    titles=[]
+    price=0
+    for(i=0;i<cart_arr.length;i++)
+    {
+        cart_arr[i] = cart_arr[i].split(",")
+        for(j=0;j<cart_arr[i].length;j++)
+        {
+            cart_arr[i][j] = cart_arr[i][j].slice(cart_arr[i][j].indexOf(':'))
+            cart_arr[i][j] = cart_arr[i][j].slice(1)
+        }
+        titles.push(cart_arr[i][0])
+        price+=(parseInt(cart_arr[i][2], 10)*parseInt(cart_arr[i][3]))
+    }
+    cart = []
+    cart['price'] = price
+    cart['titles'] = titles
+    return cart
 }
 
 module.exports = {

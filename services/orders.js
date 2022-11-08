@@ -45,7 +45,7 @@ async function getOrdersByUser(_user_id) {
 
 // Adds new order to the database 
 async function addOrder(_total_price, _movies, _user_id, _year, _month, _day){
-    const order = new order({
+    const order = new Order({
         total_price: _total_price, 
         movies: _movies,
         user_id: _user_id, 

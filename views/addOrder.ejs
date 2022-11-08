@@ -88,7 +88,7 @@
                         <br>
                         <div id="poll">
                             <h3>would you like to choose previous payment method?</h3>
-                            <form action="/paying" method="post">
+                            <form action="/paying" method="post" id="poll_form" name ="poll_form" onsubmit="return validateBeforeSubmitChoice()">
                                 <%for(i=0;i < info.cards.length ;i++) { %>
                                     *****<%=info.cards[i]._id.slice(-4) %> : <input type="radio" name="vote" id="vote" value="<%=info.cards[i]._id%>" required>
                                     <br>
@@ -96,7 +96,7 @@
                                 <button class="btn btn-primary" type="submit" id="submitOpt">Order</button>
                             </form>
                         </div>
-                        <form action="/paying" method="post" onsubmit="return validateBeforeSubmit()">
+                        <form action="/paying" method="post" id="add_form" name="add_form" onsubmit="return validateBeforeSubmit()">
                             <div class="mb-3 row text-center div_input">
                                 <label class="col-sm-2 col-form-label">Card Number</label>
                                 <div class="col-sm-10 input_text">
