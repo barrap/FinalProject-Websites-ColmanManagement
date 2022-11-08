@@ -20,19 +20,12 @@ const paying = (req, res) => {
                     cart =parseCart(req.body.cart)
                     const date = new Date()
                     OrdersService.addOrder(cart['price'], cart['titles'], req.session.username, date.getFullYear(), date.getMonth(), date.getDate() )
-                    if(req.body.vote)
+                    if(!(req.body.vote) && !(CreditCardService.getCardByNumber(req.body.cardNumber)))
                     {
-                        res.redirect("/main")
+                        CreditCardService.addCard(req.body.cardNumber, req.session.username, req.body.date, req.body.secNum)
+                        
                     }
-                    else if (CreditCardService.getCardByNumber(req.body.cardNumber)) {
-                        res.redirect("/main")
-                    }
-                    else {
-                        const result = CreditCardService.addCard(req.body.cardNumber, req.session.username, req.body.date, req.body.secNum)
-                        result.then(r => {
-                            res.redirect("/main")
-                        })
-                    }
+                    res.redirect("/main")
                 }
                 catch (e) {
                     console.log(e)
@@ -73,7 +66,17 @@ const order = (req, res) => {
                     information['username'] = cust._id
                     information['fullname'] = cust.fullname
                     information['cards'] = r
-                    res.render("addOrder.ejs", { info: information })
+
+                    // Checks if the user is admin
+                    if (cust.isAdmin == true) {
+                        res.render("addOrder-admin.ejs", { info: information })
+                    }
+
+                    // The user is not an admin
+                    else {
+                        res.render("addOrder.ejs", { info: information })
+                    }
+                    
                 })
             }
 
