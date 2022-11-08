@@ -197,8 +197,14 @@ async function getMoviesByYearAndGenreAndDirector(year, genre, director, max_pri
     return await Movie.find({ $and: [{ "year": year }, { "type": { $in: [genre] } }, { "director": director }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
 }
 
-async function getMoviesByYearAndGenre(year, genre, max_price, len) {
-    return await Movie.find({ $and: [{ "year": year }, { "type": { $in: [genre] } }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
+async function getMoviesByYearAndGenre(year, genre, max_price, len = 0) {
+    if (len) {
+        return await Movie.find({ $and: [{ "year": year }, { "type": { $in: [genre] } }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
+    }
+    else {
+        return await Movie.find({ $and: [{ "year": year }, { "type": { $in: [genre] } }, { "price": { "$lte": parseInt(max_price, 10) } }] })
+    }
+
 }
 
 async function getMoviesByYearAndDirector(year, director, max_price, len) {
@@ -209,12 +215,24 @@ async function getMoviesGenreAndDirector(genre, director, max_price, len) {
     return await Movie.find({ $and: [{ "type": { $in: [genre] } }, { "director": director }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
 }
 
-async function getMoviesByYear(year, max_price, len) {
-    return await Movie.find({ $and: [{ "year": year }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
+async function getMoviesByYear(year, max_price, len = 0) {
+    if (len) {
+        return await Movie.find({ $and: [{ "year": year }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
+    }
+    else {
+        return await Movie.find({ $and: [{ "year": year }, { "price": { "$lte": parseInt(max_price, 10) } }] })
+    }
+
 }
 
-async function getMoviesByGenre(genre, max_price, len) {
-    return await Movie.find({ $and: [{ "type": { $in: [genre] } }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
+async function getMoviesByGenre(genre, max_price, len = 0) {
+    if (len) {
+        return await Movie.find({ $and: [{ "type": { $in: [genre] } }, { "price": { "$lte": parseInt(max_price, 10) } }, { "length": { "$lte": parseInt(len, 10) } }] })
+    }
+    else {
+        return await Movie.find({ $and: [{ "type": { $in: [genre] } }, { "price": { "$lte": parseInt(max_price, 10) } }] })
+    }
+
 }
 
 async function getMoviesByDirector(director, max_price, len) {
