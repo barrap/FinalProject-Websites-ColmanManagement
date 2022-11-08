@@ -91,7 +91,7 @@ function updatePayment(req, res) {
                         results['cards'] = c
                         // Checks if the user is admin
                         if (cust.isAdmin == true) {
-                            res.render("../views/UpdateUser-admin", { dict: { username: cust._id, message: "" } })
+                            res.render("../views/UpdatePayment-admin", {  dict: results })
                         }
                         else {
                             res.render("../views/UpdatePayment", { dict: results })
