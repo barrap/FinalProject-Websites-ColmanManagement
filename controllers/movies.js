@@ -1,6 +1,8 @@
 
 // Import the neccesary modules 
 const url = require("url")
+var fs = require('fs');
+var formidable = require('formidable');
 const MovieService = require('../services/movies');
 const CreditCardService = require('../services/creditCard');
 const customersService = require("../services/customers");
@@ -369,6 +371,8 @@ const update = (req, res) => {
 // Function to upload JSON 
 const upload = (req, res) => {
 
+    console.log("here")
+
     // Checks if the users is logged in
     if (req.session.username != null) {
 
@@ -382,9 +386,27 @@ const upload = (req, res) => {
 
                 // Checks if the user is a admin
                 if (cust.isAdmin == true) {
-
-                    MovieService.uploadJson(req.data)
-                    res.redirect("/movies")
+                    var form = new formidable.IncomingForm();
+                    form.parse(req, function (err, fields, files) {
+                        console.log(files)
+                        if (files.filetoupload.originalFilename != "")
+                        {
+                            // oldpath : temporary folder to which file is saved to
+                            //console.log(files)
+                            let rawdata = fs.readFileSync(files.filetoupload.filepath);
+                            let json = JSON.parse(rawdata);
+                            try {
+                                MovieService.uploadJson(json)
+                            }
+                            catch{
+                                console.log("failed to upload json to server")
+                            }
+                            finally{
+                                fs.unlinkSync(files.filetoupload.filepath);
+                            }
+                        }
+                        res.redirect("/movies")
+                    });
                 }
 
                 // The user isn't an admin so redirect to the main page

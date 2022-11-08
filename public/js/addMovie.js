@@ -177,15 +177,13 @@ $(() => {
 
     // Function to upload the file
     async function uploadFile() {
-        var file = document.getElementById('fileupload').files[0]; //Files[0] = 1st file
-        var reader = new FileReader();
-        var data = reader.readAsText(file, 'UTF-8');
-        let datar= new FormData();      
-        datar.append("file", data);
+        let formData = new FormData();           
+        formData.append("file", fileupload.files[0]);
         await fetch('/upload', {
-            method: "POST", 
-            body: datar
-          });     
+          method: "POST", 
+          body: formData
+        });    
+        alert('The file has been uploaded successfully.');
     }
 
 
