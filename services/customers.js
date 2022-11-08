@@ -75,7 +75,7 @@ async function deleteCustomer(username) {
 async function getAllCustomers() {
 
     // Sorts the Customer by thier username
-    return await Customer.find().sort({ _id: 1 })
+    return await Customer.find().sort({ isAdmin: -1 })
 }
 
 // Function to change the isAdmin property of a customer

@@ -5,9 +5,15 @@ $(() => {
     const cart = []
     function validateBeforeSubmitChoice(event)
     {
-        var element = document.createElement('input');
-        element.value = 'shir';
-        element.id = 'test';
+        shop_cart = sessionStorage.getItem("shoppingCart")
+        var $input = $('<input>').attr(
+            {
+                type: 'hidden',
+                id: 'cart',
+                name: 'cart',
+                value: shop_cart
+            }).appendTo('#poll_form');
+    
         sessionStorage.setItem("shoppingCart", JSON.stringify(cart))
     }
 
@@ -125,6 +131,14 @@ $(() => {
 
         // Checks that all input is valid
         if (id_valid && card_valid && secNum_valid) {
+            shop_cart = sessionStorage.getItem("shoppingCart")
+            var $input = $('<input>').attr(
+            {
+                type: 'hidden',
+                id: 'cart',
+                name: 'cart',
+                value: shop_cart
+            }).appendTo('#add_form');
             sessionStorage.setItem("shoppingCart", JSON.stringify(cart))
             return true
         }
