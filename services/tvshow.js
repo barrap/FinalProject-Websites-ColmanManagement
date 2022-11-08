@@ -53,13 +53,11 @@ async function deleteTvShow(tvshow_name) {
 
 // Function to add a tv show
 function addTvShow(title, shortTitle, year, description, seasons, types, trailer, price) {
-
     new_types = []
     new_types.push(types[0])
     for (var i = 1; i < types.length; i++) {
         new_types.push(types[i].replace(" ", ""))
     }
-
     // Define the new tv show
 
     var tvshows = new TvShows({

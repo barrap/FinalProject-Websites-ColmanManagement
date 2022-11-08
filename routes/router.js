@@ -19,8 +19,10 @@ router.get("/", (req, res) => {
         res.sendFile("homepage.html", { root: 'public' })
 })
 
+// Main Controller
 router.get("/main", MainController.mainPage)
 router.get("/filter", MainController.filter)
+router.get("/allData", MainController.findAll)
 
 // Credit cards routing 
 router.get("/updatePayment", CreditCardsController.updatePayment)
