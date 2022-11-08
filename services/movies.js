@@ -188,15 +188,9 @@ async function update(title, new_preview, new_director, new_year, new_length, ne
 
 // Function to add JSON
 async function uploadJson(json) {
-    
-
     await Movie.create(json, function (err, small) {
         if (err) return;
-        // saved!
     });
-    
- 
-   
 }
 
 

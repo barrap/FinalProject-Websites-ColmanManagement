@@ -390,17 +390,20 @@ const upload = (req, res) => {
                     form.parse(req, function (err, fields, files) {
                         if (files.filetoupload.originalFilename != "")
                         {
-                            // oldpath : temporary folder to which file is saved to
-                            //console.log(files)
+                            // Read file content 
                             let rawdata = fs.readFileSync(files.filetoupload.filepath);
                             let json = JSON.parse(rawdata);
                             try {
+
+                                // Upload the json to the DB
                                 MovieService.uploadJson(json)
                             }
                             catch{
                                 console.log("failed to upload json to server")
                             }
                             finally{
+
+                                // Remove file from disk 
                                 fs.unlinkSync(files.filetoupload.filepath);
                             }
                         }
