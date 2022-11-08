@@ -265,12 +265,5 @@ $(() => {
         displayCart()
         
     })
-    $("#submitBtn").click(() => {
-        var currentdate = new Date();
-        sessionStorage._user_id
-        OrdersService.addOrder(totalCartPrice(), getAllTitles(), sessionStorage._user_id, currentdate.getFullYear(),(currentdate.getMonth()+1), currentdate.getDate())
-        
-        clearCart()
-        
-    })
+    
 });

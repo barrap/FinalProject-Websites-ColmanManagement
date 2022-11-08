@@ -88,13 +88,12 @@
                         <br>
                         <div id="poll">
                             <h3>would you like to choose previous payment method?</h3>
-                            <form>
+                            <form action="/paying" method="post">
                                 <%for(i=0;i < info.cards.length ;i++) { %>
-                                    *****<%=info.cards[i]._id.slice(-4) %> : <input type="radio" name="vote" value="0"
-                                            onclick="getChoice(this.value)"><br>
+                                    *****<%=info.cards[i]._id.slice(-4) %> : <input type="radio" name="vote" id="vote" value="<%=info.cards[i]._id%>" required>
+                                    <br>
                                         <% } %>
-
-
+                                <button class="btn btn-primary" type="submit" id="submitOpt">Order</button>
                             </form>
                         </div>
                         <form action="/paying" method="post" onsubmit="return validateBeforeSubmit()">
@@ -168,10 +167,10 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
 
+    <script src="js/cart.js"></script>
     <script src="js/sidenav.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/credit_card.js"></script>
+    <script src="js/add_order.js"></script>
 </body>
 
 </html>

@@ -50,7 +50,6 @@ const deleteCard = (req, res) => {
             if (cust) {
 
                 
-                console.log(req.body)
                 const result = creditCardService.deleteCard(req.body.card_id)
                 result.then(r => {
                     res.redirect("/updatePayment")

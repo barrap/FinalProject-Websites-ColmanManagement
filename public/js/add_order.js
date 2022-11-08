@@ -1,9 +1,17 @@
 $(() => {
 
     $("#submitBtn").click(validateBeforeSubmit);
-    
+    $("#submitOpt").click(validateBeforeSubmitChoice);
+    const cart = []
+    function validateBeforeSubmitChoice(event)
+    {
+        var element = document.createElement('input');
+        element.value = 'shir';
+        element.id = 'test';
+        sessionStorage.setItem("shoppingCart", JSON.stringify(cart))
+    }
+
     function validateBeforeSubmit(event) {
-        
 
         // Checks the validity of the ID number
         var id_num = $("#id").val()
@@ -117,15 +125,13 @@ $(() => {
 
         // Checks that all input is valid
         if (id_valid && card_valid && secNum_valid) {
+            sessionStorage.setItem("shoppingCart", JSON.stringify(cart))
             return true
         }
         else {
             return false
         }
     }
-
-
-
 
 })
 

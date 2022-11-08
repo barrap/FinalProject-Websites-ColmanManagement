@@ -8,7 +8,6 @@ const filter = (req, res) => {
 
     // Checks if the users is logged in
     if (req.session.username != null) {
-        console.log("dd")
 
         // Gets the user data
         const customer = customersService.getCustomer(req.session.username)
@@ -52,9 +51,7 @@ const filter = (req, res) => {
                         y=t_movies1
                     }
                     result = y
-                    console.log(result)
                     result['username'] = cust._id
-                    console.log(result)
                     res.json(result);
                 })
                 

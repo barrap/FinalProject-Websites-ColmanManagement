@@ -1,11 +1,13 @@
 const CreditCardService = require('../services/creditCard');
 const customersService = require("../services/customers");
+const OrdersService = require("../services/orders");
 
 // Function to add payment 
 const paying = (req, res) => {
 
     // Checks if the users is logged in
     if (req.session.username != null) {
+        
 
         // Gets the user data
         const customer = customersService.getCustomer(req.session.username)
@@ -14,9 +16,13 @@ const paying = (req, res) => {
             // Checks if the user exists
             if (cust) {
                 try {
-
                     customersService.addOrder(req.session.username)
-                    if (CreditCardService.getCardByNumber(req.body.cardNumber)) {
+                    console.log(req)
+                    if(req.body.vote)
+                    {
+                        res.redirect("/main")
+                    }
+                    else if (CreditCardService.getCardByNumber(req.body.cardNumber)) {
                         res.redirect("/main")
                     }
                     else {
