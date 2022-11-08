@@ -388,7 +388,6 @@ const upload = (req, res) => {
                 if (cust.isAdmin == true) {
                     var form = new formidable.IncomingForm();
                     form.parse(req, function (err, fields, files) {
-                        console.log(files)
                         if (files.filetoupload.originalFilename != "")
                         {
                             // oldpath : temporary folder to which file is saved to
