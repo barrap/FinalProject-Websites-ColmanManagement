@@ -13,6 +13,7 @@
 </head>
 
 <body>
+    
     <header id="sidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn">&times;</a>
         <a href="/main">Home page</a>
@@ -263,7 +264,17 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
-
+        <script>
+            window.fbAsyncInit = function() {
+              FB.init({
+                appId            : 'your-app-id',
+                autoLogAppEvents : true,
+                xfbml            : true,
+                version          : 'v15.0'
+              });
+            };
+          </script>
+          <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script src="js/main.js"></script>
     <script src="js/sidenav.js"></script>
     <script src="js/updateMovie.js"></script>

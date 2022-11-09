@@ -31,8 +31,6 @@ const paying = (req, res) => {
                             }
                             res.redirect("/main")
                         })
-                  
-                    
                 }
                 catch (e) {
                     console.log(e)
