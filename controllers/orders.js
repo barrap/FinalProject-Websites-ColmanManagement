@@ -19,13 +19,20 @@ const paying = (req, res) => {
                     customersService.addOrder(req.session.username)
                     cart =parseCart(req.body.cart)
                     const date = new Date()
-                    OrdersService.addOrder(cart['price'], cart['titles'], req.session.username, date.getFullYear(), date.getMonth(), date.getDate() )
-                    if(!(req.body.vote) && !(CreditCardService.getCardByNumber(req.body.cardNumber)))
-                    {
-                        CreditCardService.addCard(req.body.cardNumber, req.session.username, req.body.date, req.body.secNum)
-                        
-                    }
-                    res.redirect("/main")
+                    OrdersService.addOrder(cart['price'], cart['titles'], req.session.username, date.getFullYear(), date.getMonth()+1, date.getDate() )
+                    
+                    cardi = CreditCardService.getCardByNumber(req.body.cardNumber)
+                    cardi.then(c =>
+                        {
+                            if(!(req.body.vote) && !(c))
+                            {
+                                CreditCardService.addCard(req.body.cardNumber, req.session.username, req.body.date, req.body.secNum)
+                                
+                            }
+                            res.redirect("/main")
+                        })
+                  
+                    
                 }
                 catch (e) {
                     console.log(e)
@@ -97,7 +104,7 @@ function parseCart(cart)
 {
     cart = cart.slice(2)
     cart = cart.slice(0,-2)
-    cart_arr = cart.split('},{')
+    cart_arr = cart.split("},{")
     titles=[]
     price=0
     for(i=0;i<cart_arr.length;i++)
