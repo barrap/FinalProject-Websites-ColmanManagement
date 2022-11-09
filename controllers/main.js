@@ -206,8 +206,45 @@ const findAll = (req, res) => {
 
 }
 
+const about = (req, res) => {
+
+    // Checks if the user is logged in
+    if (req.session.username != null) {
+
+        // Gets the user data
+        const customer = customersService.getCustomer(req.session.username)
+        customer.then(cust => {
+
+            // Checks if the user exists
+            if (cust) {
+
+                // Checks if the user is admin
+                if (cust.isAdmin == true) {
+                    res.render("../views/aboutUs-admin", { username: { username: cust._id } })
+                }
+
+                // User is not an admin
+                else {
+                    res.render("../views/aboutUs", { username: { username: cust._id } })
+                }
+            }
+
+            // The user doesn't exists - redirects to the homepage
+            else {
+                res.redirect("/")
+            }
+        })
+    }
+
+    // User isn't logged in - redirects to the homepage
+    else {
+        res.redirect("/")
+    }
+}
+
 module.exports = {
     mainPage,
     filter,
-    findAll
+    findAll,
+    about
 }

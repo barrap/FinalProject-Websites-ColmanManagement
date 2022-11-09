@@ -23,6 +23,7 @@ router.get("/", (req, res) => {
 router.get("/main", MainController.mainPage)
 router.get("/filter", MainController.filter)
 router.get("/allData", MainController.findAll)
+router.get("/about", MainController.about)
 
 // Credit cards routing 
 router.get("/updatePayment", CreditCardsController.updatePayment)

@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blockbuster online Store</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.rtl.min.css"
+        integrity="sha384-+4j30LffJ4tgIMrq9CwHvn0NjEvmuDCOfk6Rpg2xg7zgOxWWtLtozDEEVvBPgHqE" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="img/Blockbuster_logo.svg.png">
+    <link rel="stylesheet" href="css/main_style.css">
+    <link rel="stylesheet" href="css/about_us_style.css">
+    <link rel="stylesheet" href="css/sidenav.css">
+
+</head>
+
+<body>
+    <header id="sidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/main">Home page</a>
+        <a href="/movies">Movies</a>
+        <a href="/tvshows">TV Shows</a>
+        <a href="/customers">Clients</a>
+        <a href="/locations">Locations</a>
+        <a href="/admin-stats">Statistics</a>
+        <a href="/logout">Logout</a>
+    </header>
+    <div id="main">
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="navbar bg-dark">
+                    <div class="container-fluid">
+                        <span id="sidenavBtn" onclick="openNav()">&#9776;</span>
+                        <form class="d-flex mx-auto" role="search">
+                            <div class="input-group mb-3 title text-center">
+
+                            </div>
+                        </form>
+                        <div class="dropdown">
+                            <button type="submit" class="btn btn-primary dropbtn">Hello,
+                                <%=username.username%>
+                            </button>
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="/logout">Logout</a>
+                                <a href="/updaeUserPage">Update Details</a>
+                                <a href="/updatePayment">Update Payment Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <div class="col g-3">
+                    <div class="container text-center g-3 ">
+                        <h2> Welcome to the Online Blockbuster Store!</h2>
+                        <h3></h3>
+                        <h3> About Us:</h3>
+                        <br>
+                        <section>Here at the New BlockBuster we have the outmost respect to the film and tv indestry, so
+                            much so that we wanted to celebrete evreything good about it.
+                            Headed By our founders: Oran Moyal, Shir Sadon and Bar Rapaport, we offer a comprihensive
+                            shopping enviorment with everything Cinema and TV. as you browse our store, please remember:
+                            <b>life is but a movie that you are the director of</b>
+
+                        </section>
+                        <br>
+                        <h3> Our Founders:</h3>
+                        <div id="pictures">
+                            <table>
+                                <tr>
+                                    <td>Oran Moyal</td>
+                                    <td>Shir Sadon</td>
+                                    <td>Bar Rapaport</td>
+                                </tr>
+
+                                <tr>
+                                    <td><img src="img/founders/Bar.jpg"></td>
+                                    <td><img src="img/founders/Bar.jpg"></td>
+                                    <td><img src="img/founders/Bar.jpg"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <nav class="navbar">
+                    <div class="container-fluid">
+                        <span>
+                            <a class="navbar-brand" href="/main">Home Page</a>
+                            <a class="navbar-brand" href="/locations">Location</a>
+                            <a class="navbar-brand" href="#">About Us</a>
+                        </span>
+                    </div>
+                </nav>
+            </footer>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+            integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+        <script src="js/sidenav.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/cart.js"></script>
+    </div>
+</body>
+
+</html>
