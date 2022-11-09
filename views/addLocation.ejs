@@ -9,6 +9,7 @@
         integrity="sha384-+4j30LffJ4tgIMrq9CwHvn0NjEvmuDCOfk6Rpg2xg7zgOxWWtLtozDEEVvBPgHqE" crossorigin="anonymous">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link rel="icon" type="image/x-icon" href="img/Blockbuster_logo.svg.png">
+    <link rel="stylesheet" href="css/main_style.css">
     <link rel="stylesheet" href="css/add_style.css">
 </head>
 
@@ -34,6 +35,16 @@
                                 <h5 class="text-white" id="headline">Fill the form to add a pickup location</h5>
                             </div>
                         </form>
+                        <div class="dropdown">
+                            <button type="submit" class="btn btn-primary dropbtn">Hello,
+                                <%=results.username%>
+                            </button>
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="/logout">Logout</a>
+                                <a href="/updaeUserPage">Update Details</a>
+                                <a href="/updatePayment">Update Payment Details</a>
+                            </div>
+                        </div>
                     </div>
                 </nav>
                 <form>
@@ -77,7 +88,7 @@
                                 <br>
                                 <br>
                                 <div id="error_message">
-                                    <%=message.status%>
+                                    <%=data.status%>
                                 </div>
                             </div>
                     </div>
@@ -87,8 +98,8 @@
             <nav class="navbar">
                 <div class="container-fluid">
                     <span>
-                        <a class="navbar-brand" href="/locations">Location</a>
                         <a class="navbar-brand" href="/main">Home Page</a>
+                        <a class="navbar-brand" href="/locations">Location</a>
                         <a class="navbar-brand" href="#">#</a>
                         <a class="navbar-brand" href="#"> # # # </a>
                     </span>

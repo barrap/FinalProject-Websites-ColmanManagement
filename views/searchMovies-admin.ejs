@@ -108,8 +108,8 @@
             <nav class="navbar">
                 <div class="container-fluid">
                     <span>
-                        <a class="navbar-brand" href="/locations">Location</a>
                         <a class="navbar-brand" href="/main">Home Page</a>
+                        <a class="navbar-brand" href="/locations">Location</a>
                         <a class="navbar-brand" href="#">#</a>
                         <a class="navbar-brand" href="#"> # # # </a>
                     </span>
@@ -131,42 +131,57 @@
                 <div class="card-body">
                     <iframe src="{trailer}" height="230">
                     </iframe>
-                    <h5 class="card-title">
+                    <h5 class="movie{i}">
                         {_id}
                     </h5>
                     <p class="card-text"><b>Synopsis: </b>
                         {preview}
                     </p>
-                    <p><b>Director: </b>
-                        {director}
-                    </p>
-                    <p><b>Publish Year: </b>
-                        {year}
-                    </p>
-                    <p><b>Movie Length: </b>
-                        {length} Minutes
-                    </p>
-                    <p><b>Main Actors: </b>
-                        {main_actors}
-                    </p>
-                    <p><b>Genere: </b>
-                        {type}
-                    </p>
-                    <p><b>Cost: </b>
+                    <p class="movie-price{i}"><b>Cost: </b>
                         {price}$
                     </p>
-                    <button type="submit" class="btn btn-outline-success add-to-cart"
-                                            data-name="{_id}" data-price="{price}"><svg
-                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                            </svg> Add to cart</a>
+                    <div class="buttons">
+                        <form action="/deleteMovie" method="POST" class="float-end">
+                            <input readonly class="d-none" name="movie_id"
+                                value="{_id}">
+                            <button type="submit" class="btn btn-outline-danger"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-trash3-fill"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                </svg></button>
+                        </form>
+                        <button type="submit" class="btn btn-success add-to-cart-after-filter" onclick="movieOuterAddToCartAfterFilter({i})"
+                        data-name="{_id}"
+                        data-price="{price}"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                            <path
+                                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                        </svg></button>
+                        <a href="/movie?movie={shortTitle}" id="movie_link{i}"><button
+                                class="btn btn-outline-info" type="button">See more</button></a>
+                        <form class="float-start">
+
+                            <!-- Update modal trigger button -->
+                            <button type="button" class="btn btn-outline-primary"
+                                data-bs-toggle="modal" data-bs-target="#updateModal{i}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-arrow-clockwise"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+                                    <path
+                                        d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+                                </svg></button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </script>
-
+    
     <script src="js/sidenav.js"></script>
     <script src="js/main.js"></script>
     <script src="js/cart.js"></script>

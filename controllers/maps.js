@@ -44,7 +44,8 @@ const Alllocations = (req, res) => {
 }
 
 const addLocationPage = (req, res) => {
-
+    data = {}
+    data['status'] = ""
     // Checks if the users is logged in
     if (req.session.username != null) {
 
@@ -57,7 +58,8 @@ const addLocationPage = (req, res) => {
 
                 // Checks if the user is a admin
                 if (cust.isAdmin == true) {
-                    res.render("../views/addLocation", { message: { status: "" } })
+                    data['username'] = cust._id
+                    res.render("../views/addLocation", { data: data })
                 }
 
                 // The user isn't an admin so redirect to the main page
@@ -80,6 +82,7 @@ const addLocationPage = (req, res) => {
 }
 
 const addLocation = (req, res) => {
+    
     // Checks if the users is logged in
     if (req.session.username != null) {
 
@@ -165,7 +168,7 @@ const deleteLocation = (req, res) => {
 
     // Checks if the user is logged in
     if (req.session.username != null) {
-        
+
         var city = req.body.city
 
         // Gets the users data

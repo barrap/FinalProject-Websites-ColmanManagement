@@ -29,10 +29,13 @@ body {
 .card {
     background-color: #060606;
     color: white;
+    height: 590px;
 }
+
 .dropdown {
     padding-left: 10px;
 }
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -49,7 +52,16 @@ body {
     display: block;
 }
 
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
 
+.buttons {
+    display: flex;
+    justify-content: space-around;
+}
 
 footer {
     position: fixed;
