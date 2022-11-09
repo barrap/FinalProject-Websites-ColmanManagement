@@ -33,7 +33,6 @@ const paying = (req, res) => {
                         })
                 }
                 catch (e) {
-                    console.log(e)
                     res.render("../views/main", { message: { status: "" } })
                 }
 

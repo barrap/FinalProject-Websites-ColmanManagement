@@ -37,7 +37,6 @@ const GetData = (req, res) => {
                             const customerByLocation = customersService.countCustomersByLocation()
                             customerByLocation.then(amount_of_customers_by_location=>{
                             var customer_by_location_array = []
-                            console.log(amount_of_customers_by_location)
                             amount_of_customers_by_location.forEach(element=>customer_by_location_array.push([element["_id"], element["count"]]))
 
                         
@@ -45,7 +44,6 @@ const GetData = (req, res) => {
                             const count_orders_by_month = ordersService.countOrderPriceByMonth()
                             count_orders_by_month.then(count_orders_by_month_res => {
                             var orders_by_month_array = []
-                            console.log(count_orders_by_month_res)
                             count_orders_by_month_res.forEach(element=>{
                                 orders_by_month_array.push([element["_id"]["month"], element["_id"]["year"], element["count"]])
                             })
