@@ -9,7 +9,7 @@ body {
     height: 590px;
 }
 
-.card-body{
+.card-body {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -60,5 +60,9 @@ footer {
 
 @font-face {
     font-family: "heebo";
-    src: url('../Heebo-Regular.ttf')
+    src: url('../Heebo-Regular.ttf');
+}
+
+.modal {
+    color: black;
 }

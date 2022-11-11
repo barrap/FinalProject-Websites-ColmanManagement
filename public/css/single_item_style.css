@@ -53,3 +53,7 @@ iframe {
     font-family: "heebo";
     src: url('../Heebo-Regular.ttf')
 }
+
+.modal {
+    color: black;
+}

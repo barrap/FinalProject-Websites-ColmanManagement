@@ -69,6 +69,7 @@ footer {
     bottom: 0;
     width: 100%;
     background-color: #060606;
+    margin-top: 15px;
 }
 
 .navbar-brand {
@@ -86,4 +87,8 @@ footer {
 
 .homebtn {
     margin-left: 50px;
+}
+
+.modal {
+    color:black
 }

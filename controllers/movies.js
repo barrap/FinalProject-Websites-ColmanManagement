@@ -129,6 +129,8 @@ function getMovie(req, res) {
 // Function to delete a movie
 const deleteMovie = (req, res) => {
 
+    var referer = req.rawHeaders[33].substring(21)
+
     // Checks if the users is logged in
     if (req.session.username != null) {
 
@@ -143,7 +145,12 @@ const deleteMovie = (req, res) => {
                 if (cust.isAdmin == true) {
                     const result = MovieService.deleteMovie(req.body.movie_id)
                     result.then(r => {
-                        res.redirect("/movies")
+                        if (referer == "/main") {
+                            res.redirect("/main")
+                        }
+                        else {
+                            res.redirect("/movies")
+                        }
                     })
                 }
 
@@ -328,6 +335,8 @@ const search = (req, res) => {
 // Function to update a movie details
 const update = (req, res) => {
 
+    var referer = req.rawHeaders[33].substring(21)
+
     // Checks if the users is logged in
     if (req.session.username != null) {
 
@@ -342,7 +351,13 @@ const update = (req, res) => {
                 if (cust.isAdmin == true) {
                     MovieService.update(req.body.title, req.body.preview, req.body.director, parseInt(req.body.year, 10), parseInt(req.body.length, 10),
                         req.body.actors.split(","), req.body.genre.split(","), req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
-                    res.redirect("/movies")
+                    if (referer == "/main") {
+                        res.redirect("/main")
+                    }
+                    else {
+                        res.redirect("/movies")
+                    }
+
                 }
 
                 // The user isn't an admin so redirect to the main page
@@ -386,8 +401,7 @@ const upload = (req, res) => {
                 if (cust.isAdmin == true) {
                     var form = new formidable.IncomingForm();
                     form.parse(req, function (err, fields, files) {
-                        if (files.filetoupload.originalFilename != "")
-                        {
+                        if (files.filetoupload.originalFilename != "") {
                             // Read file content 
                             let rawdata = fs.readFileSync(files.filetoupload.filepath);
                             let json = JSON.parse(rawdata);
@@ -396,10 +410,10 @@ const upload = (req, res) => {
                                 // Upload the json to the DB
                                 MovieService.uploadJson(json)
                             }
-                            catch{
+                            catch {
                                 console.log("failed to upload json to server")
                             }
-                            finally{
+                            finally {
 
                                 // Remove file from disk 
                                 fs.unlinkSync(files.filetoupload.filepath);

@@ -121,21 +121,21 @@ async function search(param, value) {
         case "title":
 
             // Search in an uncase-sensetive way
-            return await Movie.find({ "_id": { "$regex": value, "$options": "i" } })
+            return await Movie.find({ "_id": { "$regex": value, "$options": "i" } }).sort({ _id: 1 })
             break;
         case "director":
 
             // Search in an uncase-sensetive way
-            return await Movie.find({ "director": { "$regex": value, "$options": "i" } })
+            return await Movie.find({ "director": { "$regex": value, "$options": "i" } }).sort({ _id: 1 })
             break;
         case "year":
-            return await Movie.find({ "year": parseInt(value, 10) })
+            return await Movie.find({ "year": parseInt(value, 10) }).sort({ _id: 1 })
             break;
         case "length":
-            return await Movie.find({ "length": { "$gte": parseInt(value, 10) } })
+            return await Movie.find({ "length": { "$gte": parseInt(value, 10) } }).sort({ _id: 1 })
             break;
         case "cost":
-            return await Movie.find({ "cost": { "$gte": parseInt(value, 10) } })
+            return await Movie.find({ "price": { "$gte": parseInt(value, 10) } }).sort({ _id: 1 })
             break;
         default:
             break;

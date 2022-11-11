@@ -7,6 +7,13 @@ $(() => {
                 + "+" + $("#dir").val() + "+" + $("#len").val()
         }).done(function (res) {
             $(".results").html("")
+
+            if (res.length >= 0 && res.length < 5) {
+                $(".footer").css('position', 'fixed')
+            }
+            else if (res.length >= 5) {
+                $(".footer").css('position', 'relative')
+            }
             // Runs on all the results
             for (let i = 0; i < res.length; i++) {
                 const element = res[i];
@@ -35,7 +42,7 @@ $(() => {
             url: "/allMovies"
         }).done(function (res) {
             $(".results").html("")
-
+            $(".footer").css('position', 'relative')
             // Runs on all the results
             for (let i = 0; i < res.length; i++) {
                 const element = res[i];
@@ -58,3 +65,38 @@ $(() => {
         })
     })
 })
+
+function validateMovieUpdateBeforeSubmitAfterFilter(index) {
+
+    // Gets all the values
+    var trailer = $("#link" + index).val()
+
+    // gets all the input elements
+    var trailer_html = document.getElementById("link" + 1)
+
+    // gets all the span elements (for the error messages)
+    var trailer_message = document.getElementById("link_message" + 1)
+
+    // boolean variable declaration
+    var trailer_bool = false
+
+    // Checks if a trailer link was provided
+    if (trailer == "") {
+        trailer_html.style.borderColor = "green"
+        trailer_message.innerHTML = ""
+        $(".UpdateMovieAfterFilterForm" + index).submit()
+    }
+
+    // Check if the trailer link is valid
+    else if (!(/https?:\/\/www.youtube.com\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(trailer))) {
+        trailer_html.style.borderColor = "red"
+        trailer_message.innerHTML = "The trailer must be from youtube"
+        return false
+    }
+
+    else {
+        trailer_html.style.borderColor = "green"
+        trailer_message.innerHTML = ""
+        $(".UpdateMovieAfterFilterForm" + index).submit()
+    }
+}

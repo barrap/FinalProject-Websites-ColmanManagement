@@ -118,6 +118,8 @@ function getTVShow(req, res) {
 
 // Function to delete a show
 const deleteTvshow = (req, res) => {
+    
+    var referer = req.rawHeaders[33].substring(21)
 
     // Checks if the users is logged in
     if (req.session.username != null) {
@@ -133,7 +135,12 @@ const deleteTvshow = (req, res) => {
                 if (cust.isAdmin == true) {
                     const result = TVShowsService.deleteTvShow(req.body.tvshow_id)
                     result.then(r => {
-                        res.redirect("/tvshows")
+                        if (referer == "/main") {
+                            res.redirect("/main")
+                        }
+                        else {
+                            res.redirect("/tvshows")
+                        }
                     })
                 }
 
@@ -320,6 +327,8 @@ const search = (req, res) => {
 // Function to update a show details
 const update = (req, res) => {
 
+    var referer = req.rawHeaders[33].substring(21)
+
     // Checks if the users is logged in
     if (req.session.username != null) {
 
@@ -332,9 +341,14 @@ const update = (req, res) => {
 
                 // Checks if the user is a admin
                 if (cust.isAdmin == true) {
-                    const result = TVShowsService.update(req.body.title, parseInt(req.body.year, 10), req.body.description, parseInt(req.body.seasons, 10),
-                        req.body.types.split(","), req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
-                    res.redirect("/tvshows")
+                    TVShowsService.update(req.body.title, parseInt(req.body.year, 10), parseInt(req.body.seasons, 10), req.body.description,
+                        req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
+                    if (referer == "/main") {
+                        res.redirect("/main")
+                    }
+                    else {
+                        res.redirect("/tvshows")
+                    }
                 }
 
                 // The user isn't an admin so redirect to the main page
@@ -439,8 +453,7 @@ const upload = (req, res) => {
                 if (cust.isAdmin == true) {
                     var form = new formidable.IncomingForm();
                     form.parse(req, function (err, fields, files) {
-                        if (files.filetoupload.originalFilename != "")
-                        {
+                        if (files.filetoupload.originalFilename != "") {
                             // Read file content 
                             let rawdata = fs.readFileSync(files.filetoupload.filepath);
                             let json = JSON.parse(rawdata);
@@ -449,10 +462,10 @@ const upload = (req, res) => {
                                 // Upload the json to the DB
                                 TVShowsService.uploadJson(json)
                             }
-                            catch{
+                            catch {
                                 console.log("failed to upload json to server")
                             }
-                            finally{
+                            finally {
 
                                 // Remove file from disk 
                                 fs.unlinkSync(files.filetoupload.filepath);

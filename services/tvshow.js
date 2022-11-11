@@ -92,16 +92,16 @@ async function search(param, value) {
         case "title":
 
             // Search in an uncase-sensetive way
-            return await TvShows.find({ "_id": { "$regex": value, "$options": "i" } })
+            return await TvShows.find({ "_id": { "$regex": value, "$options": "i" } }).sort({ _id: 1 })
             break;
         case "year":
-            return await TvShows.find({ "year": parseInt(value) })
+            return await TvShows.find({ "year": parseInt(value) }).sort({ _id: 1 })
             break;
         case "seasons":
-            return await TvShows.find({ "seasons": { "$gte": parseInt(value, 10) } })
+            return await TvShows.find({ "seasons": { "$gte": parseInt(value, 10) } }).sort({ _id: 1 })
             break;
         case "cost":
-            return await TvShows.find({ "price": { "$lte": parseInt(value, 10) } })
+            return await TvShows.find({ "price": { "$gte": parseInt(value, 10) } }).sort({ _id: 1 })
             break;
         default:
             break;
@@ -124,12 +124,11 @@ async function update(title, new_year, new_seasons, new_description, new_trailer
     if (new_description) {
         await TvShows.updateOne({ _id: title }, { description: new_description })
     }
-
+    
     // checks if a new trailer was provided
-    if (new_trailer) {
+    if (new_trailer != "") {
         await TvShows.updateOne({ _id: title }, { trailer: new_trailer })
     }
-
     // checks if a new cost was provided
     if (new_cost) {
         await TvShows.updateOne({ _id: title }, { price: new_cost })
@@ -137,15 +136,15 @@ async function update(title, new_year, new_seasons, new_description, new_trailer
 }
 
 async function getShowsByYearAndGenre(year, genre, max_price) {
-    return await TvShows.find({ $and: [{ "year": year }, { "type": { $in: [genre] } }, { "price": { "$lte": parseInt(max_price, 10) } }] })
+    return await TvShows.find({ $and: [{ "year": year }, { "type": { $in: [genre] } }, { "price": { "$lte": parseInt(max_price, 10) } }] }).sort({ _id: 1 });
 }
 
 async function getShowsByYear(year, max_price) {
-    return await TvShows.find({ $and: [{ "year": year }, { "price": { "$lte": parseInt(max_price, 10) } }] })
+    return await TvShows.find({ $and: [{ "year": year }, { "price": { "$lte": parseInt(max_price, 10) } }] }).sort({ _id: 1 });
 }
 
 async function getShowsByGenre(genre, max_price) {
-    return await TvShows.find({ $and: [{ "type": { $in: [genre] } }, { "price": { "$lte": parseInt(max_price, 10) } }] })
+    return await TvShows.find({ $and: [{ "type": { $in: [genre] } }, { "price": { "$lte": parseInt(max_price, 10) } }] }).sort({ _id: 1 });
 }
 
 async function getYears() {

@@ -461,7 +461,7 @@
                                             <button type="submit" id="saveChangesBtn" class="btn btn-primary">Save
                                                 changes</button>
                                         </div>
-                                        </form>
+                                    </form>
                                     </div>
                                 </div>
                             </div>
@@ -471,7 +471,7 @@
                 </div>
             </div>
         </div>
-        <footer>
+        <footer class="footer">
             <nav class="navbar">
                 <div class="container-fluid">
                     <span>
@@ -537,11 +537,10 @@
                                                 </svg></button>
                         <a href="/movie?movie={shortTitle}" id="movie_link{i}"><button
                                 class="btn btn-outline-info" type="button">See more</button></a>
-                        <form class="float-start">
 
                             <!-- Update modal trigger button -->
                             <button type="button" class="btn btn-outline-primary"
-                                data-bs-toggle="modal" data-bs-target="#updateModal{i}">
+                                data-bs-toggle="modal" data-bs-target="#MovieUpdateModalAfterFilter{i}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     fill="currentColor" class="bi bi-arrow-clockwise"
                                     viewBox="0 0 16 16">
@@ -550,7 +549,98 @@
                                     <path
                                         d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
                                 </svg></button>
-                        </form>
+                                <!-- Movie Update modal After Filter -->
+                            <div class="modal fade" id="MovieUpdateModalAfterFilter{i}" tabindex="-1"
+                                aria-labelledby="MovieUpdateModalAfterFilter{i}" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="MovieUpdateModalAfterFilter{i}">Update info for:
+                                                {_id}
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/updateMovies" method="post" class="UpdateMovieAfterFilterForm{i}">
+                                                <div class="form-floating">
+                                                    <input readonly class="d-none" name="title"
+                                                        value="{_id}">
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Synopsis</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="preview"
+                                                            id="preview">
+                                                    </div>
+                                                    <span id="preview_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Director</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="director"
+                                                            id="director">
+                                                    </div>
+                                                    <span id="director_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Year of publish</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="number" class="form-control" name="year" id="year">
+                                                    </div>
+                                                    <span id="year_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Movie Length</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="number" class="form-control" name="length"
+                                                            id="length">
+                                                    </div>
+                                                    <span id="length_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Main Actors (Split By
+                                                        ,)</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="actors"
+                                                            id="actors">
+                                                    </div>
+                                                    <span id="actors_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Genre (Split By ,)</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="genre" id="genre">
+                                                    </div>
+                                                    <span id="genre_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Trailer Link</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="link" id="movie_link{i}">
+                                                    </div>
+                                                    <span id="movie_link_message{i}"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Cost</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="number" class="form-control" name="cost" id="cost">
+                                                    </div>
+                                                    <span id="cost_message"></span>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary saveMovieChangesBtnAfterFilter" onclick="validateMovieUpdateBeforeSubmitAfterFilter({i})">Save
+                                                changes</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Movie Update modal After Filter end  -->
                     </div>
                 </div>
             </div>
@@ -595,11 +685,9 @@
                                                 </svg></button>
                         <a href="/tvshow?tvshow={shortTitle}" id="tv_link{i}"><button
                                 class="btn btn-outline-info" type="button">See more</button></a>
-                        <form class="float-start">
-
                             <!-- Update modal trigger button -->
                             <button type="button" class="btn btn-outline-primary"
-                                data-bs-toggle="modal" data-bs-target="#updateModal{i}">
+                                data-bs-toggle="modal" data-bs-target="#TVUpdateModalAfterFilter{i}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     fill="currentColor" class="bi bi-arrow-clockwise"
                                     viewBox="0 0 16 16">
@@ -608,7 +696,80 @@
                                     <path
                                         d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
                                 </svg></button>
-                        </form>
+                                <!-- TV show Update modal -->
+                            <div class="modal fade" id="TVUpdateModalAfterFilter{i}" tabindex="-1"
+                                aria-labelledby="TVUpdateModalAfterFilter{i}" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="TVUpdateModalAfterFilter{i}">Update info for:
+                                                {_id}
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/updateShows" method="post" class="UpdateTVAfterFilterForm{i}">
+                                                <div class="form-floating">
+                                                    <input readonly class="d-none" name="title"
+                                                        value="{_id}">
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Synopsis</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="preview"
+                                                            id="preview">
+                                                    </div>
+                                                    <span id="preview_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Year of publish</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="number" class="form-control" name="year" id="year">
+                                                    </div>
+                                                    <span id="year_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Number Of Seasons</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="number" class="form-control" name="seasons"
+                                                            id="seasons">
+                                                    </div>
+                                                    <span id="seasons_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Genre (Split By ,)</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="genre" id="genre">
+                                                    </div>
+                                                    <span id="genre_message"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Trailer Link</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="link" id="tv_link{i}">
+                                                    </div>
+                                                    <span id="tv_link_message{i}"></span>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Cost</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="number" class="form-control" name="cost" id="cost">
+                                                    </div>
+                                                    <span id="cost_message"></span>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" id="saveChangesBtn" class="btn btn-primary" onclick="validateTVUpdateBeforeSubmitAfterFilter({i})">Save
+                                                changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- TV show Update modal end -->
                     </div>
                 </div>
             </div>

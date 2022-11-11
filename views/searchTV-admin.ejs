@@ -30,13 +30,13 @@
                     <div class="container-fluid">
                         <span id="sidenavBtn" onclick="openNav()">&#9776;</span>
                         <a href="/main"><button class="btn btn-outline-info homebtn" type="button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-house-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
-                                <path fill-rule="evenodd"
-                                    d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
-                            </svg></button></a>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-house-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                                    <path fill-rule="evenodd"
+                                        d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+                                </svg></button></a>
                         <form class="d-flex mx-auto" role="search">
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" placeholder="Search" id="inp_search">
@@ -111,7 +111,7 @@
                 </div>
             </div>
         </div>
-        <footer>
+        <footer class="footer">
             <nav class="navbar">
                 <div class="container-fluid">
                     <span>
@@ -143,9 +143,6 @@
                     <p class="card-text"><b>Synopsis: </b>
                         {description}
                     </p>
-                    <p><b>Publish Year: </b>
-                        {year}
-                    </p>
                     <p><b>Number of seasons: </b>
                         {seasons} Seasons
                     </p>
@@ -174,11 +171,10 @@
                         </svg></button>
                         <a href="/tvshow?tvshow={shortTitle}" id="tv_link{i}"><button
                                 class="btn btn-outline-info" type="button">See more</button></a>
-                        <form class="float-start">
 
                             <!-- Update modal trigger button -->
                             <button type="button" class="btn btn-outline-primary"
-                                data-bs-toggle="modal" data-bs-target="#updateModal{i}">
+                                data-bs-toggle="modal" data-bs-target="#TVUpdateModalAfterFilter{i}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     fill="currentColor" class="bi bi-arrow-clockwise"
                                     viewBox="0 0 16 16">
@@ -187,7 +183,79 @@
                                     <path
                                         d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
                                 </svg></button>
-                        </form>
+                            <!-- TV show Update modal -->
+                            <div class="modal fade" id="TVUpdateModalAfterFilter{i}" tabindex="-1"
+                            aria-labelledby="TVUpdateModalAfterFilter{i}" aria-hidden="true">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="TVUpdateModalAfterFilter{i}">Update info for:
+                                            {_id}
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/updateShows" method="post" class="UpdateTVAfterFilterForm{i}">
+                                            <div class="form-floating">
+                                                <input readonly class="d-none" name="title"
+                                                    value="{_id}">
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-2 col-form-label">Synopsis</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="preview"
+                                                        id="preview">
+                                                </div>
+                                                <span id="preview_message"></span>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-2 col-form-label">Year of publish</label>
+                                                <div class="col-sm-10">
+                                                    <input type="number" class="form-control" name="year" id="year">
+                                                </div>
+                                                <span id="year_message"></span>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-2 col-form-label">Number Of Seasons</label>
+                                                <div class="col-sm-10">
+                                                    <input type="number" class="form-control" name="seasons"
+                                                        id="seasons">
+                                                </div>
+                                                <span id="seasons_message"></span>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-2 col-form-label">Genre (Split By ,)</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="genre" id="genre">
+                                                </div>
+                                                <span id="genre_message"></span>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-2 col-form-label">Trailer Link</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="link" id="tv_link{i}">
+                                                </div>
+                                                <span id="tv_link_message{i}"></span>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-2 col-form-label">Cost</label>
+                                                <div class="col-sm-10">
+                                                    <input type="number" class="form-control" name="cost" id="cost{i}">
+                                                </div>
+                                                <span id="cost_message"></span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" id="saveChangesBtn" class="btn btn-primary" onclick="validateTVUpdateBeforeSubmitAfterFilter({i})">Save
+                                            changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- TV show Update modal end -->
                     </div>
                 </div>
             </div>
