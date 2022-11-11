@@ -76,6 +76,14 @@ function addTvShow(title, shortTitle, year, description, seasons, types, trailer
     return tvshows.save();
 }
 
+// Function to add JSON
+async function uploadJson(json) {
+    await TvShows.create(json, function (err, small) {
+        if (err) return;
+    });
+}
+
+
 // Function to search the array
 async function search(param, value) {
 
@@ -160,4 +168,5 @@ module.exports = {
     getShowsByYear,
     getShowsByGenre,
     getYears,
+    uploadJson
 }

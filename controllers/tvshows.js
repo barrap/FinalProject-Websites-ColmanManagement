@@ -4,7 +4,11 @@ const url = require("url")
 const TVShowsService = require('../services/tvshow');
 const CreditCardService = require('../services/creditCard');
 const customersService = require("../services/customers");
+var fs = require('fs');
+var formidable = require('formidable');
+const tvshow = require("../models/tvshow");
 const public_dir_path = "../public"
+
 
 
 // Function to get the data on all the shows
@@ -151,6 +155,8 @@ const deleteTvshow = (req, res) => {
         res.redirect("/")
     }
 }
+
+
 
 
 // Function to add a movie to the DB
@@ -431,9 +437,29 @@ const upload = (req, res) => {
 
                 // Checks if the user is a admin
                 if (cust.isAdmin == true) {
+                    var form = new formidable.IncomingForm();
+                    form.parse(req, function (err, fields, files) {
+                        if (files.filetoupload.originalFilename != "")
+                        {
+                            // Read file content 
+                            let rawdata = fs.readFileSync(files.filetoupload.filepath);
+                            let json = JSON.parse(rawdata);
+                            try {
 
-                    MovieService.uploadJson(req.data)
-                    res.redirect("/tvshows")
+                                // Upload the json to the DB
+                                TVShowsService.uploadJson(json)
+                            }
+                            catch{
+                                console.log("failed to upload json to server")
+                            }
+                            finally{
+
+                                // Remove file from disk 
+                                fs.unlinkSync(files.filetoupload.filepath);
+                            }
+                        }
+                        res.redirect("/tvshows")
+                    });
                 }
 
                 // The user isn't an admin so redirect to the main page
