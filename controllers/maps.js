@@ -1,6 +1,8 @@
 
 const locationsService = require('../services/location');
-const customersService = require('../services/customers')
+const customersService = require('../services/customers');
+var fs = require('fs');
+var formidable = require('formidable');
 
 const Alllocations = (req, res) => {
 
@@ -122,6 +124,65 @@ const addLocation = (req, res) => {
     }
 }
 
+// Function to upload JSON 
+const upload = (req, res) => {
+
+    // Checks if the users is logged in
+    if (req.session.username != null) {
+
+        // Gets the user data
+        const customer = customersService.getCustomer(req.session.username)
+        customer.then(cust => {
+
+
+            // Checks if the user exists
+            if (cust) {
+
+                // Checks if the user is a admin
+                if (cust.isAdmin == true) {
+                    var form = new formidable.IncomingForm();
+                    form.parse(req, function (err, fields, files) {
+                        if (files.filetoupload.originalFilename != "")
+                        {
+                            // Read file content 
+                            let rawdata = fs.readFileSync(files.filetoupload.filepath);
+                            let json = JSON.parse(rawdata);
+                            try {
+                                // Upload the json to the DB
+                                locationsService.uploadJson(json)
+                            }
+                            catch{
+                                console.log("failed to upload json to server")
+                            }
+                            finally{
+
+                                // Remove file from disk 
+                                fs.unlinkSync(files.filetoupload.filepath);
+                            }
+                        }
+                        res.redirect("/locations")
+                    });
+                }
+
+                // The user isn't an admin so redirect to the main page
+                else {
+                    res.redirect("/main")
+                }
+            }
+
+            // The user doesn't exists so redirects to the home page
+            else {
+                res.redirect("/")
+            }
+        })
+    }
+
+    // The user isn't logged in so redirects to the home page
+    else {
+        res.redirect("/")
+    }
+}
+
 const deleteLocationPage = (req, res) => {
 
     // Checks if the user is logged in
@@ -213,5 +274,6 @@ module.exports = {
     addLocationPage,
     addLocation,
     deleteLocationPage,
-    deleteLocation
+    deleteLocation,
+    upload
 }

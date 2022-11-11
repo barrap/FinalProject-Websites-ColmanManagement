@@ -63,6 +63,7 @@ router.get("/addLocationPage", LocationController.addLocationPage)
 router.post("/addLocation", LocationController.addLocation)
 router.get("/deleteLocationPage", LocationController.deleteLocationPage)
 router.post("/deleteLocation", LocationController.deleteLocation)
+router.post("/uploadLocation", LocationController.upload)
 
 // TV Shows routing
 router.get('/tvshows', TVShowsController.findAll);

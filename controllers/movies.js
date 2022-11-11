@@ -371,8 +371,6 @@ const update = (req, res) => {
 // Function to upload JSON 
 const upload = (req, res) => {
 
-    console.log("here")
-
     // Checks if the users is logged in
     if (req.session.username != null) {
 

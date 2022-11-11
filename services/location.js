@@ -17,6 +17,17 @@ async function countLocations()
     return data;
 }
 
+// Function to add JSON
+async function uploadJson(json) {
+    await location_db.create(json, function (err, small) {
+        if (err)
+        {
+            console.log(err)
+            return;
+        }
+    });
+}
+
 // Return all locations
 async function getLocations() {
     return await location_db.find({}, { _id: 0, Lat: 1, Len: 1 })
@@ -46,5 +57,6 @@ module.exports = {
     getCities,
     addLocation,
     deleteLocation, 
-    countLocations
+    countLocations,
+    uploadJson
 };
