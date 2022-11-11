@@ -1,13 +1,13 @@
 const express = require('express');
 require('dotenv').config();
 const app = express();
-var ws = require('ws');
-var server = require('http').createServer(app)
-var wsServer = new ws.Server({server});
+var ws = require('websocket').server;
+var http = require('http')
+var server = http.createServer(app)
+var wsServer = new ws({ httpServer: server });
 
-wsServer.on('connection', (ws) => {
+wsServer.on('request', function (request) {
     console.log('A new client Connected!');
-    ws.send('Welcome New Client!');
 });
 
 
