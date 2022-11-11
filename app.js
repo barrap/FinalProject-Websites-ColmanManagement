@@ -1,8 +1,15 @@
 const express = require('express');
 require('dotenv').config();
 const app = express();
-var http = require('http').createServer(app)
-var io = require('socket.io')(http)
+var ws = require('ws');
+var server = require('http').createServer(app)
+var wsServer = new ws.Server({server});
+
+wsServer.on('connection', (ws) => {
+    console.log('A new client Connected!');
+    ws.send('Welcome New Client!');
+});
+
 
 app.use(express.static("public"));
 
@@ -18,4 +25,4 @@ app.set('view engine', 'ejs');
 
 app.use('/', require('./routes/router'));
 
-http.listen(process.env.PORT)
+server.listen(process.env.PORT)
