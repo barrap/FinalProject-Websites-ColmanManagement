@@ -173,7 +173,5 @@ $(() => {
         else {
             return false
         }
-
-        // removed - js to handle file upload
     }
 })

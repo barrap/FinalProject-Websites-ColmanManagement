@@ -17,5 +17,4 @@ $(() => {
             password.type = "password"
         }
     }
-    
 });

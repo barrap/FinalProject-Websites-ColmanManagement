@@ -15,6 +15,14 @@
     <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
     </script>
     <script>
+            var connection = new WebSocket('ws://127.0.0.1:8080');
+            connection.onmessage = function (message) {
+            const res = JSON.parse(message.data);                
+            document.getElementById("online_users").textContent = res.value
+        };
+    </script>
+
+    <script>
         google.charts.load('current', {'packages':['corechart']});
         //google.charts.setOnLoadCallback(drawChart);
         //google.charts.setOnLoadCallback(drawChart2);
@@ -115,6 +123,16 @@
                     <br>
                     <br>
                     <div class="container">
+                        <div class="row" style="margin-left: 42.5%">
+                            <div class="col-lg-3 mb-4">
+                                <div class="card text-white bg-primary mb-3 justify-content-center" style="max-width: 18rem;max-height: 7rem;">
+                                    <div class="card-header">Online Users</div>
+                                    <div class="card-body">
+                                      <h5 class="card-title" id="online_users"></h5>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-lg-3 mb-4">
                                 <div class="card text-white bg-primary mb-3" style="max-width: 18rem;max-height: 7rem;">
@@ -150,7 +168,7 @@
                             </div>
                         </div>
                     </div>
-                    
+                </div>
                     </div>
                     <div class="container text-center g-3">
                         <div class="container">
