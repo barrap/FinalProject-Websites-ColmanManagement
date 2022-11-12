@@ -5,9 +5,32 @@ var ws = require('websocket').server;
 var http = require('http')
 var server = http.createServer(app)
 var wsServer = new ws({ httpServer: server });
+var usersCounter = 0;
+
+const clients = {};
+
+
 
 wsServer.on('request', function (request) {
-    console.log('A new client Connected!');
+    var connection = request.accept(null, request.origin);
+    console.log("new connection")
+    const updateCounter = function (type,val) {
+        for (var key in clients) {            
+            clients[key].sendUTF(JSON.stringify({
+                type: type,
+                value: val
+            }));
+        };
+    }    
+
+    let userID = Math.random().toString(36).substring(7);
+    clients[userID] = connection;
+    updateCounter('counter',Object.keys(clients).length);
+    
+    connection.on('close', () => {
+        delete clients[userID];        
+        updateCounter('counter',Object.keys(clients).length);
+    });
 });
 
 
