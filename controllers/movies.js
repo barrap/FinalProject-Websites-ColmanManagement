@@ -6,8 +6,32 @@ var formidable = require('formidable');
 const MovieService = require('../services/movies');
 const CreditCardService = require('../services/creditCard');
 const customersService = require("../services/customers");
+const twitterApi = require("twitter-api-v2").default;
 const public_dir_path = "../public"
 
+const client = new twitterApi({
+    appKey:process.env.API_KEY,
+    appSecret:process.env.API_SECRET,
+    accessToken:process.env.ACCESS_TOKEN,
+    accessSecret:process.env.ACCESS_SECRET,
+    clientId:process.env.CLIENT_ID,
+    clientSecret:process.env.CLIENT_SECRET
+})
+
+const rwClient = client.readWrite;
+
+// Function to tweet
+async function tweet(tweet)
+{
+    try{ 
+        await rwClient.v1.tweet("Check out our new movie "+tweet+"!")       
+
+    }
+    catch(e)
+    {
+        console.error(e)
+    }
+}
 
 // Function to get the data on all the movies
 const findAll = (req, res) => {
@@ -193,6 +217,7 @@ const addMovie = (req, res) => {
                         const result = MovieService.addMovie(req.body.title, req.body.title.split(" ").join(""), parseInt(req.body.year, 10), req.body.director, parseInt(req.body.length, 10),
                             req.body.actors.split(","), req.body.genre.split(","), req.body.preview, req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
                         result.then(r => {
+                            tweet(req.body.title)
                             res.redirect("/movies")
                         })
                     }
