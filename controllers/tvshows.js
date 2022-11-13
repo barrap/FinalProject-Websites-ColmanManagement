@@ -7,7 +7,32 @@ const customersService = require("../services/customers");
 var fs = require('fs');
 var formidable = require('formidable');
 const tvshow = require("../models/tvshow");
+const twitterApi = require("twitter-api-v2").default;
 const public_dir_path = "../public"
+
+const client = new twitterApi({
+    appKey:process.env.API_KEY,
+    appSecret:process.env.API_SECRET,
+    accessToken:process.env.ACCESS_TOKEN,
+    accessSecret:process.env.ACCESS_SECRET,
+    clientId:process.env.CLIENT_ID,
+    clientSecret:process.env.CLIENT_SECRET
+})
+
+const rwClient = client.readWrite;
+
+// Function to tweet
+async function tweet(tweet)
+{
+    try{ 
+        await rwClient.v1.tweet("Check out our new Show "+tweet+"!")       
+
+    }
+    catch(e)
+    {
+        console.error(e)
+    }
+}
 
 
 
@@ -166,7 +191,7 @@ const deleteTvshow = (req, res) => {
 
 
 
-// Function to add a movie to the DB
+// Function to add a show to the DB
 const addTVShow = (req, res) => {
 
     // Checks if the users is logged in
@@ -184,6 +209,7 @@ const addTVShow = (req, res) => {
                         const result = TVShowsService.addTvShow(req.body.title, req.body.title.split(" ").join(""), parseInt(req.body.year, 10), req.body.preview, parseInt(req.body.seasons, 10),
                             req.body.genre.split(","), req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
                         result.then(r => {
+                            tweet(req.body.title)
                             res.redirect("/tvshows")
                         })
                     }
