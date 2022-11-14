@@ -11,7 +11,8 @@ const Movie = new Schema({
     type: Array,
     preview: String,
     trailer: String,
-    price: Number
+    price: Number,
+    imdb_id: String
 })
 
 module.exports = mongoose.model('Movie', Movie)

@@ -81,7 +81,7 @@ async function deleteMovie(id) {
 }
 
 // Function to add a movie
-function addMovie(title, shortTitle, year, director, length, main_actors, types, preview, trailer, price) {
+function addMovie(title, shortTitle, year, director, length, main_actors, types, preview, trailer, price, imdb_id) {
     new_types = []
     new_types.push(types[0])
     for (var i = 1; i < types.length; i++) {
@@ -105,7 +105,8 @@ function addMovie(title, shortTitle, year, director, length, main_actors, types,
         type: new_types,
         preview: preview,
         trailer: trailer,
-        price: price
+        price: price,
+        imdb_id: imdb_id
 
     })
 
