@@ -13,7 +13,6 @@ const clients = {};
 
 wsServer.on('request', function (request) {
     var connection = request.accept(null, request.origin);
-    console.log("new connection")
     const updateCounter = function (type,val) {
         for (var key in clients) {            
             clients[key].sendUTF(JSON.stringify({
