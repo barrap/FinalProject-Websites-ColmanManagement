@@ -52,7 +52,7 @@ async function deleteTvShow(tvshow_name) {
 }
 
 // Function to add a tv show
-function addTvShow(title, shortTitle, year, description, seasons, types, trailer, price) {
+function addTvShow(title, shortTitle, year, description, seasons, types, trailer, price, imdb_id) {
     new_types = []
     new_types.push(types[0])
     for (var i = 1; i < types.length; i++) {
@@ -68,7 +68,8 @@ function addTvShow(title, shortTitle, year, description, seasons, types, trailer
         seasons: seasons,
         type: new_types,
         trailer: trailer,
-        price: price
+        price: price,
+        imdb_id: imdb_id
 
     })
 

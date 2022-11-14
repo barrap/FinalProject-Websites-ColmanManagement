@@ -10,7 +10,8 @@ const tvshow = new Schema({
     seasons: Number,
     type: Array,
     trailer: String,
-    price: Number
+    price: Number,
+    imdb_id: String
 });
 
 module.exports = mongoose.model('tvshow', tvshow)
