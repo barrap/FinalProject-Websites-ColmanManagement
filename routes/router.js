@@ -82,6 +82,8 @@ router.post("/uploadtvshows", TVShowsController.upload)
 // Orders routing
 router.post("/addOrder", OrderController.order)
 router.post("/paying", OrderController.paying)
+router.get("/allOrders", OrderController.allOrders)
+router.get("/userOrders", OrderController.getOrders)
 
 
 // Stats routing
