@@ -27,7 +27,7 @@ const paying = (req, res) => {
                             CreditCardService.addCard(req.body.cardNumber, req.session.username, req.body.date, req.body.secNum)
 
                         }
-                        res.redirect("/main")
+                        res.redirect("/after_order")
                     })
                 }
                 catch (e) {
@@ -120,6 +120,37 @@ function parseCart(cart) {
     return cart
 }
 
+// atfer order function 
+const after_order = (req, res) => {
+
+    // Checks if the users is logged in
+    if (req.session.username != null) {
+
+        // Gets the user data
+        const customer = customersService.getCustomer(req.session.username)
+        customer.then(cust => {
+
+            information=[]
+            // Checks if the user exists
+            if (cust) {
+                information['username'] = cust._id
+
+                res.render("after_order.ejs", { info: information })
+            }
+
+            // The user doesn't exists so redirects to the home page
+            else {
+                res.redirect("/")
+            }
+        })
+    }
+
+    // The user isn't logged in so redirects to the home page
+    else {
+        res.redirect("/")
+    }
+}
+
 // Function to get all the orders 
 const allOrders = (req, res) => {
     information = {}
@@ -209,5 +240,6 @@ module.exports = {
     paying,
     order,
     allOrders,
-    getOrders
+    getOrders,
+    after_order
 }

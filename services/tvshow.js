@@ -104,6 +104,9 @@ async function search(param, value) {
         case "cost":
             return await TvShows.find({ "price": { "$gte": parseInt(value, 10) } }).sort({ _id: 1 })
             break;
+        case "imdb_id":
+            return await TvShows.find({ "imdb_id": value}).sort({ _id: 1 })
+        break;
         default:
             break;
     }
