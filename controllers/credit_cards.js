@@ -79,6 +79,7 @@ function updatePayment(req, res) {
         // Gets the user data
         const customer = customersService.getCustomer(req.session.username)
         customer.then(cust => {
+            var date = new Date()
 
             // Checks if the user exists
             if (cust) {
@@ -88,6 +89,9 @@ function updatePayment(req, res) {
                     {
                         results['username'] = cust._id
                         results['cards'] = c
+                        month = date.getMonth()+1
+                        year = date.getFullYear()
+                        results['date'] = year+'-'+month
                         // Checks if the user is admin
                         if (cust.isAdmin == true) {
                             res.render("../views/UpdatePayment-admin", {  dict: results })

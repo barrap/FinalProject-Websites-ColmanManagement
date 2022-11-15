@@ -52,6 +52,7 @@ const paying = (req, res) => {
 // Function to add order 
 const order = (req, res) => {
     information = {}
+    var date = new Date()
 
     // Checks if the users is logged in
     if (req.session.username != null) {
@@ -68,6 +69,9 @@ const order = (req, res) => {
                     information['username'] = cust._id
                     information['fullname'] = cust.fullname
                     information['cards'] = r
+                    month = date.getMonth()+1
+                    year = date.getFullYear()
+                    information['date'] = year+'-'+month
 
                     // Checks if the user is admin
                     if (cust.isAdmin == true) {
