@@ -9,6 +9,7 @@ var formidable = require('formidable');
 const tvshow = require("../models/tvshow");
 const twitterApi = require("twitter-api-v2").default;
 const public_dir_path = "../public"
+const axios = require("axios");
 
 const client = new twitterApi({
     appKey:process.env.API_KEY,
@@ -206,14 +207,33 @@ const addTVShow = (req, res) => {
                 // Checks if the user is a admin
                 if (cust.isAdmin == true) {
                     try {
-                        const result = TVShowsService.addTvShow(req.body.title, req.body.title.split(" ").join(""), parseInt(req.body.year, 10), req.body.preview, parseInt(req.body.seasons, 10),
-                            req.body.genre.split(","), req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
-                        result.then(r => {
-                            tweet(req.body.title)
-                            res.redirect("/tvshows")
-                        })
+                        const options = {
+                            method: 'GET',
+                            url: 'https://imdb8.p.rapidapi.com/title/v2/find',
+                            params: {title: req.body.title, limit: '20', sortArg: 'moviemeter,asc'},
+                            headers: {
+                              'X-RapidAPI-Key': 'ac1f79cbcbmsh9f4274bfdce4627p11dabcjsn17f24c92f5b3',
+                              'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
+                            }
+                          };
+                          
+                          axios.request(options).then(function (response) {
+                            id = (response.data.results[0].id);
+                            id = id.split('/')
+                              
+                              const result = TVShowsService.addTvShow(req.body.title, req.body.title.split(" ").join(""), parseInt(req.body.year, 10), req.body.preview, parseInt(req.body.seasons, 10),
+                              req.body.genre.split(","), req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10),id[2])
+                                result.then(r => {
+                                    tweet(req.body.title)
+                                    res.redirect("/tvshows")
+                                })
+                          }).catch(function (error) {
+                                res.render("../views/addTVShow", { message: { status: "Title does not exist" } })
+                          });
+                        
                     }
                     catch (e) {
+                        console.log(e)
                         res.render("../views/addTVShow", { message: { status: "TV Show already exists" } })
                     }
 

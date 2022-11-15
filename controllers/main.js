@@ -3,6 +3,10 @@ const MovieService = require('../services/movies');
 const customersService = require("../services/customers");
 const url = require("url")
 
+// insert a function to get movie rating from a given title
+
+
+
 function mainPage(req, res) {
 
 
@@ -59,10 +63,12 @@ function mainPage(req, res) {
                 const movies = MovieService.getMovies()
                 movies.then(mov => {
                     results['movies'] = mov
+                    // Add here a for loop to go over all movies, and insert an array that contains the movie name and its rating
                     // Gets the data of all the tv shows
                     const tv_shows = TVShowsService.getTvShows()
                     tv_shows.then(tv => {
                         results['shows'] = tv
+                        // same here (rating)
                         results['username'] = cust._id
 
                         // Checks if the user is admin

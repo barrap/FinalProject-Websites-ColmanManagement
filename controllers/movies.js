@@ -8,6 +8,7 @@ const CreditCardService = require('../services/creditCard');
 const customersService = require("../services/customers");
 const twitterApi = require("twitter-api-v2").default;
 const public_dir_path = "../public"
+const axios = require("axios");
 
 const client = new twitterApi({
     appKey:process.env.API_KEY,
@@ -34,10 +35,10 @@ async function tweet(tweet)
 }
 
 // Function to get the data on all the movies
-const findAll = (req, res) => {
+const findAll = async (req, res) => {
     // Checks if the users is logged in
     if (req.session.username != null) {
-
+        
         // Gets the user data 
         const customer = customersService.getCustomer(req.session.username)
         customer.then(cust => {
@@ -77,6 +78,7 @@ const findAll = (req, res) => {
                 movies.then(mov => {
                     results['movies'] = mov
                     // Gets the data of all the tv shows
+                    // for loop to 
 
                     results['username'] = cust._id
 
@@ -197,6 +199,54 @@ const deleteMovie = (req, res) => {
     }
 }
 
+// Get the movie's imdb id
+async function getId(title)
+    {
+        id = ""
+        const options = {
+            method: 'GET',
+            url: 'https://imdb8.p.rapidapi.com/title/v2/find',
+            params: {title: title, limit: '20', sortArg: 'moviemeter,asc'},
+            headers: {
+              'X-RapidAPI-Key': 'ac1f79cbcbmsh9f4274bfdce4627p11dabcjsn17f24c92f5b3',
+              'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
+            }
+          };
+          
+          axios.request(options).then(function (response) {
+              id = (response.data.results[0].id);
+              console.log(id)
+              return id
+          }).catch(function (error) {
+              console.error(error);
+          });
+        
+    }
+
+function getRating(id)
+{
+    const data = null;
+    rating=""
+    id = id.split('/')
+    rate_url = "https://imdb8.p.rapidapi.com/title/get-ratings?tconst="+id[2]
+
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+            rating = (JSON.parse(this.responseText).rating);
+            return rating
+        }
+    });
+
+    xhr.open("GET",rate_url );
+    xhr.setRequestHeader("X-RapidAPI-Key", "ac1f79cbcbmsh9f4274bfdce4627p11dabcjsn17f24c92f5b3");
+    xhr.setRequestHeader("X-RapidAPI-Host", "imdb8.p.rapidapi.com");
+
+    xhr.send(data);
+    
+}
 
 // Function to add a movie to the DB
 const addMovie = (req, res) => {
@@ -214,14 +264,34 @@ const addMovie = (req, res) => {
                 // Checks if the user is a admin
                 if (cust.isAdmin == true) {
                     try {
-                        const result = MovieService.addMovie(req.body.title, req.body.title.split(" ").join(""), parseInt(req.body.year, 10), req.body.director, parseInt(req.body.length, 10),
-                            req.body.actors.split(","), req.body.genre.split(","), req.body.preview, req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10))
-                        result.then(r => {
-                            tweet(req.body.title)
-                            res.redirect("/movies")
-                        })
+                        const options = {
+                            method: 'GET',
+                            url: 'https://imdb8.p.rapidapi.com/title/v2/find',
+                            params: {title: req.body.title, limit: '20', sortArg: 'moviemeter,asc'},
+                            headers: {
+                              'X-RapidAPI-Key': 'ac1f79cbcbmsh9f4274bfdce4627p11dabcjsn17f24c92f5b3',
+                              'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
+                            }
+                          };
+                          
+                          axios.request(options).then(function (response) {
+                            id = (response.data.results[0].id);
+                            id = id.split('/')
+                              // add here a function to add the mdb id for the movie - also in add tv show
+                            const result = MovieService.addMovie(req.body.title, req.body.title.split(" ").join(""), parseInt(req.body.year, 10), req.body.director, parseInt(req.body.length, 10),
+                            req.body.actors.split(","), req.body.genre.split(","), req.body.preview, req.body.link.replace("watch?v=", "embed/"), parseInt(req.body.cost, 10),id[2])
+                            result.then(r => {
+                                tweet(req.body.title)
+                                res.redirect("/movies")
+                            })
+                          }).catch(function (error) {
+                                res.render("../views/addMovie", { message: { status: "Title does not exist" } })
+                          });
+
+                        
                     }
                     catch (e) {
+                        console.log(e)
                         res.render("../views/addMovie", { message: { status: "Movie already exists" } })
                     }
 
