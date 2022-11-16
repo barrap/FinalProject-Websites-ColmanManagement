@@ -30,7 +30,7 @@ section {
 }
 
 footer {
-    position: fixed;
+    position: relative;
     margin-top: 10px;
     left: 0;
     bottom: 0;
