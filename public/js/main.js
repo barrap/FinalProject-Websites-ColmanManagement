@@ -43,7 +43,7 @@ toggle between hiding and showing the dropdown content */
         for (var i = 0; i < tv_shows.length; i++) {
             var tv_show_title = document.getElementById("tvshow" + i).innerHTML
             var tv_show_page_link = document.getElementById("tv_link" + i)
-            tv_show_page_link.setAttribute("href", "/tvshow?tvshow=" + tv_show_title.split(" ").join(""))
+            tv_show_page_link.setAttribute("href", "/tvshow?tvshow=" + tv_show_title)
         }
     }
 

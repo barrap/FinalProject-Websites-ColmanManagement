@@ -103,7 +103,8 @@ const findAll = (req, res) => {
 function getTVShow(req, res) {
 
     const query = url.parse(req.url).query
-    const tvshow = query.split("=")[1]
+    var tvshow = query.split("=")[1]
+    tvshow = tvshow.replaceAll("%20","")
     TVshow_result = {}
 
     // Check if the user is logged in

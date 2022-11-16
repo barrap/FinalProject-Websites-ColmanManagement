@@ -1,5 +1,5 @@
 $(() => {
-    title = (window.location.href).split("movie=")[1]
+    title = (window.location.href).split("=")[1]
     title = title.replaceAll("%20"," ")
     title = title.trimStart().replaceAll(" ","%20")
     const settings = {
