@@ -25,6 +25,7 @@ router.get("/filter", MainController.filter)
 router.get("/allData", MainController.findAll)
 router.get("/about", MainController.about)
 
+
 // Credit cards routing 
 router.get("/updatePayment", CreditCardsController.updatePayment)
 router.post("/deleteCard", CreditCardsController.deleteCard)
@@ -84,7 +85,7 @@ router.post("/addOrder", OrderController.order)
 router.post("/paying", OrderController.paying)
 router.get("/allOrders", OrderController.allOrders)
 router.get("/userOrders", OrderController.getOrders)
-
+router.get("/after_order", OrderController.after_order)
 
 // Stats routing
 router.get("/admin-stats", statController.GetData);
