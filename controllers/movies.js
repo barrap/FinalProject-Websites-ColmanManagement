@@ -112,7 +112,8 @@ const findAll = async (req, res) => {
 function getMovie(req, res) {
 
     const query = url.parse(req.url).query
-    const movie = query.split("=")[1]
+    var movie = query.split("=")[1]
+    movie = movie.replaceAll("%20","")
     movie_result = {}
 
     // Check if the user is logged in

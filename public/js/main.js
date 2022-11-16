@@ -32,7 +32,7 @@ toggle between hiding and showing the dropdown content */
         for (var i = 0; i < movies.length; i++) {
             var movie_title = document.getElementById("movie" + i).innerHTML
             var movie_page_link = document.getElementById("movie_link" + i)
-            movie_page_link.setAttribute("href", "/movie?movie=" + movie_title.split(" ").join(""))
+            movie_page_link.setAttribute("href", "/movie?movie=" + movie_title)
         }
 
     }
