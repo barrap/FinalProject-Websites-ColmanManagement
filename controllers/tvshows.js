@@ -234,7 +234,6 @@ const addTVShow = (req, res) => {
                         
                     }
                     catch (e) {
-                        console.log(e)
                         res.render("../views/addTVShow", { message: { status: "TV Show already exists" } })
                     }
 

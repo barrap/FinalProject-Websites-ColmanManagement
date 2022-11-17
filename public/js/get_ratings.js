@@ -31,8 +31,6 @@ $(() => {
             rating = (response.rating);
             let template = $("#rate_template").html()
             template = template.replace('{rating}',rating)
-            console.log((window.location.href).split("movie="))
-    
             $(".results").append(template) 
         });
     

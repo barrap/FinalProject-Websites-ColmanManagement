@@ -53,6 +53,7 @@
                                 <th>Is Admin?</th>
                                 <th>Phone Number</th>
                                 <th>Location</th>
+                                <th>Number of orders</th>
                                 <th>Delete user?</th>
                                 <th>Change admin status</th>
                             </tr>
@@ -75,6 +76,9 @@
                                     </td>
                                     <td>
                                         <%=customers[i].location%>
+                                    </td>
+                                    <td>
+                                        <%=customers[i].orders%>
                                     </td>
                                     <td>
                                         <form action="/deleteCustomer" method="POST">
