@@ -1,0 +1,61 @@
+[{
+  "_id": "5326100356173579",
+  "_username": "barrap",
+  "_exp_date": {
+    "$date": {
+      "$numberLong": "1525132800000"
+    }
+  },
+  "_digits": 123,
+  "__v": 0
+},{
+  "_id": "1111222233334444",
+  "_username": "kingInTheNorth",
+  "_exp_date": {
+    "$date": {
+      "$numberLong": "1772323200000"
+    }
+  },
+  "_digits": 123,
+  "__v": 0
+},{
+  "_id": "5555666677778888",
+  "_username": "iAmIronMan",
+  "_exp_date": {
+    "$date": {
+      "$numberLong": "1788220800000"
+    }
+  },
+  "_digits": 852,
+  "__v": 0
+},{
+  "_id": "1111555599997777",
+  "_username": "thomas_s",
+  "_exp_date": {
+    "$date": {
+      "$numberLong": "1817078400000"
+    }
+  },
+  "_digits": 752,
+  "__v": 0
+},{
+  "_id": "3333222244446666",
+  "_username": "shmosbey",
+  "_exp_date": {
+    "$date": {
+      "$numberLong": "1756684800000"
+    }
+  },
+  "_digits": 741,
+  "__v": 0
+},{
+  "_id": "9999777766662222",
+  "_username": "DieHardForLife",
+  "_exp_date": {
+    "$date": {
+      "$numberLong": "1693526400000"
+    }
+  },
+  "_digits": 951,
+  "__v": 0
+}]

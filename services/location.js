@@ -22,7 +22,6 @@ async function uploadJson(json) {
     await location_db.create(json, function (err, small) {
         if (err)
         {
-            console.log(err)
             return;
         }
     });

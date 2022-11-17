@@ -1,0 +1,109 @@
+[{
+  "_id": "oranma",
+  "fullname": "Oran Moyal",
+  "password": "4c92796bd51caf7ce66f111a5bc07cb9441c4bd439d7d5914e6c0f9bd52360407e68a1346978ef8fc7c7a41245ad694da5eae652dee52587cd366fa880ae82db",
+  "location": "Be'er Sheva",
+  "isAdmin": true,
+  "phone": "0506662376",
+  "orders": 0,
+  "__v": 0
+},{
+  "_id": "kingInTheNorth",
+  "fullname": "Jon Show",
+  "password": "4c92796bd51caf7ce66f111a5bc07cb9441c4bd439d7d5914e6c0f9bd52360407e68a1346978ef8fc7c7a41245ad694da5eae652dee52587cd366fa880ae82db",
+  "location": "Qiryat Shemona",
+  "isAdmin": false,
+  "phone": "0589967843",
+  "orders": 1,
+  "__v": 0
+},{
+  "_id": "iAmIronMan",
+  "fullname": "Tony Stark",
+  "password": "4c92796bd51caf7ce66f111a5bc07cb9441c4bd439d7d5914e6c0f9bd52360407e68a1346978ef8fc7c7a41245ad694da5eae652dee52587cd366fa880ae82db",
+  "location": "Tel Aviv",
+  "isAdmin": false,
+  "phone": "0575960438",
+  "orders": 1,
+  "__v": 0
+},{
+  "_id": "barrap",
+  "fullname": "Bar Rapaport",
+  "password": "4c92796bd51caf7ce66f111a5bc07cb9441c4bd439d7d5914e6c0f9bd52360407e68a1346978ef8fc7c7a41245ad694da5eae652dee52587cd366fa880ae82db",
+  "location": "Herzliya",
+  "isAdmin": true,
+  "phone": "0545520952",
+  "orders": 3,
+  "__v": 0
+},{
+  "_id": "thomas_s",
+  "fullname": "Thomas Shelby",
+  "password": "4c92796bd51caf7ce66f111a5bc07cb9441c4bd439d7d5914e6c0f9bd52360407e68a1346978ef8fc7c7a41245ad694da5eae652dee52587cd366fa880ae82db",
+  "location": "Ashkelon",
+  "isAdmin": false,
+  "phone": "0576283749",
+  "orders": 1,
+  "__v": 0
+},{
+  "_id": "shmosbey",
+  "fullname": "Ted Mosbey",
+  "password": "4c92796bd51caf7ce66f111a5bc07cb9441c4bd439d7d5914e6c0f9bd52360407e68a1346978ef8fc7c7a41245ad694da5eae652dee52587cd366fa880ae82db",
+  "location": "Sde Boker",
+  "isAdmin": false,
+  "phone": "0514962384",
+  "orders": 1,
+  "__v": 0
+},{
+  "_id": "DieHardForLife",
+  "fullname": "Jake Parelta",
+  "password": "4c92796bd51caf7ce66f111a5bc07cb9441c4bd439d7d5914e6c0f9bd52360407e68a1346978ef8fc7c7a41245ad694da5eae652dee52587cd366fa880ae82db",
+  "location": "Tel Aviv",
+  "isAdmin": false,
+  "phone": "0537196716",
+  "orders": 1,
+  "__v": 0
+},{
+  "_id": "WorthyThor",
+  "fullname": "Thor Odinson",
+  "password": "4c92796bd51caf7ce66f111a5bc07cb9441c4bd439d7d5914e6c0f9bd52360407e68a1346978ef8fc7c7a41245ad694da5eae652dee52587cd366fa880ae82db",
+  "location": "Karmiel",
+  "isAdmin": false,
+  "phone": "0584196327",
+  "orders": 0,
+  "__v": 0
+},{
+  "_id": "MrPresident",
+  "fullname": "Francis Underwood",
+  "password": "4c92796bd51caf7ce66f111a5bc07cb9441c4bd439d7d5914e6c0f9bd52360407e68a1346978ef8fc7c7a41245ad694da5eae652dee52587cd366fa880ae82db",
+  "location": "Jerusalem",
+  "isAdmin": false,
+  "phone": "0548962374",
+  "orders": 0,
+  "__v": 0
+},{
+  "_id": "cap",
+  "fullname": "Steve Rogers",
+  "password": "4c92796bd51caf7ce66f111a5bc07cb9441c4bd439d7d5914e6c0f9bd52360407e68a1346978ef8fc7c7a41245ad694da5eae652dee52587cd366fa880ae82db",
+  "location": "Eilat",
+  "isAdmin": false,
+  "phone": "0558741398",
+  "orders": 0,
+  "__v": 0
+},{
+  "_id": "MrKnight",
+  "fullname": "Marc Spector",
+  "password": "4c92796bd51caf7ce66f111a5bc07cb9441c4bd439d7d5914e6c0f9bd52360407e68a1346978ef8fc7c7a41245ad694da5eae652dee52587cd366fa880ae82db",
+  "location": "Ashdod",
+  "isAdmin": false,
+  "phone": "0579856324",
+  "orders": 0,
+  "__v": 0
+},{
+  "_id": "shircapara",
+  "fullname": "Shir Sadon",
+  "password": "4c92796bd51caf7ce66f111a5bc07cb9441c4bd439d7d5914e6c0f9bd52360407e68a1346978ef8fc7c7a41245ad694da5eae652dee52587cd366fa880ae82db",
+  "location": "Jerusalem",
+  "isAdmin": false,
+  "phone": "0549631794",
+  "orders": 0,
+  "__v": 0
+}]

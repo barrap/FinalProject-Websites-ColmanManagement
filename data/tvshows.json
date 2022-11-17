@@ -1,0 +1,162 @@
+[{
+  "_id": "How I Met Your Mother",
+  "shortTitle": "HowIMetYourMother",
+  "description": "Ted Mosby, an architect, recounts to his children the events that led him to meet their mother. His journey is made more eventful by the presence of his friends Lily, Marshall, Robin and Barney.",
+  "year": "2005",
+  "seasons": 9,
+  "type": [
+    "Comady",
+    "Romance"
+  ],
+  "trailer": "https://www.youtube.com/embed/aJtVL2_fA5w",
+  "price": 9,
+  "__v": 0
+},{
+  "_id": "Peaky Blinders",
+  "shortTitle": "PeakyBlinders",
+  "description": "Tommy Shelby, a dangerous man, leads the Peaky Blinders, a gang based in Birmingham. Soon, Chester Campbell, an inspector, decides to nab him and put an end to the criminal activities.",
+  "year": "2013",
+  "seasons": 6,
+  "type": [
+    "Crime",
+    "Drama"
+  ],
+  "trailer": "https://www.youtube.com/embed/oVzVdvGIC7U",
+  "price": 10,
+  "__v": 0
+},{
+  "_id": "Stranger Things",
+  "shortTitle": "StrangerThings",
+  "description": "In 1980s Indiana, a group of young friends witness supernatural forces and secret government exploits. As they search for answers, the children unravel a series of extraordinary mysteries.",
+  "year": "2016",
+  "seasons": 4,
+  "type": [
+    "Drama",
+    "Fantasy",
+    "Horror"
+  ],
+  "trailer": "https://www.youtube.com/embed/b9EkMc79ZSU",
+  "price": 20,
+  "__v": 0
+},{
+  "_id": "Game of Thrones",
+  "shortTitle": "GameofThrones",
+  "description": "Nine noble families wage war against each other in order to gain control over the mythical land of Westeros. Meanwhile, a force is rising after millenniums and threatens the existence of living men.",
+  "year": "2011",
+  "seasons": 8,
+  "type": [
+    "Action",
+    "Adventure",
+    "Drama"
+  ],
+  "trailer": "https://www.youtube.com/embed/KPLWWIOCOOQ",
+  "price": 15,
+  "__v": 0
+},{
+  "_id": "House of the Dragon",
+  "shortTitle": "HouseoftheDragon",
+  "description": "After the death of their father, two siblings fight for the throne, thereby causing a civil war known as the Dance of the Dragons.",
+  "year": "2022",
+  "seasons": 1,
+  "type": [
+    "Action",
+    "Adventure",
+    "Drama"
+  ],
+  "trailer": "https://www.youtube.com/embed/DotnJ7tTA34",
+  "price": 20,
+  "__v": 0
+},{
+  "_id": "Moon Knight",
+  "shortTitle": "MoonKnight",
+  "description": "Steven Grant and mercenary Marc Spector investigate the mysteries of the Egyptian gods from inside the same body.",
+  "year": "2022",
+  "seasons": 1,
+  "type": [
+    "Action",
+    "Adventure",
+    "Fantasy"
+  ],
+  "trailer": "https://www.youtube.com/embed/x7Krla_UxRg",
+  "price": 17,
+  "__v": 0
+},{
+  "_id": "Brooklyn Nine-Nine",
+  "shortTitle": "BrooklynNine-Nine",
+  "description": "Ray Holt, an eccentric commanding officer, and his diverse and quirky team of odd detectives solve crimes in Brooklyn, New York City.",
+  "year": "2013",
+  "seasons": 8,
+  "type": [
+    "Comady",
+    "Crime"
+  ],
+  "trailer": "https://www.youtube.com/embed/sEOuJ4z5aTc",
+  "price": 13,
+  "__v": 0
+},{
+  "_id": "Friends",
+  "shortTitle": "Friends",
+  "description": "Follow the lives of six reckless adults living in Manhattan, as they indulge in adventures which make their lives both troublesome and happening.",
+  "year": "1994",
+  "seasons": 10,
+  "type": [
+    "Comady",
+    "Romance"
+  ],
+  "trailer": "https://www.youtube.com/embed/IEEbUzffzrk",
+  "price": 10,
+  "__v": 0
+},{
+  "_id": "The Big Bang Theory",
+  "shortTitle": "TheBigBangTheory",
+  "description": "The lives of four socially awkward friends, Leonard, Sheldon, Howard and Raj, take a wild turn when they meet the beautiful and free-spirited Penny.",
+  "year": "2007",
+  "seasons": 12,
+  "type": [
+    "Comady",
+    "Romance"
+  ],
+  "trailer": "https://www.youtube.com/embed/WBb3fojgW0Q",
+  "price": 4,
+  "__v": 0
+},{
+  "_id": "House of Cards",
+  "shortTitle": "HouseofCards",
+  "description": "Frank Underwood is a Democrat appointed as the secretary of state. Along with his wife, he sets out on a quest to seek revenge on the people who betrayed him while successfully rising to supremacy.",
+  "year": "2013",
+  "seasons": 6,
+  "type": [
+    "Drama"
+  ],
+  "trailer": "https://www.youtube.com/embed/SvSkxBYuoQY",
+  "price": 17,
+  "__v": 0
+},{
+  "_id": "Designated Survivor",
+  "shortTitle": "DesignatedSurvivor",
+  "description": "When a mysterious attack kills the president and wipes out everybody in the line of succession, Thomas Kirkman, a lowly cabinet minister, is forced to rise to the occasion as the designated survivor.",
+  "year": "2016",
+  "seasons": 3,
+  "type": [
+    "Action",
+    "Drama",
+    "Mystery"
+  ],
+  "trailer": "https://www.youtube.com/embed/N_f1v0Nx5Sw",
+  "price": 15,
+  "__v": 0
+},{
+  "_id": "The Blacklist",
+  "shortTitle": "TheBlacklist",
+  "description": "A wanted fugitive mysteriously surrenders himself to the FBI and offers to help them capture deadly criminals. His sole condition is that he will work only with the new profiler, Elizabeth Keen.",
+  "year": "2013",
+  "seasons": 9,
+  "type": [
+    "Crime",
+    "Drama",
+    "Mystery"
+  ],
+  "trailer": "https://www.youtube.com/embed/-WYdUaK54fU",
+  "price": 10,
+  "__v": 0
+}]

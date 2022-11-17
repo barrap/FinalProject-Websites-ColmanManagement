@@ -1,0 +1,229 @@
+[{
+  "_id": "Captain America: The Winter Soldier",
+  "year": "2014",
+  "director": "Anthony Russo",
+  "length": 136,
+  "main_actors": [
+    "Chris Evans",
+    "Scarlett Johansson"
+  ],
+  "type": [
+    "Action",
+    "Adventure",
+    "Sci-Fi"
+  ],
+  "preview": "As Steve Rogers adapts to the complexities of a contemporary world, he joins Natasha Romanoff and Sam Wilson in his mission to uncover the secret behind a deadly, mysterious assassin.",
+  "trailer": "https://www.youtube.com/embed/7SlILk2WMTI",
+  "price": 15,
+  "__v": 0,
+  "shortTitle": "CaptainAmerica:TheWinterSoldier"
+},{
+  "_id": "Thor",
+  "year": "2011",
+  "director": "Kenneth Branagh",
+  "length": 136,
+  "main_actors": [
+    "chris hemsworth",
+    " tom hiddelston"
+  ],
+  "type": [
+    "action",
+    " comedy"
+  ],
+  "preview": "Deprived of his mighty hammer Mjolnir, Thor must escape the other side of the universe to save his home, Asgard, from Hela, the goddess of death.",
+  "trailer": "https://www.youtube.com/embed/JOddp-nlNvQ",
+  "price": 10,
+  "__v": 0,
+  "shortTitle": "Thor"
+},{
+  "_id": "Avatar",
+  "year": "2009",
+  "director": "James Cameron",
+  "length": 162,
+  "main_actors": [
+    "Sam Worthington",
+    " Zoe Saldana",
+    " Stephen Lang",
+    " Michelle Rodriguez",
+    " Sigourney Weaver"
+  ],
+  "type": [
+    "Action",
+    " Adventure",
+    " Fantasy"
+  ],
+  "preview": "Jake, who is paraplegic, replaces his twin on the Na'vi inhabited Pandora for a corporate mission. After the natives accept him as one of their own, he must decide where his loyalties lie.",
+  "trailer": "https://www.youtube.com/embed/5PSNL1qE6VY",
+  "price": 20,
+  "__v": 0,
+  "shortTitle": "Avatar"
+},{
+  "_id": "Interstellar",
+  "year": "2014",
+  "director": "Christopher Nolan",
+  "length": 169,
+  "main_actors": [
+    "Matthew McConaughey",
+    " Anne Hathaway"
+  ],
+  "type": [
+    "Adventure",
+    " Drama",
+    " Fantasy"
+  ],
+  "preview": "When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.",
+  "trailer": "https://www.youtube.com/embed/zSWdZVtXT7E",
+  "price": 20,
+  "__v": 0,
+  "shortTitle": "Interstellar"
+},{
+  "_id": "12 Mighty Orphans",
+  "year": "2021",
+  "director": "Ty Roberts",
+  "length": 118,
+  "main_actors": [
+    "Luke Wilson",
+    " Vinessa Shaw"
+  ],
+  "type": [
+    "History",
+    " Sport"
+  ],
+  "preview": "During the Great Depression, Rusty, a football coach, starts training a team of orphaned teenagers for a state championship. But while doing so, he must deal with the orphanage manager's rebuke.",
+  "trailer": "https://www.youtube.com/embed/cgM_oyXE0d0",
+  "price": 10,
+  "__v": 0,
+  "shortTitle": "12MightyOrphans"
+},{
+  "_id": "Zero Dark Thirty",
+  "year": "2012",
+  "director": "Kathryn Bigelow",
+  "length": 157,
+  "main_actors": [
+    "Jessica Chastain",
+    " Jason Clarke"
+  ],
+  "type": [
+    "Drama",
+    " History",
+    " Thriller"
+  ],
+  "preview": "A group of CIA operatives, led by analyst Maya, spends over a decade tracking the location of one of the most dreaded names in the United States of America, Osama Bin Laden.",
+  "trailer": "https://www.youtube.com/embed/LJFra3B9sbA",
+  "price": 16,
+  "__v": 0,
+  "shortTitle": "ZeroDarkThirty"
+},{
+  "_id": "Remember the Titans",
+  "year": "2000",
+  "director": "Boaz Yakin",
+  "length": 113,
+  "main_actors": [
+    "Denzel Washington",
+    " Will Patton"
+  ],
+  "type": [
+    "Biography",
+    " Drama",
+    " Sport"
+  ],
+  "preview": "Herman Boone, an African-American, is appointed as the new coach of a high school team. The team is playing as a racially-integrated team for the first time.",
+  "trailer": "https://www.youtube.com/embed/35MvdHBWjwU",
+  "price": 25,
+  "__v": 0,
+  "shortTitle": "RemembertheTitans"
+},{
+  "_id": "Hacksaw Ridge",
+  "year": "2016",
+  "director": "Mel Gibson",
+  "length": 139,
+  "main_actors": [
+    "Andrew Garfield",
+    " Sam Worthington"
+  ],
+  "type": [
+    "Biography",
+    " Drama",
+    " History"
+  ],
+  "preview": "The true story of Pfc. Desmond T. Doss (Andrew Garfield), who won the Congressional Medal of Honor despite refusing to bear arms during WWII on religious grounds. Doss was drafted and ostracized by fellow soldiers for his pacifist stance but went on to earn respect and adoration for his bravery, selflessness and compassion after he risked his life -- without firing a shot -- to save 75 men in the Battle of Okinawa.",
+  "trailer": "https://www.youtube.com/embed/s2-1hz1juBI",
+  "price": 15,
+  "__v": 0,
+  "shortTitle": "HacksawRidge"
+},{
+  "_id": "The Prestige",
+  "year": "2006",
+  "director": "Christopher Nolan",
+  "length": 130,
+  "main_actors": [
+    "Hugh Jackman",
+    " Christian Bale"
+  ],
+  "type": [
+    "Drama",
+    " Mystery",
+    " Sci-Fi"
+  ],
+  "preview": "Two friends and fellow magicians become bitter enemies after a sudden tragedy. As they devote themselves to this rivalry, they make sacrifices that bring them fame but, with terrible consequences.",
+  "trailer": "https://www.youtube.com/embed/RLtaA9fFNXU",
+  "price": 17,
+  "__v": 0,
+  "shortTitle": "The Prestige"
+},{
+  "_id": "Ocean's Eleven",
+  "year": "2001",
+  "director": "Steven Soderbergh",
+  "length": 116,
+  "main_actors": [
+    "George Clooney",
+    " Matt Damon"
+  ],
+  "type": [
+    "Crime",
+    " Thriller"
+  ],
+  "preview": "Danny Ocean, a gangster, assembles a group of eleven people in an effort to steal money from three popular casinos in Las Vegas owned by his rival, Terry Benedict.",
+  "trailer": "https://www.youtube.com/embed/imm6OR605UI",
+  "price": 15,
+  "__v": 0,
+  "shortTitle": "Ocean's Eleven"
+},{
+  "_id": "Iron man",
+  "year": "2008",
+  "director": "Jon Favreau",
+  "length": 126,
+  "main_actors": [
+    "Robert Downy jr",
+    " Gwyneth Paltrow"
+  ],
+  "type": [
+    "Action",
+    " Adventure",
+    " Sci-Fi"
+  ],
+  "preview": "When Tony Stark, an industrialist, is captured, he constructs a high-tech armoured suit to escape. Once he manages to escape, he decides to use his suit to fight against evil forces to save the world.",
+  "trailer": "https://www.youtube.com/embed/8ugaeA-nMTc",
+  "price": 25,
+  "__v": 0,
+  "shortTitle": "Ironman"
+},{
+  "_id": "21",
+  "shortTitle": "21",
+  "year": "2008",
+  "director": "Robert Luketic",
+  "length": 123,
+  "main_actors": [
+    "Jim Sturgess",
+    " Kate Bosworth"
+  ],
+  "type": [
+    "Crime",
+    " Drama",
+    " History"
+  ],
+  "preview": "Micky, a math professor, recruits five brilliant students and uses their skills to win millions of dollars at blackjack in Las Vegas.",
+  "trailer": "https://www.youtube.com/embed/oqkdB7It5Go",
+  "price": 15,
+  "__v": 0
+}]

@@ -25,6 +25,17 @@ async function deleteCard(card_number) {
     await creditCard.deleteOne({ _id: card_number })
 }
 
+// Function to add JSON
+async function uploadJson(json) {
+    await creditCard.create(json, function (err, small) {
+        if (err)
+        {
+            console.log(err)
+            return;
+        }
+    });
+  }
+
 // Adds new card to the database 
 async function addCard(card_number, username, exp_date, digits){
     const credit_card = new creditCard({
@@ -43,5 +54,6 @@ module.exports = {
     deleteCard,
     addCard,
     getCreditCard,
-    getCardByNumber
+    getCardByNumber,
+    uploadJson
 }

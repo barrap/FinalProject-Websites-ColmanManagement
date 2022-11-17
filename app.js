@@ -6,9 +6,10 @@ var http = require('http')
 var server = http.createServer(app)
 var wsServer = new ws({ httpServer: server });
 var usersCounter = 0;
+require('./services/dbhandler.js').inital_db();
+
 
 const clients = {};
-
 
 
 wsServer.on('request', function (request) {

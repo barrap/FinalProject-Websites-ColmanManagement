@@ -19,6 +19,18 @@ async function countOrderByMonth() {
   return data;
 }
 
+
+// Function to add JSON
+async function uploadJson(json) {
+  await Order.create(json, function (err, small) {
+      if (err)
+      {
+          console.log(err)
+          return;
+      }
+  });
+}
+
 // Count amount of orders by month
 async function countOrderPriceByMonth() {
   const data = await Order.aggregate([
@@ -70,5 +82,6 @@ module.exports = {
   countOrderByMonth,
   countOrderPriceByMonth,
   allOrders,
-  allOrdersByUser
+  allOrdersByUser,
+  uploadJson
 }

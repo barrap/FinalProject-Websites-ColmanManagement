@@ -1,0 +1,134 @@
+[{
+  "_id": {
+    "$oid": "636bb05b343a513525e57c33"
+  },
+  "total_price": 24,
+  "movies": [
+    "\"Avatar\"",
+    "\"Captain America: The Winter Soldier\"",
+    "\"21\""
+  ],
+  "user_id": "barrap",
+  "year": 2022,
+  "month": 11,
+  "day": 9,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63728682b4e43a440579df9e"
+  },
+  "total_price": 82,
+  "movies": [
+    "\"Zero Dark Thirty\"",
+    "\"Friends\"",
+    "\"House of Cards\"",
+    "\"The Big Bang Theory\"",
+    "\"Remember the Titans\"",
+    "\"12 Mighty Orphans\""
+  ],
+  "user_id": "barrap",
+  "year": 2022,
+  "month": 11,
+  "day": 14,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "637286d3b4e43a440579dfad"
+  },
+  "total_price": 51,
+  "movies": [
+    "\"Interstellar\"",
+    "\"Ocean's Eleven\"",
+    "\"Zero Dark Thirty\""
+  ],
+  "user_id": "barrap",
+  "year": 2022,
+  "month": 11,
+  "day": 14,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63728fda6db1ac923216a3a5"
+  },
+  "total_price": 65,
+  "movies": [
+    "\"Avatar\"",
+    "\"Interstellar\"",
+    "\"Hacksaw Ridge\"",
+    "\"Thor\""
+  ],
+  "user_id": "kingInTheNorth",
+  "year": 2022,
+  "month": 11,
+  "day": 14,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "637290226db1ac923216a3bd"
+  },
+  "total_price": 94,
+  "movies": [
+    "\"12 Mighty Orphans\"",
+    "\"Iron man\"",
+    "\"Ocean's Eleven\"",
+    "\"Designated Survivor\"",
+    "\"How I Met Your Mother\"",
+    "\"Stranger Things\""
+  ],
+  "user_id": "iAmIronMan",
+  "year": 2022,
+  "month": 11,
+  "day": 14,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6372905a6db1ac923216a3d5"
+  },
+  "total_price": 89,
+  "movies": [
+    "\"Peaky Blinders\"",
+    "\"The Big Bang Theory\"",
+    "\"Moon Knight\"",
+    "\"Game of Thrones\"",
+    "\"Zero Dark Thirty\"",
+    "\"Thor\"",
+    "\"The Prestige\""
+  ],
+  "user_id": "thomas_s",
+  "year": 2022,
+  "month": 11,
+  "day": 14,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "637290886db1ac923216a3ed"
+  },
+  "total_price": 39,
+  "movies": [
+    "\"How I Met Your Mother\"",
+    "\"House of the Dragon\"",
+    "\"Friends\""
+  ],
+  "user_id": "shmosbey",
+  "year": 2022,
+  "month": 11,
+  "day": 14,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "637290c56db1ac923216a405"
+  },
+  "total_price": 76,
+  "movies": [
+    "\"Brooklyn Nine-Nine\"",
+    "\"The Prestige\"",
+    "\"Zero Dark Thirty\"",
+    "\"Ocean's Eleven\"",
+    "\"21\""
+  ],
+  "user_id": "DieHardForLife",
+  "year": 2022,
+  "month": 11,
+  "day": 14,
+  "__v": 0
+}]

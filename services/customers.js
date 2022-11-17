@@ -22,6 +22,16 @@ async function login(username) {
     return customer
 }
 
+// Function to add JSON
+async function uploadJson(json) {
+    await Customer.create(json, function (err, small) {
+        if (err)
+        {
+            return;
+        }
+    });
+  }
+
 // Count customers
 async function countCustomers()
 {
@@ -126,5 +136,6 @@ module.exports = {
     update,
     countCustomersByLocation,
     countCustomers,
-    addOrder
+    addOrder,
+    uploadJson
 }
