@@ -1,7 +1,4 @@
 [{
-  "_id": {
-    "$oid": "636bb05b343a513525e57c33"
-  },
   "total_price": 24,
   "movies": [
     "\"Avatar\"",
@@ -14,9 +11,6 @@
   "day": 9,
   "__v": 0
 },{
-  "_id": {
-    "$oid": "63728682b4e43a440579df9e"
-  },
   "total_price": 82,
   "movies": [
     "\"Zero Dark Thirty\"",
@@ -32,9 +26,6 @@
   "day": 14,
   "__v": 0
 },{
-  "_id": {
-    "$oid": "637286d3b4e43a440579dfad"
-  },
   "total_price": 51,
   "movies": [
     "\"Interstellar\"",
@@ -47,9 +38,6 @@
   "day": 14,
   "__v": 0
 },{
-  "_id": {
-    "$oid": "63728fda6db1ac923216a3a5"
-  },
   "total_price": 65,
   "movies": [
     "\"Avatar\"",
@@ -63,9 +51,6 @@
   "day": 14,
   "__v": 0
 },{
-  "_id": {
-    "$oid": "637290226db1ac923216a3bd"
-  },
   "total_price": 94,
   "movies": [
     "\"12 Mighty Orphans\"",
@@ -81,9 +66,6 @@
   "day": 14,
   "__v": 0
 },{
-  "_id": {
-    "$oid": "6372905a6db1ac923216a3d5"
-  },
   "total_price": 89,
   "movies": [
     "\"Peaky Blinders\"",
@@ -100,9 +82,6 @@
   "day": 14,
   "__v": 0
 },{
-  "_id": {
-    "$oid": "637290886db1ac923216a3ed"
-  },
   "total_price": 39,
   "movies": [
     "\"How I Met Your Mother\"",
@@ -115,9 +94,6 @@
   "day": 14,
   "__v": 0
 },{
-  "_id": {
-    "$oid": "637290c56db1ac923216a405"
-  },
   "total_price": 76,
   "movies": [
     "\"Brooklyn Nine-Nine\"",

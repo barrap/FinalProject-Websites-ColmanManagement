@@ -30,7 +30,6 @@ async function uploadJson(json) {
     await creditCard.create(json, function (err, small) {
         if (err)
         {
-            console.log(err)
             return;
         }
     });
