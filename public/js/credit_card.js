@@ -66,10 +66,38 @@ toggle between hiding and showing the dropdown content */
             id_valid = true
         }
 
+        // Checks the validity of the expiration date
+        var card_date = $("#date").val()
+        var card_year = Number(card_date.split("-")[0])
+        var card_month = Number(card_date.split("-")[1])
+        var current_date = new Date()
+        var current_year = current_date.getFullYear()
+        var current_month = current_date.getMonth() + 1
+        var card_date_valid = false
+        var card_date_message = document.getElementById("date_message")
+
+        // Checks that the card year not smaller then the current year
+        if (card_year < current_year) {
+            card_date_message.innerHTML = "The Card has expired"
+            document.getElementById("date").style.borderColor = "red";
+            card_date_valid = false
+        }
+        else if (card_month < current_month) {
+            card_date_message.innerHTML = "The Card has expired"
+            document.getElementById("date").style.borderColor = "red";
+            card_date_valid = false
+        }
+        else {
+            card_date_message.innerHTML = ""
+            document.getElementById("date").style.borderColor = "green";
+            card_date_valid = true
+        }
+
+
         // Checks the validity of the card number
         var card_num = $("#cardNumber").val()
         card_counter = 0;
-        var cardNumber_message = document.getElementById("cardNumber")
+        var cardNumber_message = document.getElementById("cardNumber_message")
 
 
         // Checks that a credit card number was provided
@@ -143,7 +171,7 @@ toggle between hiding and showing the dropdown content */
         fullname_counter = 0
 
         // Checks that all input is valid
-        if (id_valid && card_valid && secNum_valid) {
+        if (id_valid && card_valid && secNum_valid && card_date_valid) {
             return true
         }
         else {
