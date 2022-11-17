@@ -49,6 +49,7 @@
                             <tr>
                                 <th>Order No.</th>
                                 <th>Order Cost</th>
+                                <th>Titles Purchased</th>
                                 <th>Date</th>
                             </tr>
                             <% for (var i=0; i < info.orders.length; i++) { %>
@@ -58,6 +59,15 @@
                                     </td>
                                     <td>
                                         <%=info.orders[i].total_price%>$
+                                    </td>
+                                    <td>
+                                        <% for (var k=0; k < info.orders[i].movies.length; k++) { %>
+                                            <% if(k==info.orders[i].movies.length - 1) {%>
+                                                <%=info.orders[i].movies[k]%>
+                                                    <%} else { %>
+                                                        <%=info.orders[i].movies[k]%>,
+                                                            <%}%>
+                                                                <%}%>
                                     </td>
                                     <td>
                                         <%=info.orders[i].day%>.<%=info.orders[i].month%>.<%=info.orders[i].year%>

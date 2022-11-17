@@ -57,3 +57,13 @@ iframe {
 .modal {
     color: black;
 }
+
+.minus-item {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.plus-item {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}

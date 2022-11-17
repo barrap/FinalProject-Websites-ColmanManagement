@@ -10,6 +10,7 @@
     <link rel="icon" type="image/x-icon" href="img/Blockbuster_logo.svg.png">
     <link rel="stylesheet" href="css/main_style.css">
     <link rel="stylesheet" href="css/add_style.css">
+    <link rel="stylesheet" href="css/updatePayment_style.css">
 </head>
 
 <body>
@@ -44,22 +45,25 @@
                         </div>
                     </div>
                 </nav>
-                <div class="col g-3">
-                    <div class="container text-center g-3">
+                <div class="container text-center g-3">
+                    <h4>Your Cards</h4>
+                    <div class="myCards d-flex">
                         <%for(i=0; i < dict.cards.length;i++) {%>
                             <form action="/deleteCard" method="POST" class="float-end">
-                                <p>****<%=dict.cards[i]._id.slice(-4)%></p>
-                                <input readonly class="d-none" name="card_id"
-                                    value="<%=dict.cards[i]._id%>">
-                                <button type="submit" class="btn btn-outline-danger"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-trash3-fill"
-                                        viewBox="0 0 16 16">
-                                        <path
-                                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
-                                    </svg></button>
+                                **** **** **** <%=dict.cards[i]._id.slice(-4)%>
+                                    <input readonly class="d-none" name="card_id" value="<%=dict.cards[i]._id%>">
+                                    <button type="submit" class="btn btn-outline-danger deleteCard"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                        </svg></button>
                             </form>
-                        <%}%>
+                            <%}%>
+                    </div>
+                </div>
+                <div class="col g-3">
+                    <div class="container text-center g-3">
                         <br>
                         <br>
                         <h4>Add a new card</h4>
@@ -88,7 +92,8 @@
                             <div class="mb-3 row text-center div_input">
                                 <label class="col-sm-2 col-form-label">Expiration Date(MM/YY)</label>
                                 <div class="col-sm-10 input_text">
-                                    <input type="month" id="date" name="date" min="<%=dict.date%>" value="<%=dict.date%>" required>
+                                    <input type="month" id="date" name="date" min="<%=dict.date%>"
+                                        value="<%=dict.date%>" required>
                                 </div>
                                 <span id="date_message"></span>
                             </div>
@@ -96,7 +101,7 @@
                             <div class="mb-3 row text-center div_input">
                                 <label class="col-sm-2 col-form-label">Security number</label>
                                 <div class="col-sm-10 input_text">
-                                    <input type="text" class="form-control" name="secNum" id="secNum" required >
+                                    <input type="text" class="form-control" name="secNum" id="secNum" required>
                                 </div>
                                 <span id="secNum_message"></span>
                             </div>
@@ -134,7 +139,6 @@
     <script src="js/credit_card.js"></script>
     <script src="js/sidenav.js"></script>
     <script src="js/connect.js"></script>
-    <script src="js/cart.js"></script>
 
 </body>
 
