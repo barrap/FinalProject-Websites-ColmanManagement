@@ -23,13 +23,13 @@ body {
 h1 {
     color: white;
     text-decoration: underline;
-    text-align:center;
+    text-align: center;
 }
 
-h2{
+h2 {
     color: white;
     text-decoration: underline;
-    text-align:center;
+    text-align: center;
 }
 
 .dropdown-content {
@@ -72,4 +72,14 @@ footer {
 
 .modal {
     color: black;
+}
+
+.minus-item {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.plus-item {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
