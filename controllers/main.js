@@ -144,7 +144,7 @@ const filter = (req, res) => {
                     })
                 }
                 else if (genre != "none") {
-                    const tvs = TVShowsService.getShowsGenre(genre, max_price)
+                    const tvs = TVShowsService.getShowsByGenre(genre, max_price)
                     tvs.then(tv => {
                         data['tv'] = tv
                         const movies = MovieService.getMoviesByGenre(genre, max_price)
