@@ -9,7 +9,6 @@ var usersCounter = 0;
 
 if(process.env.INIT_DB == "false") {
     require('./services/dbhandler.js').inital_db();
-    process.env.INIT_DB == "true"
 }
 
 const clients = {};
