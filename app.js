@@ -6,8 +6,11 @@ var http = require('http')
 var server = http.createServer(app)
 var wsServer = new ws({ httpServer: server });
 var usersCounter = 0;
-require('./services/dbhandler.js').inital_db();
 
+if(process.env.INIT_DB == "false") {
+    require('./services/dbhandler.js').inital_db();
+    process.env.INIT_DB == "true"
+}
 
 const clients = {};
 
